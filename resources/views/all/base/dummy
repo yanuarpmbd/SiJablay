@@ -1,0 +1,146 @@
+<script>
+        $(document).ready(function () {
+
+
+            $(".select2_demo_1").select2();
+            $(".select2_demo_2").select2();
+            $(".select2_demo_3").select2({
+                placeholder: "Pilih Nama...",
+                allowClear: true,
+                minimumInputLength:3,
+            });
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: "yyyy-mm-dd"
+            });
+
+
+            var lineData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "Example dataset",
+                        backgroundColor: "rgba(26,179,148,0.5)",
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointBackgroundColor: "rgba(26,179,148,1)",
+                        pointBorderColor: "#fff",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    },
+                    {
+                        label: "Example dataset",
+                        backgroundColor: "rgba(220,220,220,0.5)",
+                        borderColor: "rgba(220,220,220,1)",
+                        pointBackgroundColor: "rgba(220,220,220,1)",
+                        pointBorderColor: "#fff",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    }
+                ]
+            };
+
+            var lineOptions = {
+                responsive: true
+            };
+
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            new Chart(ctx, {type: 'line', data: lineData, options: lineOptions});
+
+        });
+    </script>
+    <script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
+    <script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+
+    </script>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
+    <script>
+
+        $('#article-ckeditor').wysiwyg();
+
+        $('#submit-notulen').on('click',function(){
+
+            console.log($('#editor').html());
+
+        });
+    </script>
+
+    foreach ($jns_izins as $j){
+                $jenis_izin_id = new SOPPelayananModel();
+                $jenis_izin_id->jenis_izin_id = $j;
+                $jenis_izin_id->save();
+            }
+            foreach ($sops as $s){
+                $sop = new SOPPelayananModel();
+                $sop->sop = $s;
+                $sop->save();
+            }
+
+            <?php
+
+            namespace App\Models\Yanzin;
+
+            use Illuminate\Database\Eloquent\Model;
+
+            class RekapPerizinanModel extends Model
+            {
+                protected $table = 'rekap_perizinan_models';
+
+                protected $primaryKey = 'id';
+
+                public function sop(){
+                    return $this->belongsTo('App\Models\Yanzin\SOPPelayananModel');
+                }
+            }
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateRekapPerizinanModelsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('rekap_perizinan_models', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('izin_id');
+            $table->string('sop');
+            $table->date('bulan');
+            $table->string('izin');
+            $table->string('nonizin');
+            $table->string('waktu_selesai');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('rekap_perizinan_models');
+    }
+}

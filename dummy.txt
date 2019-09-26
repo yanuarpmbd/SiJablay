@@ -1,0 +1,233 @@
+<div class="row">
+    <div class="col-lg-12">
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>REKAP REALISASI INVESTASI</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="form-group">
+                    <form action="{{route('rekap.pma')}}">
+                        <div class="form-group" id="data_1">
+                            <label class="col-lg-12 control-label">Kabupaten/Kota</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" name="kab_kota" id="kab_kota">
+                                    <option selected value="all">Tampilkan Semua..</option>
+                                    @foreach($kab_kotas as $k)
+                                        <option value="{{$k->kab_kota}}">{{$k->kab_kota}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <label class="col-lg-12 control-label"></label>
+                            <label class="col-lg-12 control-label">PMA/PMDN</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" name="pma_pmdn" id="pma_pmdn">
+                                    <option selected value="all">Tampilkan Semua..</option>
+                                @foreach($pma_pmdns as $p)
+                                        <option value="{{$p->pma_pmdn}}">{{$p->pma_pmdn}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-white" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="footable table toggle-arrow-tiny" style="table-layout: fixed">
+                            <thead>
+                            <tr>
+                                <td data-toggle="true">Nama Perusahaan</td>
+                                <td>Sektor</td>
+                                <td data-hide="all" hidden>Cetak Bidang Usaha</td>
+                                <td data-hide="all" hidden>Provinsi</td>
+                                <td>Kab/Kota</td>
+                                <td data-hide="all" hidden>Negara</td>
+                                <td>No Izin</td>
+                                @if ($pma_pmdn == "PMA")
+                                <td>Tambahan Investasi (Dalam US$.Ribu)</td>
+                                <td>Total Investasi (Dalam US$.Ribu)</td>
+                                @else
+                                <td>Tambahan Investasi (Dalam Rp.Juta)</td>
+                                <td>Total Investasi (Dalam Rp.Juta)</td>
+                                @endif
+                                <td data-hide="all" hidden>Proyek</td>
+                                <td data-hide="all" hidden>TKI</td>
+                                <td data-hide="all" hidden>TKA</td>
+                                <td>Tahun</td>
+                                <td>PMA/PMDN</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($pma_invest as $r)
+                                <tr>
+                                    <td>{{$r->nama_perusahaan}}</td>
+                                    <td>{{$r->sektor}}</td>
+                                    <td hidden>{{$r->cetak_bid_usaha}}</td>
+                                    <td hidden>{{$r->provinsi}}</td>
+                                    <td>{{$r->kab_kota}}</td>
+                                    <td hidden>{{$r->negara}}</td>
+                                    <td>{{$r->no_izin}}</td>
+                                    <td>{{$r->tambahan_invest}}</td>
+                                    <td>{{$r->total_invest}}</td >
+                                    <td hidden>{{$r->proyek}}</td>
+                                    <td hidden>{{$r->tki}}</td>
+                                    <td hidden>{{$r->tka}}</td>
+                                    <td>{{$r->tahun}}</td>
+                                    <td>{{$r->pma_pmdn}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <ul class="pagination">
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <form action="">
+                                            <button class="btn btn-sm btn-white" href="" type="submit">Download</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="twPc-div">
+        <div class="twPc-bg twPc-block"></div>
+        <div class="clearfix">
+            @if(count($sotk) > 0)
+            <?php
+                if($sotk->photo != ''){
+                    if(file_exists('./packages/upload/pejabat/'.$sotk->photo)){
+                        $img = url().'/packages/upload/pejabat/'.$sotk->photo;
+                    }else{
+                        $img = url().'/packages/upload/pejabat/default.jpg';
+                    }
+                }else{
+                    $img = url().'/packages/upload/sejarah/default.jpg';
+                }
+
+                $jabatan = getUtility('ppid_sotk', 'id', $sotk->idjab, 'jabatan');
+                $pangkat = getUtility('a_golruang', 'idgolru', $sotk->idgol, 'pangkat');
+                $golongan = getUtility('a_golruang', 'idgolru', $sotk->idgol, 'golru');
+            ?>
+            <div class="col-sm-4">
+                <figure class="twPc-avatarLink">
+                    <img alt="{{$jabatan}}" src="{{$img}}" class="twPc-avatarImg">
+                </figure>
+            </div>
+            <div class="col-sm-8">
+                <div class="twPc-divUser">
+                    <div class="twPc-divName">
+                        {{$sotk->nama}}
+                    </div>
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr>
+                            <td><b>NIP</b></td>
+                            <td>{{$sotk->nip}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Jabatan</b></td>
+                            <td>{{$jabatan}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Pangkat</b></td>
+                            <td>{{$pangkat." (".$golongan.")"}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @else
+                <div align="center">Data Jabatan Kosong</div>
+            @endif
+        </div>
+    </div>
+
+<ul class="metismenu">
+    <?php $rs = \DB::table('ppid_sotk')->where('parent', '')->where('flag', '1')->get();?>
+    @foreach($rs as $item)
+        @if(count($rs) > 0)
+            <li class="active">
+                <a href="#"><span class="fa fa-plus-square fa-fw"></span> <b>{{$item->jabatan_singkat}}</b></a> <small data-toggle="modal" onclick="getModal('{{$item->id}}');">detail</small>
+                <?php $rs = \DB::table('ppid_sotk')->where('parent', $item->id)->where('flag', '1')->get();?>
+                @foreach($rs as $item)
+                    @if(count($rs) > 0)
+                        <ul>
+                            <li class="active">
+                                <a href="#"><span class="fa fa-plus-square fa-fw"></span> <b>{{$item->jabatan_singkat}}</b></a> <small data-toggle="modal" onclick="getModal('{{$item->id}}');">detail</small>
+                                <?php $rs = \DB::table('ppid_sotk')->where('parent', $item->id)->where('flag', '1')->get();?>
+                                @foreach($rs as $item)
+                                    @if(count($rs) > 0)
+                                        <ul>
+                                            <li class="active">
+                                                <a href="#"><span class="fa fa-plus-square fa-fw"></span> <b>{{$item->jabatan_singkat}}</b></a> <small data-toggle="modal" onclick="getModal('{{$item->id}}');">detail</small>
+                                                <?php $rs = \DB::table('ppid_sotk')->where('parent', $item->id)->where('flag', '1')->get();?>
+                                                @foreach($rs as $item)
+                                                    @if(count($rs) > 0)
+                                                        <ul>
+                                                            <li><a href="#"> {{$item->jabatan_singkat}}</a> <small data-toggle="modal" onclick="getModal('{{$item->id}}');">detail</small></li>
+                                                        </ul>
+                                                    @endif
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    @endif
+                                @endforeach
+                            </li>
+                        </ul>
+                    @endif
+                @endforeach
+            </li>
+        @endif
+    @endforeach
+</ul>
+
+<script type="text/javascript">
+    function claravel_modal_close(elemen){
+        $('#' + elemen + '').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+
+    function claravel_modal(judul,isi,elemen){
+        elemen = (elemen == '')?'modal2':elemen;
+        $('#' + elemen + '').modal({ keyboard: true });
+        $('#' + elemen + ' .modal-title').html(judul);
+        $('#' + elemen + ' .modal-body').html(isi);
+    }
+
+    function getModal(id){
+        claravel_modal('Detail Pejabat PPID','Loading...','main_modal');
+        $.ajax({
+            type:'post',
+            url : '{{url()}}/profilpejabatppid',
+            data: {'id': id, '_token' : '{{csrf_token()}}'},
+            success:function(html){
+                $('#main_modal .modal-body').html(html);
+            }
+        });
+    };
+</script>
+
+
