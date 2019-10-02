@@ -107,28 +107,24 @@ class RekapOSSController extends Controller
         $kabkotas = KabKotaModels::all();
         $kabkota = $request->input('kab_kota');
         $status = $request->input('status');
-        $oss = OssModels::all();
         if ($kabkota == 'all' and $status == 'all'){
             $rek_oss = DB::table('oss_models')->paginate(10);
         }
-        elseif ($status == 'perorangan'){
-            foreach ($oss as $o){
-                $rek_oss = $oss->where('nama_perseroan', $o->nama_pendaftar);
-            }
+        elseif ($kabkota == 'all' and $status == 'perorangan'){
+            $rek_oss = DB::table('oss_models')
+                ->where('nama_perseroan', '=', DB::raw('nama_pendaftar'))
+                ->get();
         }
-        elseif ($status == 'perusahaan'){
-            foreach ($oss as $o) {
-                $rek_oss = DB::table('oss_models')
-                    ->where('nama_perseroan', '!=', $o->nama_pendaftar)
-                    ->get();
-            }
+        elseif ($kabkota == 'all' and $status == 'perusahaan'){
+            $rek_oss = DB::table('oss_models')
+                ->where('nama_perseroan', '!=', DB::raw('nama_pendaftar'))
+                ->get();
         }
         else{
             $rek_oss = DB::table('oss_models')
                 ->where('daerah', 'LIKE', '%'.$kabkota.'%')
                 ->get();
         }
-        //dd($rek_oss);
 
 
         return view('pdi.base.rek-oss', compact('kabkotas', 'rek_oss'));

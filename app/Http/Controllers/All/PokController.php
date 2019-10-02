@@ -129,7 +129,7 @@ class PokController extends Controller
         $in->keu_smp_skrg = $sum_reakeu_skrg;
         $in->deviasi = $deviasi;
         $in->ket = $ket;
-        //dd($in);
+        dd($in);
         $in->save();
         return redirect()->route('rekap.pok')->with('success', 'Data Berhasil Ditambahkan');
     }
