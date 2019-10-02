@@ -8,8 +8,10 @@
                 <li class=""><a data-toggle="tab" href="#tab-4">User</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-5">Perjalanan Dinas</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-6">RKO</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-7">Target Realisasi RKO</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-8">Rekap RKO</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-7">Rekap RKO</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-8">Target Realisasi RKO</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-9">Rekap Target Realisasi</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-10">Rekap Target RKO</a></li>
 
             </ul>
             <div class="tab-content">
@@ -46,10 +48,20 @@
                 </div>
                 <div id="tab-7" class="tab-pane">
                     <div class="panel-body">
-                        @include('sekretariat.content.target-realisasi-rko')
+                        @include('sekretariat.content.rek-rko')
                     </div>
                 </div>
                 <div id="tab-8" class="tab-pane">
+                    <div class="panel-body">
+                        @include('sekretariat.content.target-realisasi-rko')
+                    </div>
+                </div>
+                <div id="tab-9" class="tab-pane">
+                    <div class="panel-body">
+                        @include('sekretariat.content.rekap-target')
+                    </div>
+                </div>
+                <div id="tab-10" class="tab-pane">
                     <div class="panel-body">
                         @include('sekretariat.content.rekap-rko')
                     </div>

@@ -15,7 +15,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('all.content.edit-notulen')
+        @include('sekretariat.content.rek-rko')
     </div>
 @endsection
 @section('js')
@@ -34,21 +34,11 @@
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
             $(".select2_demo_3").select2({
-                placeholder: "Pilih Nama...",
-                allowClear: true,
-                minimumInputLength:3,
+                placeholder: "Select a state",
+                allowClear: true
             });
 
             $('#data_1 .input-group.date').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true,
-                format: "yyyy-mm-dd"
-            });
-
-            $('#data_2 .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -117,4 +107,5 @@
         });
     </script>
 @endsection
+
 

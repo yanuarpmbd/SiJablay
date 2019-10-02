@@ -31,7 +31,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
+                    <div class="col-lg-12">
+                        <div class="form-group"><label>Realisasi Fisik s/d Bulan Lalu (Rp)</label>
+                            <input placeholder="Realisasi Fisik s/d Bulan lalu (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_fisik_sebelum" id="realisasi_fisik_sebelum"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-lg-12">
+                        <div class="form-group"><label>Realisasi Keuangan s/d Bulan Lalu (Rp)</label>
+                            <input placeholder="Realisasi Keuangan s/d Bulan Lalu (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_keu_sebelum" id="realisasi_keu_sebelum"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
                     <div class="col-lg-12">
                         <div class="form-group"><label>Realisasi Fisik (Rp)</label>
                             <input placeholder="Realisasi Fisik (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_fisik" id="realisasi_fisik"
@@ -39,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="col-lg-12">
                         <div class="form-group"><label>Realisasi Keuangan (Rp)</label>
                             <input placeholder="Realisasi Keuangan (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_keu" id="realisasi_keu"
@@ -47,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-12">
                     <div class="col-lg-12">
                         <div class="form-group"><label>Keterangan</label>
                             <input placeholder="Keterangan" name="ket" id="ket"

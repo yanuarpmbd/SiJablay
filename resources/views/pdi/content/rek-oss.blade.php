@@ -21,6 +21,12 @@
                                 <option value="{{$k->kab_kota}}">{{$k->kab_kota}}</option>
                                 @endforeach
                             </select>
+                            <label class="col-lg-12 control-label">Status Badan Usaha</label>
+                            <select class="form-control" name="status" id="status">
+                                <option value="all">Pilih Semua...</option>
+                                <option value="perorangan">Perorangan</option>
+                                <option value="perusahaan">Perusahaan</option>
+                            </select>
                             <div class="ibox float-e-margins">
                                 <div class="ibox-content">
                                     <div class="form-group">

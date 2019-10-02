@@ -60,6 +60,8 @@
                         <th class="tg-c3ow" colspan="4">Sampai dengan {{$todays}}</th>
                         <th class="tg-c3ow" rowspan="3">Deviasi</th>
                         <th class="tg-c3ow" rowspan="3">Keterangan</th>
+                        <th class="tg-c3ow" rowspan="3">Edit</th>
+                        <th class="tg-c3ow" rowspan="3">Hapus</th>
                     </tr>
                     <tr>
                         <td class="tg-c3ow" rowspan="2">Real Fisik (Rp)</td>
@@ -96,6 +98,17 @@
                             <td class="tg-0lax">{{number_format($ps->keu_smp_skrg, 0, ',', '.')}}</td>
                             <td class="tg-0lax">{{($ps->deviasi)}}</td>
                             <td class="tg-0lax">{{($ps->ket)}}</td>
+                            <td>
+                                <form action="{{route('edit.pok', $ps->id)}}">
+                                    <button class="btn btn-block btn-outline-success">Edit</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{route('delete.pok', $ps->id)}}">
+                                    <button class="btn btn-block btn-outline-danger">Hapus</button>
+                                </form>
+                            </td>
+
                         </tr>
                     @endforeach
                     </tbody>
@@ -108,7 +121,6 @@
                     </tr>
                     </tfoot>
                 </table>
-
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <div class="form-group">
@@ -122,4 +134,3 @@
         </div>
     </div>
 </div>
-

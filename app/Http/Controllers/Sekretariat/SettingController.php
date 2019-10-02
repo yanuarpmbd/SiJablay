@@ -54,6 +54,7 @@ class SettingController extends Controller
         $dropdown = RkoModel::all(['nama_kegiatan', 'id']);
         $username = Auth::user()->name;
         $todays = date('F-Y');
+        $rek_rko = RkoModel::all();
 
         $bulan = $request->input('bulan_input');
         //dd($bulan);
@@ -61,7 +62,7 @@ class SettingController extends Controller
         //$target = TargetRealisasiModel::all();
         $rko = TargetRealisasiModel::where('bulan', '=', $today)->get();
 
-        return view('sekretariat.base.gabung', compact('user', 'kepala', 'plt', 'kabid', 'plh', 'rek', 'id', 'nomor', 'bidang', 'today', 'target', 'dropdown', 'username', 'todays', 'bulan', 'rko'));
+        return view('sekretariat.base.gabung', compact('user', 'rek_rko', 'kepala', 'plt', 'kabid', 'plh', 'rek', 'id', 'nomor', 'bidang', 'today', 'target', 'dropdown', 'username', 'todays', 'bulan', 'rko'));
     }
 
     public function plh()

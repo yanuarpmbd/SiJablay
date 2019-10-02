@@ -97,7 +97,10 @@ class RkoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rko = RkoModel::findOrFail($id);
+        $bidang = User::whereBetween('id', [2, 8])->get();
+
+        return view('sekretariat.base.edit-rko', compact('rko', 'bidang'));
     }
 
     /**
@@ -109,7 +112,23 @@ class RkoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama_kegiatan' => 'required',
+            'jml_anggaran' => 'required',
+            'bidang' => 'required',
+        ]);
+
+        $nama_kegiatan = $request->input('nama_kegiatan');
+        $jml_anggarans = $request->input('jml_anggaran');
+        $jml_anggaran = str_replace('.','', $jml_anggarans);
+        $bidang = $request->input('bidang');
+
+        $update = new RkoModel();
+        $update->nama_kegiatan = $nama_kegiatan;
+        $update->jml_anggaran = $jml_anggaran;
+        $update->bidang = $bidang;
+
+        dd($update);
     }
 
     /**
@@ -120,6 +139,18 @@ class RkoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = RkoModel::findOrFail($id);
+        dd($delete);
+        //$delete->delete();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
+
+    public function rekapRKO(){
+        $rek_rko = RkoModel::all();
+
+        return view('sekretariat.base.rek-rko', compact('rek_rko'));
+    }
+
+
 }

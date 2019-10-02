@@ -19,7 +19,7 @@ class PokExport implements FromView, ShouldAutoSize
         $query = "CAST(rko_id AS int)ASC";
 
         return view('all.content.rekap-pok-bidang', [
-            'pok' => PokModel::where('bulan', '=', '2019-01')->orderByRaw($query)->get()
+            'pok' => PokModel::where('bulan', '=', $today)->orderByRaw($query)->get()
         ], compact('user_name', 'todays', 'today'));
     }
 }
