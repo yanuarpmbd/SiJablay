@@ -1,3 +1,4 @@
+
 @extends('master.home-master')
 @section('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -15,7 +16,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('all.content.edit-notulen')
+        @include('all.content.edit-pok')
     </div>
 @endsection
 @section('js')
@@ -49,6 +50,20 @@
             });
 
             $('#data_2 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: "yyyy-mm"
+            });
+
+            $('#data_3 .input-group.date').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                startView: "months",
+                minViewMode: "months",
+                showButtonPanel: true,
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,

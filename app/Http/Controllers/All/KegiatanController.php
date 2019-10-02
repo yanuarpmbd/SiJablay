@@ -247,7 +247,7 @@ class KegiatanController extends Controller
         if ($user == $bidang_id){
             $delete->delete();
             return redirect()->back()->with('success', 'Kegiatan berhasil dihapus');
-        }
+    }
         else{
             return redirect()->back()->with('warning', 'Bukan Kegiatan di Bidang Anda');
         }

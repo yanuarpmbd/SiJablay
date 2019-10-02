@@ -7,6 +7,7 @@ use App\Models\Sekretariat\TargetRealisasiModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TargetRealisasiController extends Controller
 {
@@ -96,7 +97,11 @@ class TargetRealisasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $target = TargetRealisasiModel::findOrFail($id);
+        $dropdown = RkoModel::all(['nama_kegiatan', 'id']);
+        $user = Auth::user()->username;
+
+        return view('sekretariat.base.edit-target', compact('dropdown', 'target', 'user'));
     }
 
     /**
@@ -108,7 +113,23 @@ class TargetRealisasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'target' => 'required',
+            'bulan' => 'required',
+            'rko_id' => 'required',
+        ]);
+
+        $target = $request->input('target');
+        $bulan = $request->input('bulan');
+        $rko_id = $request->input('rko_id');
+
+        $update = TargetRealisasiModel::findOrFail($id);
+        $update->target = $target;
+        $update->bulan = $bulan;
+        $update->rko_id = $rko_id;
+        $update->update();
+
+        return redirect()->route('rekap.targetrealisasi')->with('success', 'Data berhasil diedit');
     }
 
     /**
@@ -119,6 +140,22 @@ class TargetRealisasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $target = TargetRealisasiModel::findOrFail($id);
+        //dd($target);
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
+    }
+
+    public function rekapTarget(Request $request){
+        $user = Auth::user()->id;
+        $user_name = Auth::user()->name;
+        $bulan = $request->input('bulan');
+        $today = date("Y-m");
+        $query = "CAST(rko_id AS int)ASC";
+        $target = TargetRealisasiModel::where('bulan', '=', $bulan)
+            ->orderByRaw($query)
+            ->get();
+        //dd($target);
+        return view('sekretariat.base.rekap-target', compact('target', 'user', 'user_name', 'bulan', 'today'));
     }
 }

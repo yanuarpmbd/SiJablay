@@ -185,22 +185,22 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\sijablay2\resources\views\sekretariat\base" />
+      <recent name="C:\xampp\htdocs\sijablay2\resources\views\sekretariat\content" />
+      <recent name="C:\xampp\htdocs\sijablay2\resources\views\wasdal\base" />
+      <recent name="C:\xampp\htdocs\sijablay2\database\migrations" />
+      <recent name="C:\xampp\htdocs\sijablay2\database\migrations\test" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\sijablay_v1\storage\app\public\spt" />
       <recent name="C:\xampp\htdocs\sijablay_v1\public\js" />
       <recent name="C:\xampp\htdocs\sijablay_v1\public\css" />
       <recent name="C:\xampp\htdocs\sijablay_v1\resources\views\admin\roles" />
       <recent name="C:\xampp\htdocs\sijablay_v1\public\css\spt" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\sijablay2\resources\views\wasdal\base" />
-      <recent name="C:\xampp\htdocs\sijablay2\database\migrations" />
-      <recent name="C:\xampp\htdocs\sijablay2\database\migrations\test" />
-      <recent name="C:\xampp\htdocs\sijablay2\resources\views\wasdal" />
-      <recent name="C:\xampp\htdocs\sijablay2\resources\views\pdi\content" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -470,8 +470,16 @@
       <workItem from="1568770455949" duration="1042000" />
       <workItem from="1568772128042" duration="1196000" />
       <workItem from="1569392981357" duration="8715000" />
+<<<<<<< HEAD
       <workItem from="1569472014940" duration="9324000" />
       <workItem from="1569548188362" duration="320000" />
+=======
+      <workItem from="1569472014940" duration="8773000" />
+      <workItem from="1569805578532" duration="7033000" />
+      <workItem from="1569893404284" duration="3628000" />
+      <workItem from="1569897441058" duration="7477000" />
+      <workItem from="1569977163885" duration="17501000" />
+>>>>>>> 401539d9dadfa66f3da23ddb50c6bd8b4f7dd5f8
     </task>
     <servers />
   </component>
@@ -504,11 +512,6 @@
           <url>file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ThrottlesLogins.php</url>
           <line>4</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/sekretariat/content/rekap-rko.blade.php</url>
-          <line>31</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -106,8 +106,22 @@ class RekapOSSController extends Controller
     public function rekap(Request $request){
         $kabkotas = KabKotaModels::all();
         $kabkota = $request->input('kab_kota');
-        if ($kabkota == 'all'){
+        $status = $request->input('status');
+        $oss = OssModels::all();
+        if ($kabkota == 'all' and $status == 'all'){
             $rek_oss = DB::table('oss_models')->paginate(10);
+        }
+        elseif ($status == 'perorangan'){
+            foreach ($oss as $o){
+                $rek_oss = $oss->where('nama_perseroan', $o->nama_pendaftar);
+            }
+        }
+        elseif ($status == 'perusahaan'){
+            foreach ($oss as $o) {
+                $rek_oss = DB::table('oss_models')
+                    ->where('nama_perseroan', '!=', $o->nama_pendaftar)
+                    ->get();
+            }
         }
         else{
             $rek_oss = DB::table('oss_models')

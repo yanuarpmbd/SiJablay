@@ -1,3 +1,4 @@
+
 @extends('master.home-master')
 @section('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -15,7 +16,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('all.content.edit-notulen')
+        @include('sekretariat.content.edit-rko')
     </div>
 @endsection
 @section('js')

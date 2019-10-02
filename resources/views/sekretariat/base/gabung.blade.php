@@ -39,12 +39,17 @@
             });
 
             $('#data_1 .input-group.date').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                startView: "months",
+                minViewMode: "months",
+                showButtonPanel: true,
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true,
-                format: "yyyy-mm-dd"
+                format: "yyyy-mm"
             });
 
 
