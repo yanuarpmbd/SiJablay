@@ -14,12 +14,11 @@ class PokExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $user_name = strtoupper(Auth::user()->name);
-        $todays = strtoupper(date("F"));
-        $today = date("Y-m");
+        $todays = date('F', strtotime("-1 month"));
         $query = "CAST(rko_id AS int)ASC";
 
         return view('all.content.rekap-pok-bidang', [
-            'pok' => PokModel::where('bulan', '=', $today)->orderByRaw($query)->get()
-        ], compact('user_name', 'todays', 'today'));
+            'pok' => PokModel::where('bulan', '=', date('Y-m', strtotime("-1 month")))->orderByRaw($query)->get()
+        ], compact('user_name', 'todays'));
     }
 }

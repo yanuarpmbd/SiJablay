@@ -123,12 +123,14 @@ class RkoController extends Controller
         $jml_anggaran = str_replace('.','', $jml_anggarans);
         $bidang = $request->input('bidang');
 
-        $update = new RkoModel();
+        $update = RkoModel::findOrFail($id);
         $update->nama_kegiatan = $nama_kegiatan;
         $update->jml_anggaran = $jml_anggaran;
         $update->bidang = $bidang;
+        //($update);
+        $update->update();
 
-        dd($update);
+        return redirect()->route('get.all')->with('success', 'Data RKO berhasil diubah');
     }
 
     /**
@@ -140,10 +142,10 @@ class RkoController extends Controller
     public function destroy($id)
     {
         $delete = RkoModel::findOrFail($id);
-        dd($delete);
-        //$delete->delete();
+        //dd($delete);
+        $delete->delete();
 
-        return redirect()->back()->with('success', 'Data berhasil dihapus');
+        return redirect()->route('get.all')->with('success', 'Data RKO berhasil diubah');
     }
 
     public function rekapRKO(){

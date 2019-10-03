@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-lg-12">
-        @if ($message = Session::get('warning'))
-            <div class="alert alert-warning alert-block">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
+                <strong>{!! $message !!}</strong>
             </div>
         @endif
         <div class="ibox float-e-margins">

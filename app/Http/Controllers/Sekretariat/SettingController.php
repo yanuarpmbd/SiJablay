@@ -57,12 +57,13 @@ class SettingController extends Controller
         $rek_rko = RkoModel::all();
 
         $bulan = $request->input('bulan_input');
+        $bulans = date('F-Y', strtotime($bulan));
         //dd($bulan);
 
         //$target = TargetRealisasiModel::all();
         $rko = TargetRealisasiModel::where('bulan', '=', $today)->get();
 
-        return view('sekretariat.base.gabung', compact('user', 'rek_rko', 'kepala', 'plt', 'kabid', 'plh', 'rek', 'id', 'nomor', 'bidang', 'today', 'target', 'dropdown', 'username', 'todays', 'bulan', 'rko'));
+        return view('sekretariat.base.gabung', compact('user', 'rek_rko', 'bulans', 'kepala', 'plt', 'kabid', 'plh', 'rek', 'id', 'nomor', 'bidang', 'today', 'target', 'dropdown', 'username', 'todays', 'bulan', 'rko'));
     }
 
     public function plh()

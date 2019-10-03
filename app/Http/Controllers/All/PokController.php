@@ -129,7 +129,7 @@ class PokController extends Controller
         $in->keu_smp_skrg = $sum_reakeu_skrg;
         $in->deviasi = $deviasi;
         $in->ket = $ket;
-        dd($in);
+        //dd($in);
         $in->save();
         return redirect()->route('rekap.pok')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -182,6 +182,10 @@ class PokController extends Controller
             'ket' => 'required',
         ]);
 
+        $realisasi_fisiks_sebelum = $request->input('realisasi_fisik_sebelum');
+        $realisasi_fisik_sebelum = str_replace('.','', $realisasi_fisiks_sebelum);
+        $realisasi_keus_sebelum = $request->input('realisasi_keu_sebelum');
+        $realisasi_keu_sebelum = str_replace('.','', $realisasi_keus_sebelum);
         $realisasi_fisiks = $request->input('realisasi_fisik');
         $realisasi_fisik = str_replace('.','', $realisasi_fisiks);
         $realisasi_keus = $request->input('realisasi_keu');
@@ -202,7 +206,7 @@ class PokController extends Controller
             $jml->jml_anggaran;
         }
         $jml_anggarans = str_replace('.','', ($jml->jml_anggaran));
-        $pok_sblm = PokModel::where('bulan', '<', $bulan)->where('user_id', '=', $user_id)->get();
+        /*$pok_sblm = PokModel::where('bulan', '<', $bulan)->where('user_id', '=', $user_id)->get();
         $sum_reafis_sblm = 0;
         foreach ($pok_sblm as $reafis_sebelum){
             if ($reafis_sebelum->rko_id == $rko_id){
@@ -218,31 +222,31 @@ class PokController extends Controller
                 $sum_reakeu_sblm = $reakeu_sebelum->keu_smp_skrg;
             }
             else{
-
             }
-
-        }
-        $sum_reafis_skrg = $sum_reafis_sblm + $realisasi_fisik;
-        $sum_reakeu_skrg = $sum_reakeu_sblm + $realisasi_keu;
+        }*/
+        $sum_reafis_skrg = $realisasi_fisik_sebelum + $realisasi_fisik;
+        $sum_reakeu_skrg = $realisasi_keu_sebelum + $realisasi_keu;
         $persen_reafis_skrg = round((((str_replace('.','',$sum_reafis_skrg))/$jml_anggarans)*100),2);
         $deviasi = round(($persen_reafis_skrg - $targets),2);
         //dd($deviasi);
 
-        $in = new PokModel();
+        $in = PokModel::findOrFail($id);
         $in->realisasi_fisik = $realisasi_fisik;
         $in->realisasi_keu = $realisasi_keu;
         $in->user_id = Auth::user()->id;
         $in->bulan = $bulan;
         $in->target = $targets;
         $in->rko_id = $rko_id;
-        $in->fisik_sblm_bln = $sum_reafis_sblm;
-        $in->keu_sblm_bln = $sum_reakeu_sblm;
+        $in->fisik_sblm_bln = $realisasi_fisiks_sebelum;
+        $in->keu_sblm_bln = $realisasi_keu_sebelum;
         $in->fisik_smp_skrg = $sum_reafis_skrg;
         $in->keu_smp_skrg = $sum_reakeu_skrg;
         $in->deviasi = $deviasi;
         $in->ket = $ket;
-        dd($in);
+        //dd($in);
         $in->update();
+
+        return redirect()->route('rekap.pok')->with('success', 'Data berhasil dirubah');
     }
 
     /**

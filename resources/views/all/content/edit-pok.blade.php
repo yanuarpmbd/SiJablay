@@ -1,4 +1,23 @@
-<div class="ibox float-e-margins">
+<div class="row">
+    <div class="col-lg-12">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        @if(session()->has('bad'))
+            <div class="alert alert-danger alert-block">
+                {{ session()->get('bad') }}
+            </div>
+        @endif
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h5>EDIT POK</h5>
     </div>
@@ -31,6 +50,22 @@
                                     <input type="text" name="bulan" id="bulan" class="form-control"
                                            value="{{$pok->bulan}}" autocomplete="off">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="col-lg-12">
+                            <div class="form-group"><label>Realisasi Fisik s/d Bulan Lalu (Rp) *</label>
+                                <input placeholder="Realisasi Fisik s/d Bulan lalu (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_fisik_sebelum" id="realisasi_fisik_sebelum"
+                                       class="form-control" value="{{$pok->fisik_sblm_bln}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="col-lg-12">
+                            <div class="form-group"><label>Realisasi Keuangan s/d Bulan Lalu (Rp) *</label>
+                                <input placeholder="Realisasi Keuangan s/d Bulan Lalu (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_keu_sebelum" id="realisasi_keu_sebelum"
+                                       class="form-control" value="{{$pok->keu_sblm_bln}}">
                             </div>
                         </div>
                     </div>
@@ -70,5 +105,7 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
     </div>
 </div>

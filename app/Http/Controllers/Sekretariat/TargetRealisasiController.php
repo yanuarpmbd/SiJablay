@@ -79,14 +79,14 @@ class TargetRealisasiController extends Controller
         $username = Auth::user()->name;
         $today = date('Y-m');
         $todays = date('F-Y');
-
-        $bulan = $request->input('bulan_input');
-        //dd($bulan);
+        $bulan = $request->input('bulan');
+        $bulans = date('F-Y', strtotime($bulan));
+        //dd($bulans);
 
         //$target = TargetRealisasiModel::all();
-        $rko = TargetRealisasiModel::where('bulan', '=', $today)->get();
+        $rko = TargetRealisasiModel::where('bulan', '=', $bulan)->get();
         //($rko);
-        return view('sekretariat.base.rekap-rko', compact('user', 'username', 'bulan', 'today', 'rko', 'todays'));
+        return view('sekretariat.base.rekap-rko', compact('user', 'username', 'bulan', 'bulans', 'today', 'rko', 'todays'));
     }
 
     /**
@@ -129,7 +129,7 @@ class TargetRealisasiController extends Controller
         $update->rko_id = $rko_id;
         $update->update();
 
-        return redirect()->route('rekap.targetrealisasi')->with('success', 'Data berhasil diedit');
+        return redirect()->route('get.all')->with('success', 'Data Target Realisasi berhasil diedit');
     }
 
     /**
@@ -142,8 +142,8 @@ class TargetRealisasiController extends Controller
     {
         $target = TargetRealisasiModel::findOrFail($id);
         //dd($target);
-
-        return redirect()->back()->with('success', 'Data berhasil dihapus');
+        $target->delete();
+        return redirect()->route('get.all')->with('success', 'Data Target Realisasi berhasil dihapus');
     }
 
     public function rekapTarget(Request $request){

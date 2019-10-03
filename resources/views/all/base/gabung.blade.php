@@ -29,6 +29,12 @@
                         {{ session()->get('bad') }}
                     </div>
                 @endif
+                @if ($message = Session::get('warning'))
+                    <div class="alert alert-warning alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-1">Tambah Notulen</a></li>

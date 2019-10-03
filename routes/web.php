@@ -109,12 +109,12 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('RKO/delete/{id}', 'Sekretariat\RkoCOntroller@destroy')->name('delete.rko');
         Route::get('/TargetRealisasi', 'Sekretariat\TargetRealisasiController@showForm')->name('show.targetrealisasi');
         Route::post('/TargetRealisasi', 'Sekretariat\TargetRealisasiController@storeTargetRealisasi')->name('post.targetrealisasi');
+        Route::get('/rekapTargetRKO', 'Sekretariat\TargetRealisasiController@show')->name('rekap.rko');
+        Route::post('/rekapTargetRKO', 'Sekretariat\TargetRealisasiController@show')->name('postrekap.rko');
         Route::get('/rekapTargetRealisasi', 'Sekretariat\TargetRealisasiController@rekapTarget')->name('rekap.targetrealisasi');
         Route::get('/{id}', 'Sekretariat\TargetRealisasiController@edit')->name('edit.targetrealisasi');
         Route::patch('/update/{id}', 'Sekretariat\TargetRealisasiController@update')->name('update.targetrealisasi');
         Route::get('/delete/{id}', 'Sekretariat\TargetRealisasiController@destroy')->name('delete.targetrealisasi');
-        Route::get('/rekapTargetRKO', 'Sekretariat\TargetRealisasiController@show')->name('rekap.rko');
-        Route::post('/rekapTargetRKO', 'Sekretariat\TargetRealisasiController@show')->name('postrekap.rko');
 
         Route::get('/settings/rek', 'Sekretariat\RekController@rek')->name('get.rek');
         Route::post('/settings/rek', 'Sekretariat\RekController@rekPost')->name('post.rek');
@@ -128,7 +128,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{id}', 'All\PokController@edit')->name('edit.pok');
         Route::patch('/update/{id}', 'All\PokController@update')->name('update.pok');
         Route::get('/delete/{id}', 'All\PokController@destroy')->name('delete.pok');
-        Route::get('/download', 'All\PokController@export')->name('export.pok');
+        Route::get('/POK/download', 'All\PokController@export')->name('export.pok');
         Route::get('/', 'All\PokController@gabungPOK')->name('gabung.pok');
     });
 

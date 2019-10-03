@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-lg-12">
         @if ($message = Session::get('warning'))
@@ -9,44 +8,25 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>REKAP RKO Bulan <strong>{{$todays}}</strong></h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">Config option 1</a>
-                        </li>
-                        <li><a href="#">Config option 2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h5>REKAP Target Realisasi RKO Bulan <strong>{{$bulans}}</strong></h5>
             </div>
             <div class="ibox-content">
-               {{-- <div class="col-4">
-                    <div class="form-group" id="data_1">
-                        <label class="col-lg-12 control-label">Bulan - Tahun</label>
-                        <div class="col-lg-12">
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input type="text" name="bulan_input" id="bulan_input" class="form-control"
-                                       value="{{$today}}">
+                <div class="col-4">
+                    <form action="{{route('rekap.rko')}}">
+                        <div class="form-group" id="data_1">
+                            <label class="col-lg-12 control-label">Bulan</label>
+                            <div class="col-lg-12">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="bulan" id="bulan" class="form-control" autocomplete="off">
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group" >
-                            <div style="align-items: center">
-                                <button class="btn btn-sm btn-white" type="submit">Submit</button>
-                            </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-white" type="submit">Submit</button>
                         </div>
-                    </div>
-                </div>--}}
+                    </form>
+                </div>
 
 
                 <table class="footable table table-stripped toggle-arrow-tiny">
