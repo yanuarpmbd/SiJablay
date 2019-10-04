@@ -1,5 +1,16 @@
 <div class="row">
     <div class="col-lg-12">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        @if(session()->has('bad'))
+            <div class="alert alert-danger alert-block">
+                {{ session()->get('bad') }}
+            </div>
+        @endif
         @if ($message = Session::get('warning'))
             <div class="alert alert-warning alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -58,9 +69,18 @@
                                 <input placeholder="Peserta" name="peserta" id="peserta" class="form-control">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             <div class="form-group"><label>Tempat *</label>
-                                <input placeholder="Tempat" name="tempat" id="tempat" class="form-control">
+                                <select class="form-control" name="tempat" id="tempat" required>
+                                    @foreach($tempat as $t)
+                                        <option value="{{$t->id}}">{{$t->tempat_keg}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-1" align="center "><label></label>
+                            <div align="center">
+                                <a href="{{action('All\KegiatanController@showTempatKegiatan')}}" class="btn btn-app btn-success fa fa-plus"></a>
                             </div>
                         </div>
                     </div>

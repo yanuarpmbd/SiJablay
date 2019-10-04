@@ -5,6 +5,7 @@ namespace App\Http\Controllers\All;
 use App\Exports\KegiatanExport;
 use App\Models\All\KegiatanCrash;
 use App\Models\All\KegiatanModels;
+use App\Models\All\TempatKegModels;
 use App\Models\Sekretariat\DataAsnModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,13 +15,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class KegiatanController extends Controller
 {
-    public function showKegiatan(){
-
+    public function showKegiatan(Request $request){
         $today = date('Y-m-d');
-        //dd($today);
+        $todays = date('m');
+        $bulan = $request->input('bulan');
+        //dd($bulan);
         //$user = Auth::user()->id;
-        $keg = KegiatanModels::all()->sortByDesc('created_at');
-        //dd($keg);
+        $keg = KegiatanModels::whereMonth('tanggal', '=', $bulan)->get();
+
+        $tempat = TempatKegModels::all();
         foreach ($keg as $k){
             $cek_tmp = KegiatanModels::where('tempat', '=', $k->tempat)->exists();
             $cek_pst = KegiatanModels::where('peserta', '=', $k->peserta)->exists();
@@ -30,7 +33,7 @@ class KegiatanController extends Controller
         for ($i=0;$i<count($keg);$i++){
             //dd($keg[$i]->id = $k->crash);
         }
-        return view('all.base.show-kegiatan', compact('today', 'keg'));
+        return view('all.base.all-keg', compact('today', 'keg', 'tempat', 'todays'));
     }
 
     public function allKegiatan(){
@@ -255,5 +258,48 @@ class KegiatanController extends Controller
 
     public function exportKegiatan(){
         return Excel::download(new KegiatanExport(), 'Rekap Kegiatan.xlsx');
+    }
+
+    public function showTempatKegiatan(){
+        return view('all.base.show-tempat-keg');
+    }
+
+    public function addTempatKegiatan(Request $request){
+        $this->validate($request, [
+            'tempat_keg' => 'required',
+            'status_tempat' => 'required',
+        ]);
+
+        $user = Auth::user()->username;
+        //dd($user);
+
+        $tempat_keg = $request->input('tempat_keg');
+        $status_tempat = $request->input('status_tempat');
+
+        $post = new TempatKegModels();
+        $post->tempat_keg = $tempat_keg;
+        $post->status_tempat = $status_tempat;
+        //dd($post);
+        $post->save();
+
+        return redirect()->back()->with('success', 'Tempat Kegiatan berhasil ditambahkan');
+    }
+
+    public function gabungKegiatan(Request $request){
+        $today = date('Y-m-d');
+        $bulan = $request->input('bulan');
+        $todays = date('m');
+        $keg = KegiatanModels::whereMonth('tanggal', '=', $bulan)->get();
+        //dd($keg);
+        $tempat = TempatKegModels::all();
+        foreach ($keg as $k){
+            $cek_tmp = KegiatanModels::where('tempat', '=', $k->tempat)->exists();
+            $cek_pst = KegiatanModels::where('peserta', '=', $k->peserta)->exists();
+            $cek_tgl = KegiatanModels::where('tanggal', '=', $k->tanggal)->exists();
+        }
+        for ($i=0;$i<count($keg);$i++){
+            //dd($keg[$i]->id = $k->crash);
+        }
+        return view('all.base.gabung-kegiatan', compact('today', 'keg', 'tempat', 'todays'));
     }
 }

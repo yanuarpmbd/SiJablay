@@ -91,7 +91,6 @@ class RekapSPTController extends Controller
         $kepala = DB::table('data_asn_models')
             ->where('jabatan', 'LIKE', 'KEPALA DINAS%')
             ->get();
-        //dd($kepala);
 
         if (count($kepala) == 1){
             foreach ($kepala as $kep){
@@ -115,7 +114,9 @@ class RekapSPTController extends Controller
         $pangkat_kepala = 'Pembina Tingkat I';
 
         if (!empty($kep)){
+
             $jabatan = 'KEPALA DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU';
+
         }
         $plh = SettingModels::all();
         foreach ($plh as $gankep){
@@ -130,26 +131,13 @@ class RekapSPTController extends Controller
             ->orWhere('jabatan', 'LIKE', 'KASUBBAG%')
             ->pluck('jabatan');
 //dd($strukturals);
+        foreach ($strukturals as $struktural){
+
+        }
+        //dd(stripos($d, $c) !== FALSE);
         foreach ($spt->pivot as $s){
         }
-        foreach ($strukturals as $struktural){
-            $cek = ((stripos($s->namad->jabatan, $struktural) !== false) || (stripos($s->namad->jabatan, $struktural) !== false));
-        }
-        dd($cek);
-        //dd(stripos($d, $c) !== FALSE);
-        if ($bidang_name == 'Sekretariat'){
-            $pjspt = DataAsnModel::where('jabatan', 'LIKE', 'Sekretaris%')->get();
-            foreach ($pjspt as $pj){
-            }
-        }
-        else{
-            $pjspt = DataAsnModel::where('jabatan', 'LIKE', 'Kabid '.$bidang_name.'%')->get();
-            //dd($kabid);
-            foreach ($pjspt as $pj){
-                //dd($kbd->nama);
-            }
-        }
-        //dd($pj);
+        $cek = (stripos($s->namad->jabatan, $struktural) !== FALSE);
         if ($bidang_name == 'Sekretariat'){
             $kabid = DataAsnModel::where('jabatan', 'LIKE', 'Sekretaris%')->get();
             foreach ($kabid as $sek){
@@ -168,12 +156,12 @@ class RekapSPTController extends Controller
         /*for ($i=0; $i<=count($struktural); $i++){
             echo "$s <br>";
             $cek = in_array($struktural[$i], $nama);
-            //dd($struktural[$i]);
+            dd($struktural[$i]);
         }*/
 
         foreach ($spt->pivot as $s){
             $namas = $s->namad;
-            //dd(empty($namas));
+            //dd(empty($namas);
         }
 
         $m = $spt->tgl_berangkat;
@@ -245,9 +233,9 @@ class RekapSPTController extends Controller
 
                 $templateProcessor->setValue('nama', $s->namad->nama);
                 $templateProcessor->setValue('nip', $s->namad->nip);
-                $templateProcessor->setValue('jabatan', (ucwords(strtolower($s->namad->jabatan))));
+                $templateProcessor->setValue('jabatan', $s->namad->jabatan);
 
-            //dd(ucwords(strtolower($s->namad->jabatan)));
+            //dd($s->namad->pejabat);
 
             $templateProcessor->setValue('dalam_rangka', $spt->perihal);
             $templateProcessor->setValue('count_hari', $diff_in_days);
@@ -259,39 +247,35 @@ class RekapSPTController extends Controller
             $templateProcessor->setValue('tanggal_spt', $b_spt);
             $templateProcessor->setValue('now', $now);
 
-            /*$templateProcessor->setValue('jabatan_kepala', $pj->jabatan);
-            $templateProcessor->setValue('nama_kepala', $pj->nama);
-            $templateProcessor->setValue('pangkat_kepala', $pangkat_kepala);
-            $templateProcessor->setValue('nip_kepala', $pj->nip);*/
-            if ($cek == 'true'){
-                if (count($plh) == 0){
-                    if ($p == false){
-                        $templateProcessor->setValue('jabatan_kepala', $kep->jabatan);
-                        $templateProcessor->setValue('nama_kepala', $kep->nama);
-                        $templateProcessor->setValue('pangkat_kepala', $pangkat_kepala);
-                        $templateProcessor->setValue('nip_kepala', $kep->nip);
-                    }
-                    else{
-                        $templateProcessor->setValue('jabatan_kepala','Plt. '. $jabatan. "\r\n" . $jabatan_plt);
-                        $templateProcessor->setValue('nama_kepala', $nama_plt);
-                        $templateProcessor->setValue('pangkat_kepala', $pangkat_plt);
-                        $templateProcessor->setValue('nip_kepala', $nip_plt);
-                    }
+            if (count($plh) == 0){
 
-                }
+               if ($p == false){
+                    $templateProcessor->setValue('jabatan_kepala', $kep->jabatan);
+                    $templateProcessor->setValue('nama_kepala', $kep->nama);
+                    $templateProcessor->setValue('pangkat_kepala', $pangkat_kepala);
+                    $templateProcessor->setValue('nip_kepala', $kep->nip);
+               }
                 else{
-                    $templateProcessor->setValue('jabatan_kepala', 'Plh. '. $jabatan . "\r\n" . $gankep->jabatan_kepala);
-                    $templateProcessor->setValue('nama_kepala', $gankep->nama_kepala);
-                    $templateProcessor->setValue('pangkat_kepala', $gankep->pangkat->pangkat);
-                    $templateProcessor->setValue('nip_kepala', $gankep->nip_kepala);
+                    $templateProcessor->setValue('jabatan_kepala','Plt. '. $jabatan. "\r\n" . $jabatan_plt);
+                    $templateProcessor->setValue('nama_kepala', $nama_plt);
+                    $templateProcessor->setValue('pangkat_kepala', $pangkat_plt);
+                    $templateProcessor->setValue('nip_kepala', $nip_plt);
                 }
+
+            }
+            elseif ($cek == false){
+                $templateProcessor->setValue('jabatan_kepala', 'a.n. '. $jabatan . "\r\n" . $kabid->jabatan_kepala);
+                $templateProcessor->setValue('nama_kepala', $kabid->nama_kepala);
+                $templateProcessor->setValue('pangkat_kepala', $kabid->pangkat->pangkat);
+                $templateProcessor->setValue('nip_kepala', $kabid->nip_kepala);
             }
             else{
-                $templateProcessor->setValue('jabatan_kepala', 'a.n. '. $jabatan . "\r\n" . $pj->jabatan);
-                $templateProcessor->setValue('nama_kepala', $pj->nama);
-                $templateProcessor->setValue('pangkat_kepala', $pj->pangkat->pangkat);
-                $templateProcessor->setValue('nip_kepala', $pj->nip);
+                $templateProcessor->setValue('jabatan_kepala', 'Plh. '. $jabatan . "\r\n" . $gankep->jabatan_kepala);
+                $templateProcessor->setValue('nama_kepala', $gankep->nama_kepala);
+                $templateProcessor->setValue('pangkat_kepala', $gankep->pangkat->pangkat);
+                $templateProcessor->setValue('nip_kepala', $gankep->nip_kepala);
             }
+
             /**/
 
             $export_file = public_path('Sijablay_SPT.docx');
@@ -358,36 +342,26 @@ class RekapSPTController extends Controller
             $templateProcessor->setValue('nama_bidang', $user_name);
             $templateProcessor->setValue('now', $now);
 
-            if ($cek == 'true'){
-                if (count($plh) == 0){
-                    if ($p == false){
-                        $templateProcessor->setValue('jabatan_kepala', $kep->jabatan);
-                        $templateProcessor->setValue('nama_kepala', $kep->nama);
-                        $templateProcessor->setValue('pangkat_kepala', $pangkat_kepala);
-                        $templateProcessor->setValue('nip_kepala', $kep->nip);
-                    }
-                    else{
-                        $templateProcessor->setValue('jabatan_kepala','Plt. '. $jabatan. "\r\n" . $jabatan_plt);
-                        $templateProcessor->setValue('nama_kepala', $nama_plt);
-                        $templateProcessor->setValue('pangkat_kepala', $pangkat_plt);
-                        $templateProcessor->setValue('nip_kepala', $nip_plt);
-                    }
-
+            if (count($plh) == 0){
+                if ($p == false){
+                    $templateProcessor->setValue('jabatan_kepala', $kep->jabatan);
+                    $templateProcessor->setValue('nama_kepala', $kep->nama);
+                    $templateProcessor->setValue('pangkat_kepala', $pangkat_kepala);
+                    $templateProcessor->setValue('nip_kepala', $kep->nip);
                 }
                 else{
-                    $templateProcessor->setValue('jabatan_kepala', 'Plh. '. $jabatan . "\r\n" . $gankep->jabatan_kepala);
-                    $templateProcessor->setValue('nama_kepala', $gankep->nama_kepala);
-                    $templateProcessor->setValue('pangkat_kepala', $gankep->pangkat->pangkat);
-                    $templateProcessor->setValue('nip_kepala', $gankep->nip_kepala);
+                    $templateProcessor->setValue('jabatan_kepala','Plt. '. $jabatan. "\r\n" . $jabatan_plt);
+                    $templateProcessor->setValue('nama_kepala', $nama_plt);
+                    $templateProcessor->setValue('pangkat_kepala', $pangkat_plt);
+                    $templateProcessor->setValue('nip_kepala', $nip_plt);
                 }
             }
             else{
-                $templateProcessor->setValue('jabatan_kepala', 'a.n. '. $jabatan . "\r\n" . $pj->jabatan);
-                $templateProcessor->setValue('nama_kepala', $pj->nama);
-                $templateProcessor->setValue('pangkat_kepala', $pj->pangkat->pangkat);
-                $templateProcessor->setValue('nip_kepala', $pj->nip);
+                $templateProcessor->setValue('jabatan_kepala', 'Plh. '. $jabatan . "\r\n" . $gankep->jabatan_kepala);
+                $templateProcessor->setValue('nama_kepala', $gankep->nama_kepala);
+                $templateProcessor->setValue('pangkat_kepala', $gankep->pangkat->pangkat);
+                $templateProcessor->setValue('nip_kepala', $gankep->nip_kepala);
             }
-
             $export_file = public_path('SPT_Sijablay.docx');
             //dd($export_file);
             $templateProcessor->saveAs($export_file);
@@ -660,6 +634,7 @@ class RekapSPTController extends Controller
             $namas = $s->namad;
             //dd($namas);
             //dd($namas->gol == '-');
+
         }
         //dd($spt->pivot[0]->namad->pangkat->pangkat);
 

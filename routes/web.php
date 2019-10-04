@@ -11,15 +11,18 @@
 |
 */
 
+//HOME//
 Route::get('/', function () {
     return view('layouts.home');
 });
 
+//NO AUTH//
 Route::prefix('kegiatan')->group(function (){
     Route::get('/', 'All\KegiatanController@showKegiatan')->name('get.kegiatan');
     Route::get('/databidang', 'All\DataBidangController@gabungbidang')->name('gabung.bidang');
 });
 
+//AUTH//
 Route::namespace('Auth')->group(function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@login')->name('login.post');
@@ -27,6 +30,7 @@ Route::namespace('Auth')->group(function () {
     Route::post('logout', 'LoginController@logout')->name('logout');
 });
 
+//MAIN ROUTES//
 Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/home', 'All\HomeController@home')->name('home');
@@ -53,7 +57,6 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/advance/sppd', 'SPT\AdvanceSPTController@getSPPD')->name('adv.sppd');
         Route::get('/sppd_cetak-adv/{id}', 'SPT\AdvanceSPTController@cetakAdvSppd')->name('cetak-adv.sppd');
     });
-    //SPT dan SPPD//
 
     //All Bidang Sementara//
     Route::prefix('allbidang')->group(function (){
@@ -188,22 +191,26 @@ Route::middleware(['web', 'auth'])->group(function () {
     });
 
     //KEGIATAN//
-    Route::prefix('kegiatan')->group(function (){
-        Route::post('/', 'All\KegiatanController@postKegiatan')->name('post.kegiatan');
+    Route::prefix('kegiatans')->group(function (){
+        Route::get('/', 'All\KegiatanController@gabungKegiatan')->name('gabung.kegiatan');
+        Route::post('/add', 'All\KegiatanController@postKegiatan')->name('post.kegiatan');
+        Route::get('/tempatkegiatan', 'All\KegiatanController@showTempatKegiatan')->name('show.tempat-keg');
+        Route::post('/tempatkegiatan', 'All\KegiatanController@addTempatKegiatan')->name('add.tempat-keg');
+        Route::get('/download', 'All\KegiatanController@exportKegiatan')->name('export.kegiatan');
         Route::get('/{id}', 'All\KegiatanController@editKegiatan')->name('edit.kegiatan');
         Route::get('/edit/{id}', 'All\KegiatanController@editKegiatan')->name('edit.kegiatan');
         Route::patch('/update/{id}', 'All\KegiatanController@updateKegiatan')->name('update.kegiatan');
         Route::get('/pilih/{id}', 'All\KegiatanController@pilihKegiatan')->name('pilih.kegiatan');
         Route::patch('/terpilih/{id}', 'All\KegiatanController@tentukanKegiatan')->name('terpilih.kegiatan');
         Route::get('/delete/{id}', 'All\KegiatanController@hapusKegiatan')->name('hapus.kegiatan');
-        Route::get('/download', 'All\KegiatanController@exportKegiatan')->name('export.kegiatan');
     });
 
-/*    Route::prefix('datapegawai')->group(function () {
+    /*Route::prefix('datapegawai')->group(function () {
         Route::get('/', 'All\AbsenSimpegController@absensimpeg')->name('get.presensi');
         Route::get('/show', 'All\AbsenSimpegController@index')->name('show.presensi');
     });*/
 
+    //DATA ASN//
     Route::prefix('dataasn')->group(function () {
         Route::get('/presensi', 'All\DataAsnController@absensimpeg')->name('get.presensi');
         Route::get('/asn', 'All\DataAsnController@dataasn')->name('get.asn');

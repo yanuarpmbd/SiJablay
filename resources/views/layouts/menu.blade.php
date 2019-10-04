@@ -10,7 +10,7 @@
 
     <ul class="navigation__ul">
         <li><a href="{{route('home')}}">Home</a></li>
-        <li><a href="{{route('get.kegiatan')}}">Kegiatan</a></li>
+        <li><a href="{{route('gabung.kegiatan')}}">Kegiatan</a></li>
         <li><a href="{{route('gabung.notulen')}}">Notulen</a></li>
         <li><a href="{{route('form.spt')}}">Perjalanan Dinas</a></li>
         <li><a href="{{route('gabung.bidang')}}">Data Bidang</a></li>
