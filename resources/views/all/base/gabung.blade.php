@@ -7,12 +7,7 @@
     <link href="{{asset('css/style_.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/footable/footable.bootstrap.css')}}" rel="stylesheet">
-    <style>
-        .btn-trans {
-            background-color: transparent;
-            border-color: transparent;
-        }
-    </style>
+    <link href="{{asset('css/plugins/clockpicker/clockpicker.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="tengah">
@@ -35,21 +30,19 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1">Tambah Notulen</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2">Rekap Notulen</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-                                @include('all.content.notulen')
-                            </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1">Tambah Notulen</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-2">Rekap Notulen</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            @include('all.content.notulen')
                         </div>
-                        <div id="tab-2" class="tab-pane">
-                            <div class="panel-body">
-                                @include('all.content.dummy')
-                            </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            @include('all.content.dummy')
                         </div>
                     </div>
                 </div>
@@ -68,10 +61,9 @@
     <script src="{{asset('js/plugins/footable/footable.js')}}"></script>
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.js')}}"></script>
     <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('js/plugins/clockpicker/clockpicker.js')}}"></script>
     <script>
         $(document).ready(function () {
-
-
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
             $(".select2_demo_3").select2({
@@ -79,7 +71,6 @@
                 allowClear: true,
                 minimumInputLength:3,
             });
-
             $('#data_1 .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -88,8 +79,6 @@
                 autoclose: true,
                 format: "yyyy-mm-dd"
             });
-
-
             var lineData = {
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
                 datasets: [
@@ -111,15 +100,11 @@
                     }
                 ]
             };
-
             var lineOptions = {
                 responsive: true
             };
-
-
             var ctx = document.getElementById("lineChart").getContext("2d");
             new Chart(ctx, {type: 'line', data: lineData, options: lineOptions});
-
         });
     </script>
     <script>
@@ -198,13 +183,9 @@
         CKEDITOR.replace( 'article-ckeditor' );
     </script>
     <script>
-
         $('#article-ckeditor').wysiwyg();
-
         $('#submit-notulen').on('click',function(){
-
             console.log($('#editor').html());
-
         });
     </script>
 @endsection

@@ -13,17 +13,15 @@
                                 <div class="col-lg-12">
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" name="tgl" id="tgl" class="form-control"
-                                               value="{{$today}}" autocomplete="off">
+                                        <input type="text" name="tgl" id="tgl" class="form-control" value="{{$today}}" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group"><label>Pukul</label>
+                            <div class="form-group"><label>Pukul *</label>
                                 <div class="col-lg-12">
-                                <input placeholder="00:00 - 00:00" name="pukul" id="pukul"
-                                       class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                <input placeholder="00:00 - 00:00" name="pukul" id="pukul" class="form-control" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -31,26 +29,22 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="col-lg-12">
-                            <div class="form-group"><label>Tempat</label>
-                                <input placeholder="Tempat" name="tempat" id="tempat"
-                                       class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
-
+                            <div class="form-group"><label>Tempat *</label>
+                                <input placeholder="Tempat" name="tempat" id="tempat" class="form-control" autocomplete="off" required>
                             </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="col-lg-12">
-                            <div class="form-group"><label>Acara</label>
-                                <input placeholder="Acara" name="acara" id="acara"
-                                       class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
-
+                            <div class="form-group"><label>Acara *</label>
+                                <input placeholder="Acara" name="acara" id="acara" class="form-control" autocomplete="off" required>
                             </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="col-lg-12">
-                            <div class="form-group"><label>Peserta</label>
-                                <input placeholder="Peserta Rapat" name="peserta" class="form-control">
+                            <div class="form-group"><label>Peserta *</label>
+                                <input placeholder="Peserta Rapat" name="peserta" class="form-control" autocomplete="off" required>
                             </div>
                             </div>
                         </div>
@@ -74,8 +68,8 @@
                         <div class="col-4">
                             <div class="form-group" id="plk">
                                 <div class="col-lg-12">
-                                <label>Pemimpin Rapat</label>
-                                    <select class="select2_demo_3 form-control" name="pemimpin_rpt" id="pemimpin_rpt">
+                                <label>Pemimpin Rapat *</label>
+                                    <select class="select2_demo_3 form-control" name="pemimpin_rpt" id="pemimpin_rpt" autocomplete="off" required>
                                         @foreach($nama as $d)
                                             <option value=""></option>
                                             <option value="{{$d->id}}">{{$d->nama}}</option>
@@ -87,8 +81,8 @@
                         <div class="col-4">
                             <div class="form-group" id="plk">
                                 <div class="col-lg-12">
-                                <label>Pengampu Kegiatan</label>
-                                    <select class="select2_demo_3 form-control" name="pengampu_keg" id="pengampu_keg">
+                                <label>Pengampu Kegiatan *</label>
+                                    <select class="select2_demo_3 form-control" name="pengampu_keg" id="pengampu_keg" autocomplete="off" required>
                                         @foreach($nama as $d)
                                             <option value=""></option>
                                             <option value="{{$d->id}}">{{$d->nama}}</option>
@@ -100,8 +94,8 @@
                         <div class="col-4">
                             <div class="form-group" id="plk">
                                 <div class="col-lg-12">
-                                <label>Notulis</label>
-                                    <select class="select2_demo_3 form-control" name="notulis" id="notulis">
+                                <label>Notulis *</label>
+                                    <select class="select2_demo_3 form-control" name="notulis" id="notulis" autocomplete="off" required>
                                         @foreach($nama as $d)
                                             <option value=""></option>
                                             <option value="{{$d->id}}">{{$d->nama}}</option>
@@ -113,7 +107,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="form-group"><label>Hasil Rapat</label>
+                            <div class="form-group"><label>Hasil Rapat *</label>
                                 <textarea name="article-ckeditor" id="article-ckeditor"></textarea>
                                 <textarea name="hidden-editor" id="hidden-editor" style="display:none;"></textarea>
                             </div>
@@ -186,14 +180,10 @@
         });
     });
 </script>
-<script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
-<script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-
         $('.footable').footable();
         $('.footable2').footable();
-
     });
 </script>
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
@@ -217,16 +207,13 @@
                     }
                 }
             });
-
             // when parsing is done, export the data to PDF
             dataSource.read().then(function (data) {
                 var pdf = new shield.exp.PDFDocument({
                     author: "SiJablay DPMPTSP Jateng",
                     created: new Date()
                 });
-
                 pdf.addPage("a4", "portrait");
-
                 pdf.table(
                     50,
                     50,
@@ -244,7 +231,6 @@
                         }
                     }
                 );
-
                 pdf.saveAs({
                     fileName: "Absen"
                 });
