@@ -8,12 +8,6 @@
     <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/footable/footable.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/clockpicker/clockpicker.css')}}" rel="stylesheet">
-    <style>
-        .btn-trans {
-            background-color: transparent;
-            border-color: transparent;
-        }
-    </style>
 @endsection
 @section('content')
     <div class="tengah">
@@ -30,8 +24,12 @@
                         {{ session()->get('bad') }}
                     </div>
                 @endif
-            </div>
-            <div class="tabs-container">
+                @if ($message = Session::get('warning'))
+                    <div class="alert alert-warning alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#tab-1">Tambah Kegiatan</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-2">Data Kegiatan</a></li>
@@ -66,8 +64,6 @@
     <script src="{{asset('js/plugins/clockpicker/clockpicker.js')}}"></script>
     <script>
         $(document).ready(function () {
-
-
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
             $(".select2_demo_3").select2({
@@ -75,7 +71,6 @@
                 allowClear: true,
                 minimumInputLength:3,
             });
-
             $('#data_1 .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -84,7 +79,6 @@
                 autoclose: true,
                 format: "yyyy-mm-dd"
             });
-
             $('#data_2 .input-group.date').datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -98,10 +92,6 @@
                 autoclose: true,
                 format: "mm"
             });
-
-
-
-
             var lineData = {
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
                 datasets: [
@@ -123,26 +113,18 @@
                     }
                 ]
             };
-
             var lineOptions = {
                 responsive: true
             };
-
-
             var ctx = document.getElementById("lineChart").getContext("2d");
             new Chart(ctx, {type: 'line', data: lineData, options: lineOptions});
-
         });
     </script>
     <script>
         $(document).ready(function() {
-
             $('.footable').footable();
             $('.footable2').footable();
-
         });
-
         $('.clockpicker').clockpicker();
-
     </script>
 @endsection

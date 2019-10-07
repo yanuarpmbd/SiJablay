@@ -16,9 +16,10 @@ class KegiatanExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $today = date('Y-m-d');
+        $todays = date('F');
 
         return view('all.content.all-keg', [
             'keg' => KegiatanModels::all()
-        ], compact('today'));
+        ], compact('today', 'todays'));
     }
 }

@@ -14,4 +14,9 @@ class KegiatanModels extends Model
     public function bidang(){
         $this->belongsTo(User::class, 'bidang_id');
     }
+
+    public function tempat_keg(){
+        $this->belongsTo(TempatKegModels::class, 'tempat');
+    }
+
 }

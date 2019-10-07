@@ -205,11 +205,6 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/delete/{id}', 'All\KegiatanController@hapusKegiatan')->name('hapus.kegiatan');
     });
 
-    /*Route::prefix('datapegawai')->group(function () {
-        Route::get('/', 'All\AbsenSimpegController@absensimpeg')->name('get.presensi');
-        Route::get('/show', 'All\AbsenSimpegController@index')->name('show.presensi');
-    });*/
-
     //DATA ASN//
     Route::prefix('dataasn')->group(function () {
         Route::get('/presensi', 'All\DataAsnController@absensimpeg')->name('get.presensi');

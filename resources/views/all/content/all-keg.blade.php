@@ -1,11 +1,5 @@
 <div class="row">
     <div class="col-lg-12">
-        @if ($message = Session::get('warning'))
-            <div class="alert alert-warning alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>DATA KEGIATAN BULANAN DPMPTSP</h5>
@@ -22,13 +16,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-sm btn-white" type="submit">Submit</button>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="form-group">
+                                    <button class="btn btn-app btn-success" type="submit">Submit</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="ibox-content">
                 <table class="footable" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                     <thead>
                     <tr>
@@ -37,7 +33,6 @@
                         <th>Tempat</th>
                         <th>Peserta</th>
                         <th data-breakpoints="all">Seksi</th>
-                        <th data-breakpoints="all">Program Kerja</th>
                         <th data-breakpoints="all">Mulai Pukul</th>
                         <th data-breakpoints="all">Selesai Pukul</th>
                         <th>Bidang</th>
@@ -59,14 +54,12 @@
                     @else
 
                         @foreach($keg as $s)
-
                             <tr>
                                 <td>{{$s->nama_kegiatan}}</td>
                                 <td>{{Carbon\Carbon::parse($s->tanggal)->formatLocalized('%A, %d %B %Y')}}</td>
                                 <td>{{$s->tempat}}</td>
                                 <td>{{$s->peserta}}</td>
                                 <td>{{$s->seksi}}</td>
-                                <td>{{$s->program_kerja}}</td>
                                 <td>{{$s->pukul_mulai}}</td>
                                 <td>{{$s->pukul_mulai}}</td>
                                 <td>

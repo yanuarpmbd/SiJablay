@@ -10,7 +10,4 @@ class TempatKegModels extends Model
 
     public $timestamps = false;
 
-    public function tempat_keg(){
-        $this->belongsTo(KegiatanModels::class, 'id');
-    }
 }

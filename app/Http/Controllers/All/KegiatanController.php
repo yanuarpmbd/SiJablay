@@ -6,7 +6,6 @@ use App\Exports\KegiatanExport;
 use App\Models\All\KegiatanCrash;
 use App\Models\All\KegiatanModels;
 use App\Models\All\TempatKegModels;
-use App\Models\Sekretariat\DataAsnModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +16,9 @@ class KegiatanController extends Controller
 {
     public function showKegiatan(Request $request){
         $today = date('Y-m-d');
-        $todays = date('m');
-        $bulan = $request->input('bulan');
-        //dd($bulan);
+        $todays = date('F');
+        $bulan = date('m', strtotime($request->input('bulan')));
+
         //$user = Auth::user()->id;
         $keg = KegiatanModels::whereMonth('tanggal', '=', $bulan)->get();
 
@@ -50,7 +49,6 @@ class KegiatanController extends Controller
         $this->validate($request, [
             'nama_keg' => 'required',
             'seksi' => 'required',
-            'proker' => 'required',
             'peserta' => 'required',
             'tempat' => 'required',
             'tgl_keg' => 'required',
@@ -63,7 +61,6 @@ class KegiatanController extends Controller
 
         $nama_keg = $request->input('nama_keg');
         $seksi = $request->input('seksi');
-        $proker = $request->input('proker');
         $peserta = $request->input('peserta');
         $tempat = $request->input('tempat');
         $tgl_keg = $request->input('tgl_keg');
@@ -85,7 +82,6 @@ class KegiatanController extends Controller
             $post->bidang_id = $user;
             $post->seksi = $seksi;
             $post->nama_kegiatan = $nama_keg;
-            $post->program_kerja = $proker;
             $post->peserta = $peserta;
             $post->tempat = $tempat;
             $post->tanggal = $tgl_keg;
@@ -106,7 +102,6 @@ class KegiatanController extends Controller
             $post->bidang_id = $user;
             $post->seksi = $seksi;
             $post->nama_kegiatan = $nama_keg;
-            $post->program_kerja = $proker;
             $post->peserta = $peserta;
             $post->tempat = $tempat;
             $post->tanggal = $tgl_keg;
@@ -139,7 +134,6 @@ class KegiatanController extends Controller
         //dd($update);
         $nama_keg = $request->input('nama_keg');
         $seksi = $request->input('seksi');
-        $proker = $request->input('proker');
         $peserta = $request->input('peserta');
         $tempat = $request->input('tempat');
         $tgl_keg = $request->input('tgl_keg');
@@ -162,7 +156,6 @@ class KegiatanController extends Controller
             $post->bidang_id = $user;
             $post->seksi = $seksi;
             $post->nama_kegiatan = $nama_keg;
-            $post->program_kerja = $proker;
             $post->peserta = $peserta;
             $post->tempat = $tempat;
             $post->tanggal = $tgl_keg;
@@ -171,10 +164,10 @@ class KegiatanController extends Controller
             $post->crash = $p->id;
             $post->update();
 
-            $add = KegiatanModels::find($post->crash);
-            $add->crash = $post->crash;
-            $add->update();
-            // dd($add);
+            //$add = KegiatanModels::find($post->crash);
+            //$add->crash = $post->crash;
+            //$add->update();
+            //dd($add);
 
             return redirect()->route('get.kegiatan')->with('bad', 'Kegiatan Anda memiliki kesamaan Tanggal, Tempat dan Peserta, Silahkan Koordinasikan');
         }
@@ -183,7 +176,6 @@ class KegiatanController extends Controller
             $post->bidang_id = $user;
             $post->seksi = $seksi;
             $post->nama_kegiatan = $nama_keg;
-            $post->program_kerja = $proker;
             $post->peserta = $peserta;
             $post->tempat = $tempat;
             $post->tanggal = $tgl_keg;
@@ -287,8 +279,9 @@ class KegiatanController extends Controller
 
     public function gabungKegiatan(Request $request){
         $today = date('Y-m-d');
-        $bulan = $request->input('bulan');
-        $todays = date('m');
+        $todays = date('F');
+        $bulan = date('m', strtotime($request->input('bulan')));
+
         $keg = KegiatanModels::whereMonth('tanggal', '=', $bulan)->get();
         //dd($keg);
         $tempat = TempatKegModels::all();
