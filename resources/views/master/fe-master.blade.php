@@ -7,11 +7,22 @@
     <title>SIJABLAY | DPMPTSP PROV JATENG</title>
     <meta name="description" content="A free and modern UI toolkit for web makers based on the popular Bootstrap 4 framework.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{asset('img/demo/home.png')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('css/shards.css')}}">
     <link rel="stylesheet" href="{{asset('css/shards-demo.css')}}">
     <link rel="stylesheet" href="{{asset('css/me.css')}}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150921178-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-150921178-1');
+    </script>
+
     @yield('css')
 </head>
 
