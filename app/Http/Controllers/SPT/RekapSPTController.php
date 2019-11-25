@@ -111,7 +111,7 @@ class RekapSPTController extends Controller
              }*/
         }
         $p = false;
-        $pangkat_kepala = 'Pembina Tingkat I';
+        $pangkat_kepala = 'Pembina Utama Muda';
 
         if (!empty($kep)){
 
