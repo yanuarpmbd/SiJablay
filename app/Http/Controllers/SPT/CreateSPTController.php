@@ -142,7 +142,7 @@ class CreateSPTController extends Controller
         $update_no->no_spt = $incno;
         $update_no->no_sppd = $get_no->no_sppd + $jml_brgkt;
         $update_no->user_id = $id;
-        $update_no->save();
+        //$update_no->save();
         //dd($update_no);
 
         $post = new SptModel();
@@ -165,9 +165,9 @@ class CreateSPTController extends Controller
         $post->kendaraan = $input_ken;
         $post->pembuka = $input_pembuka;
         $post->user_id = Auth::user()->id;
-        //dd($post);
+        dd($post);
 
-        $post->save();
+        //$post->save();
 
         foreach ($input_plk as $a){
 

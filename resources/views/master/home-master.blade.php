@@ -166,6 +166,24 @@
     });
 
 </script>
+<script>
+    function addKategori() {
+        var x = document.getElementById("addKategori");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
 
+    function addSetting() {
+        var x = document.getElementById("addSetting");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
