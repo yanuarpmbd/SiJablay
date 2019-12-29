@@ -8,7 +8,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Kategori Surat</h5>
+                <h5>Spare Nomor Surat</h5>
             </div>
             <div class="ibox-content">
                 @isset($settings)

@@ -167,6 +167,23 @@
 
 </script>
 <script>
+    @isset($kategoris)
+    @foreach($kategoris as $kategori)
+    @if($kategori->nama_kategori == 'SPT')
+
+    @else
+    function {{str_replace(' ', '', (strtolower($kategori->nama_kategori)))}}() {
+        var x = document.getElementById("{{str_replace(' ', '', (strtolower($kategori->nama_kategori)))}}");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    @endif
+    @endforeach
+    @endisset
+
     function addKategori() {
         var x = document.getElementById("addKategori");
         if (x.style.display === "none") {

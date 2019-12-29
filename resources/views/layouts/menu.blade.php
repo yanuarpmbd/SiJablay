@@ -12,6 +12,7 @@
         <li><a href="{{route('home')}}">Home</a></li>
         <li><a href="{{route('gabung.kegiatan')}}">Kegiatan</a></li>
         <li><a href="{{route('gabung.notulen')}}">Notulen</a></li>
+        <li><a href="{{route('show.setting-nomor')}}">Ambil Nomor</a></li>
         <li><a href="{{route('form.spt')}}">Perjalanan Dinas</a></li>
         <li><a href="{{route('gabung.bidang')}}">Data Bidang</a></li>
         @if((Auth::user()->username == 'promosi') || (Auth::user()->username == 'superadmin'))

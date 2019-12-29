@@ -6,6 +6,7 @@ use App\Models\All\NonASN;
 use App\Models\PD\NumberModel;
 use App\Models\PD\SptModel;
 use App\Models\Sekretariat\DataAsnModel;
+use App\Models\Sekretariat\PenggunaanNomorModel;
 use App\Models\Sekretariat\RekModel;
 use App\PivotName;
 use Carbon\Carbon;
@@ -105,6 +106,18 @@ class CreateSPTController extends Controller
         $id = Auth::user()->id;
         $year = date('Y');
 
+        $total_nomor = PenggunaanNomorModel::all()->count();
+        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+        $nomor_terakhir->user_id = $id;
+        $nomor_terakhir->kategori_nomor_id = 2;
+        $nomor_terakhir->arsip_id = 12524;
+        $nomor_terakhir->perihal = 'Permohonan Surat Perintah Tugas dalam tangka' .' '.$request->perihal;
+        $nomor_terakhir->tanggal = Carbon::now();
+        $nomor_terakhir->count = ($nomor_terakhir->count) + 1;
+        $nomor_terakhir->used = 1;
+        $nomor_terakhir->update();
+
+
         //GET INPUT FORM//
         $input_no_spt = $request->input('nomor_spt');
         $input_perihal = $request->input('perihal');
@@ -139,15 +152,15 @@ class CreateSPTController extends Controller
 
         $update_no = new NumberModel();
         $incno = $get_no->no_spt + 1;
-        $update_no->no_spt = $incno;
+        $update_no->no_spt = $nomor_terakhir->count;
         $update_no->no_sppd = $get_no->no_sppd + $jml_brgkt;
         $update_no->user_id = $id;
-        //$update_no->save();
+        $update_no->save();
         //dd($update_no);
 
         $post = new SptModel();
         /*094/SPT/6/2019/123412341234*/
-        $format = '094/SPT/'. $id . '/' . $year . '/' . $incno;
+        $format = '094/SPT/'. $id . '/' . $year . '/' . $nomor_terakhir->count;
         //dd($format);
 
         $post->nomor_spt = $format;
@@ -165,9 +178,9 @@ class CreateSPTController extends Controller
         $post->kendaraan = $input_ken;
         $post->pembuka = $input_pembuka;
         $post->user_id = Auth::user()->id;
-        dd($post);
+        //dd($post);
 
-        //$post->save();
+        $post->save();
 
         foreach ($input_plk as $a){
 
