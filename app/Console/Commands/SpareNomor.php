@@ -43,9 +43,15 @@ class SpareNomor extends Command
         $spare = SettingNomorModel::first();
         for ($i=1;$i<=$spare->spare;$i++){
             $total_nomor = PenggunaanNomorModel::all()->count();
-            $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
             $nomor_spare = new PenggunaanNomorModel();
-            $nomor_spare->count = ($nomor_terakhir->count) + 1;
+            if ($total_nomor !== 0){
+                $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+                $nomor_spare->count = ($nomor_terakhir->count) + 1;
+            }
+            else{
+                $nomor_terakhir = 0;
+                $nomor_spare->count = $nomor_terakhir + 1;
+            }
             $nomor_spare->tanggal = Carbon::now();
             $nomor_spare->used = 0;
             $nomor_spare->save();

@@ -37,7 +37,7 @@ Route::namespace('Auth')->group(function () {
 Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/home', 'All\HomeController@home')->name('home');
-
+    Route::get('/settings/setting-penomoran', 'Sekretariat\Nomor\SettingNomorController@showSetting')->name('show.setting-nomor');
     //KEPALAAAAAAA//
     Route::get('kepala/rekap', 'Admin\RekapController@showRekap')->name('rekap.kepala');
 
@@ -125,7 +125,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/settings/rek', 'Sekretariat\RekController@rek')->name('get.rek');
         Route::post('/settings/rek', 'Sekretariat\RekController@rekPost')->name('post.rek');
 
-        Route::get('/settings/setting-penomoran', 'Sekretariat\Nomor\SettingNomorController@showSetting')->name('show.setting-nomor');
+
         Route::post('/settings/add-kategori-nomor', 'Sekretariat\Nomor\SettingNomorController@addKategori')->name('add.kategori-nomor');
         Route::get('/settings/edit-kategori-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@editKategori')->name('edit.kategori-nomor');
         Route::patch('/settings/update-kategori-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateKategori')->name('update.kategori-nomor');

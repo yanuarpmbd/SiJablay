@@ -25,8 +25,7 @@ class SettingNomorController extends Controller
        // dd( $nomor_terakhir = PenggunaanNomorModel::latest('created_at')->limit(1)->get());
        // dd(Carbon::now());
         //dd(date('H:i:s'));
-        $total_nomor = PenggunaanNomorModel::all()->count();
-        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+
         //dd($nomor_terakhir);
         return view('sekretariat.base.penomoran.setting', compact('kategoris', 'settings', 'nomors', 'kodes', 'today'));
     }
