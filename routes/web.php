@@ -38,6 +38,9 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/home', 'All\HomeController@home')->name('home');
     Route::get('/settings/setting-penomoran', 'Sekretariat\Nomor\SettingNomorController@showSetting')->name('show.setting-nomor');
+	Route::post('/settings/add-nomor', 'Sekretariat\Nomor\SettingNomorController@addNomor')->name('add.nd');
+        Route::get('/settings/edit-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@editNomor')->name('edit.nd');
+        Route::patch('/settings/update-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateNomor')->name('update.nd');
     //KEPALAAAAAAA//
     Route::get('kepala/rekap', 'Admin\RekapController@showRekap')->name('rekap.kepala');
 
@@ -136,9 +139,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::patch('/settings/update-setting-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateSetting')->name('update.setting-nomor');
         Route::delete('/settings/delete-setting-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@deleteSetting')->name('delete.setting-nomor');
 
-        Route::post('/settings/add-nomor', 'Sekretariat\Nomor\SettingNomorController@addNomor')->name('add.nd');
-        Route::get('/settings/edit-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@editNomor')->name('edit.nd');
-        Route::patch('/settings/update-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateNomor')->name('update.nd');
+        
 
     });
 

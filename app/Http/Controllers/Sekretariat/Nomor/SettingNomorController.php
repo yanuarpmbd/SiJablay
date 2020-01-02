@@ -32,11 +32,12 @@ class SettingNomorController extends Controller
 
     //////NOMOR//////
     public function addNomor(Request $request){
+		
         $tanggal_nomor = Carbon::parse($request->tanggal)->format('Y-m-d').' '.$request->time;
         //dd(Carbon::today()->gt(Carbon::parse($tanggal_nomor)));
         //dd( Carbon::parse($request->tanggal)->format('Y-m-d'));
-        $total_nomor = PenggunaanNomorModel::all()->count();
-        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+        $total_nomor = PenggunaanNomorModel::all()->count(); //bug
+        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor); //bug on 0
 
         if (Carbon::today()->gt(Carbon::parse($tanggal_nomor))){
             $nomor_spare = PenggunaanNomorModel::orderByDesc('created_at')->where('used', 0)->whereDate('tanggal', Carbon::parse($request->tanggal)->format('Y-m-d'))->first();
