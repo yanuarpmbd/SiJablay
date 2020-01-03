@@ -164,6 +164,21 @@ class SettingNomorController extends Controller
         return redirect()->back()->with('success', 'Kategori berhasil dihapus');
     }
 
+    public function updateTanggalSpare(){
+        $spares = PenggunaanNomorModel::where('arsip_id', null)->get();
+
+        foreach ($spares as $spare){
+            $update = PenggunaanNomorModel::findOrFail($spare->id);
+            $update->tanggal = Carbon::yesterday();
+            $update->created_at = Carbon::yesterday();
+            $update->updated_at = Carbon::yesterday();
+            $update->update();
+        }
+
+        return 'sukses';
+
+    }
+
     ////////END SETTING////////
 
 }

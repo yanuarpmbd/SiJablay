@@ -14,7 +14,7 @@
                 @isset($kategoris)
                     <div class="row">
                         @foreach($kategoris as $kategori)
-                            @if($kategori->nama_kategori == 'SPT')
+                            @if($kategori->id == 2)
 
                                 @else
                                 <div class="col-6">
@@ -111,6 +111,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if(Auth::user()->id == 7)
+                                @foreach($nomors->where('arsip_id', '!=', null) as $nomor)
+                                    <tr>
+                                        <td style="text-align: center">{{$loop->iteration}}</td>
+                                        <td style="text-align: center">{{$nomor->perihal}}</td>
+                                        <td style="text-align: center">{{$nomor->tanggal}}</td>
+                                        <td style="text-align: center">{{$nomor->kodenomor->kode}}/{{$nomor->count}}</td>
+                                    </tr>
+                                @endforeach
+                            @else
                             @foreach($nomors->where('user_id', Auth::user()->id) as $nomor)
                                 <tr>
                                     <td style="text-align: center">{{$loop->iteration}}</td>
@@ -119,7 +129,7 @@
                                     <td style="text-align: center">{{$nomor->kodenomor->kode}}/{{$nomor->count}}</td>
                                 </tr>
                             @endforeach
-
+                            @endif
                             </tbody>
                             <tfoot>
                             <tr>

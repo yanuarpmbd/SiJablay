@@ -63,6 +63,16 @@ class AdvanceSPTController extends Controller
         $id = Auth::user()->id;
         $spt = SptModel::where('user_id', $id)->latest()->first();
 
+        $total_nomor = PenggunaanNomorModel::all()->count();
+        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+        $nomor_terakhir->user_id = $id;
+        $nomor_terakhir->kategori_nomor_id = 2;
+        $nomor_terakhir->arsip_id = 12524;
+        $nomor_terakhir->perihal = 'Permohonan Surat Perintah Tugas dalam tangka' .' '.$request->perihal;
+        $nomor_terakhir->tanggal = Carbon::now();
+        $nomor_terakhir->count = ($nomor_terakhir->count) + 1;
+        $nomor_terakhir->used = 1;
+        $nomor_terakhir->update();
 
 
         $adv = new AdvanceSpt();
@@ -70,7 +80,7 @@ class AdvanceSPTController extends Controller
         //$pelaksanas['data'] = $request->all();
         $pelaksanas['data'] = $request->all();
         $adv->pelaksana = json_encode($pelaksanas);
-        $adv->nomor_spt  = $spt->nomor_spt;
+        $adv->nomor_spt  = $nomor_terakhir->count;
         $adv->perihal = $spt->perihal;
         $adv->tgl_spt = $spt->tgl_spt;
         $adv->user_id = $spt->user_id;

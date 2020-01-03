@@ -69,7 +69,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @if(Auth::user()->id == 7 or 1)
+        @if(Auth::user()->id == 7)
             <main>
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
@@ -96,7 +96,33 @@
                     </div>
                 </div>
             </main>
-
+        @elseif(Auth::user()->id == 1)
+        <main>
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1">Request Nomor</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-2">Kategori Nomor</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-3">Setting Nomor</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            @include('sekretariat.content.penomoran.request')
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            @include('sekretariat.content.penomoran.setting-kategori')
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            @include('sekretariat.content.penomoran.setting')
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         @else
             <main>
                 <div class="tabs-container">

@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('import-nomor', 'Sekretariat\NomorController@importArsipNomor');
+//Route::get('spare', 'Sekretariat\Nomor\SettingNomorController@updateTanggalSpare');
 Route::post('import-nomor', 'Sekretariat\NomorController@postimportArsipNomor')->name('postimport');
 
 //NO AUTH//
