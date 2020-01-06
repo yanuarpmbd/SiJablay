@@ -27,7 +27,7 @@
 
                     <div class="row">
                         @foreach($kategoris as $kategori)
-                            @if($kategori->nama_kategori == 'SPT')
+                            @if($kategori->id == 2)
 
                             @else
                                 <div class="col-12">
@@ -105,6 +105,7 @@
                             <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Bidang</th>
                                 <th>Perihal</th>
                                 <th>Tanggal</th>
                                 <th>Nomor Surat</th>
@@ -115,6 +116,18 @@
                                 @foreach($nomors->where('arsip_id', '!=', null) as $nomor)
                                     <tr>
                                         <td style="text-align: center">{{$loop->iteration}}</td>
+                                        <td style="text-align: center">{{$nomor->user->name}}</td>
+                                        <td style="text-align: center">{{$nomor->perihal}}</td>
+                                        <td style="text-align: center">{{$nomor->tanggal}}</td>
+                                        <td style="text-align: center">{{$nomor->kodenomor->kode}}/{{$nomor->count}}</td>
+                                    </tr>
+                                @endforeach
+
+                                @elseif(Auth::user()->id == 1)
+                                @foreach($nomors->where('arsip_id', '!=', null) as $nomor)
+                                    <tr>
+                                        <td style="text-align: center">{{$loop->iteration}}</td>
+                                        <td style="text-align: center">{{$nomor->user->name}}</td>
                                         <td style="text-align: center">{{$nomor->perihal}}</td>
                                         <td style="text-align: center">{{$nomor->tanggal}}</td>
                                         <td style="text-align: center">{{$nomor->kodenomor->kode}}/{{$nomor->count}}</td>
@@ -124,6 +137,7 @@
                             @foreach($nomors->where('user_id', Auth::user()->id) as $nomor)
                                 <tr>
                                     <td style="text-align: center">{{$loop->iteration}}</td>
+                                    <td style="text-align: center">{{$nomor->user->name}}</td>
                                     <td style="text-align: center">{{$nomor->perihal}}</td>
                                     <td style="text-align: center">{{$nomor->tanggal}}</td>
                                     <td style="text-align: center">{{$nomor->kodenomor->kode}}/{{$nomor->count}}</td>

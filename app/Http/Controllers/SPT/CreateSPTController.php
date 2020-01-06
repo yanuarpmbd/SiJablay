@@ -106,14 +106,14 @@ class CreateSPTController extends Controller
         $id = Auth::user()->id;
         $year = date('Y');
 
-        $total_nomor = PenggunaanNomorModel::all()->count();
+        $total_nomor = PenggunaanNomorModel::latest()->first();
         $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
         $nomor_terakhir->user_id = $id;
         $nomor_terakhir->kategori_nomor_id = 2;
         $nomor_terakhir->arsip_id = 12524;
         $nomor_terakhir->perihal = 'Permohonan Surat Perintah Tugas dalam tangka' .' '.$request->perihal;
         $nomor_terakhir->tanggal = Carbon::now();
-        $nomor_terakhir->count = ($nomor_terakhir->count) + 1;
+        $nomor_terakhir->count = ($total_nomor->count) + 1;
         $nomor_terakhir->used = 1;
         $nomor_terakhir->update();
 

@@ -36,7 +36,8 @@ class SettingNomorController extends Controller
         $tanggal_nomor = Carbon::parse($request->tanggal)->format('Y-m-d').' '.$request->time;
         //dd(Carbon::today()->gt(Carbon::parse($tanggal_nomor)));
         //dd( Carbon::parse($request->tanggal)->format('Y-m-d'));
-        $total_nomor = PenggunaanNomorModel::all()->count(); //bug
+        $total_nomor = PenggunaanNomorModel::latest()->first(); //bug
+        //dd($total_nomor->count);
         $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor); //bug on 0
 
         if (Carbon::today()->gt(Carbon::parse($tanggal_nomor))){
@@ -68,7 +69,7 @@ class SettingNomorController extends Controller
             $nomor->arsip_id = $request->kode;
             $nomor->perihal = $request->perihal;
             $nomor->tanggal = $tanggal_nomor;
-            $nomor->count = ($nomor_terakhir->count) + 1;
+            $nomor->count = ($total_nomor->count) + 1;
             $nomor->used = 1;
             //dd($nomor);
             $nomor->save();

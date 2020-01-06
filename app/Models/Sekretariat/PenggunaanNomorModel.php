@@ -2,6 +2,7 @@
 
 namespace App\Models\Sekretariat;
 
+use App\Models\Admin\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PenggunaanNomorModel extends Model
@@ -10,5 +11,9 @@ class PenggunaanNomorModel extends Model
 
     public function kodenomor(){
         return $this->belongsTo(ArsipNomor::class, 'arsip_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
