@@ -42,7 +42,7 @@
 
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="form-group"><label>Perihal</label>
+                                                    <div class="form-group"><label>Perihal </label>
                                                         <input placeholder="Perihal Surat" name="perihal" id="perihal" class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
                                                     </div>
                                                 </div>
