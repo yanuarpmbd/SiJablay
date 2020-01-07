@@ -6,6 +6,7 @@ use App\Models\PD\NumberModel;
 use App\Models\PD\SptModel;
 use App\Models\PD\AdvanceSpt;
 use App\Models\Sekretariat\DataAsnModel;
+use App\Models\Sekretariat\PenggunaanNomorModel;
 use App\Models\Sekretariat\RekModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -63,15 +64,16 @@ class AdvanceSPTController extends Controller
         $id = Auth::user()->id;
         $spt = SptModel::where('user_id', $id)->latest()->first();
 
-        $total_nomor = PenggunaanNomorModel::all()->count();
-        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+        $total_nomor = PenggunaanNomorModel::latest()->first();
+        $nomor_terakhir = new PenggunaanNomorModel();
         $nomor_terakhir->user_id = $id;
         $nomor_terakhir->kategori_nomor_id = 2;
         $nomor_terakhir->arsip_id = 12524;
         $nomor_terakhir->perihal = 'Permohonan Surat Perintah Tugas dalam tangka' .' '.$request->perihal;
         $nomor_terakhir->tanggal = Carbon::now();
-        $nomor_terakhir->count = ($nomor_terakhir->count) + 1;
+        $nomor_terakhir->count = ($total_nomor->count) + 1;
         $nomor_terakhir->used = 1;
+        //dd($nomor_terakhir);
         $nomor_terakhir->update();
 
 

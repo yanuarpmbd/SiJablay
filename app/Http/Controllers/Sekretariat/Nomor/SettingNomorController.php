@@ -56,10 +56,14 @@ class SettingNomorController extends Controller
                 return redirect()->back()->with('success', 'NOMOR ANDA ADALAH' .' '. $nomor_spare->count);
             }
             else{
-                return redirect()->back()->with('success', 'BELUM ADA NOMOR DI TANGGAL'.' '.Carbon::parse($request->tanggal)->toFormattedDateString());
+                return redirect()->back()->with('danger', 'BELUM ADA NOMOR DI TANGGAL'.' '.Carbon::parse($request->tanggal)->toFormattedDateString());
             }
 
 
+        }
+        elseif (Carbon::parse($tanggal_nomor)->gt(Carbon::today())){
+
+            return redirect()->back()->with('danger', 'DILARANG AMBIL NOMOR DI TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() .' KARENA TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() . ' LEBIH DARI HARI INI') ;
         }
         else{
             //dd($nomor_terakhir);
