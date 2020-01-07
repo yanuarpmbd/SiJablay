@@ -34,6 +34,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-1">Form Rekap Informasi dan Pengaduan</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-2">Rekap Informasi dan Pengaduan</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3">Setting</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -44,6 +45,11 @@
                         <div id="tab-2" class="tab-pane active">
                             <div class="panel-body">
                                 @include('ppl.content.rekap-pengaduan')
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane active">
+                            <div class="panel-body">
+                                @include('ppl.content.sektor')
                             </div>
                         </div>
                     </div>
