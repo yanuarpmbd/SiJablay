@@ -107,7 +107,7 @@ class CreateSPTController extends Controller
         $year = date('Y');
 
         $total_nomor = PenggunaanNomorModel::latest()->first();
-        $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor);
+        $nomor_terakhir = new PenggunaanNomorModel();
         $nomor_terakhir->user_id = $id;
         $nomor_terakhir->kategori_nomor_id = 2;
         $nomor_terakhir->arsip_id = 12524;
@@ -115,6 +115,7 @@ class CreateSPTController extends Controller
         $nomor_terakhir->tanggal = Carbon::now();
         $nomor_terakhir->count = ($total_nomor->count) + 1;
         $nomor_terakhir->used = 1;
+        //dd($nomor_terakhir);
         $nomor_terakhir->update();
 
 

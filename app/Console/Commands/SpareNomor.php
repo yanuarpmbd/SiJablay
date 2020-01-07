@@ -52,7 +52,7 @@ class SpareNomor extends Command
                 $nomor_terakhir = 0;
                 $nomor_spare->count = $nomor_terakhir + 1;
             }
-            $nomor_spare->tanggal = Carbon::createFromDate(2020, 01, 03);
+            $nomor_spare->tanggal = Carbon::createFromDate(2020, 01, 06);
             $nomor_spare->used = 0;
             $nomor_spare->save();
         }
