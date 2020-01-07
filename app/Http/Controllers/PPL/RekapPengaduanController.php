@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PPL;
 
 use App\Exports\PengaduanExport;
 use App\Models\PPL\RekapPengaduanModels;
+use App\Models\Yanzin\SektorModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,10 @@ class RekapPengaduanController extends Controller
     public function gabung(){
         $rek_pengaduan = RekapPengaduanModels::all();
         $user_name = Auth::user()->name;
+        $sektors = SektorModel::all();
+        //dd($sektors);
 
-        return view('ppl.base.gabung', compact('rek_pengaduan', 'user_name'));
+        return view('ppl.base.gabung', compact('rek_pengaduan', 'user_name', 'sektors'));
     }
 
     public function index(){

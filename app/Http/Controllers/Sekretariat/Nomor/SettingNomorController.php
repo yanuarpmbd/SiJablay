@@ -61,7 +61,7 @@ class SettingNomorController extends Controller
 
 
         }
-        elseif (Carbon::parse($tanggal_nomor)->gt(Carbon::today())){
+        elseif (Carbon::parse($tanggal_nomor)->isFuture()){
 
             return redirect()->back()->with('danger', 'DILARANG AMBIL NOMOR DI TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() .' KARENA TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() . ' LEBIH DARI HARI INI') ;
         }

@@ -71,24 +71,9 @@
                             <div class="col-6">
                                 <div class="form-group"><label>Sektor *</label>
                                     <select class="form-control" name="sektor" id="sektor">
-                                        <option value="Penanaman Modal">Penanaman Modal</option>
-                                        <option value="Tenaga Kerja, Transmigrasi dan Kependudukan">Tenaga Kerja, Transmigrasi dan Kependudukan</option>
-                                        <option value="Koperasi dan UKM">Koperasi dan UKM</option>
-                                        <option value="Kesbanglinmas">Kesbanglinmas</option>
-                                        <option value="Sosial">Sosial</option>
-                                        <option value="Pengelolaan Sumberdaya Air">Pengelolaan Sumberdaya Air</option>
-                                        <option value="Kelautan dan Perikanan">Kelautan dan Perikanan</option>
-                                        <option value="Kehutanan">Kehutanan</option>
-                                        <option value="Pekerjaan Umum">Pekerjaan Umum</option>
-                                        <option value="Perhubungan, Komunikasi dan Informatika">Perhubungan, Komunikasi dan Informatika</option>
-                                        <option value="Perindustrian dan Perdagangan">Perindustrian dan Perdagangan</option>
-                                        <option value="Kesehatan">Kesehatan</option>
-                                        <option value="Perkebunan">Perkebunan</option>
-                                        <option value="Peternakan dan Kesehatan Hewan">Peternakan dan Kesehatan Hewan</option>
-                                        <option value="Lingkungan Hidup">Lingkungan Hidup</option>
-                                        <option value="ESDM">ESDM</option>
-                                        <option value="Pendidikan">Pendidikan</option>
-                                        <option value="Lainnya">Lainnya</option>
+                                        @foreach($sektors as $sektor)
+                                        <option value="{{$sektor->id}}">{{$sektor->nama_sektor}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

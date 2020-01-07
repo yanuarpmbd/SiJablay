@@ -211,6 +211,24 @@ Route::middleware(['web', 'auth'])->group(function () {
        Route::delete('/hapus/{id}', 'PPL\RekapPengaduanController@delete')->name('delete.pengaduan');
     });
 
+
+    //SEKTOR//
+    Route::prefix('sektor')->group(function (){
+        Route::get('/', 'All\SektorController@formSektor')->name('form.sektor');
+        Route::post('/', 'All\SektorController@addSektor')->name('add.sektor');
+        Route::get('/edit/{id}', 'All\SektorController@editSektor')->name('edit.sektor');
+        Route::patch('/update/{id}', 'All\SektorController@updateSektor')->name('update.sektor');
+        Route::delete('/delete/{id}', 'All\SektorController@deleteSektor')->name('delete.sektor');
+
+    });
+
+
+    //END SEKTOR//
+
+
+
+
+
     //KEGIATAN//
     Route::prefix('kegiatans')->group(function (){
         Route::get('/', 'All\KegiatanController@gabungKegiatan')->name('gabung.kegiatan');
