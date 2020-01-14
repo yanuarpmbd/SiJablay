@@ -28,6 +28,10 @@ class PokController extends Controller
         $today = date("Y-m");
         $todays = date("F", strtotime($bulan));
         //dd($todays);
+        +
+
+
+
         $query = "CAST(rko_id AS int)ASC";
         $pok = PokModel::where('bulan', '=', $bulan)
             ->orderByRaw($query)

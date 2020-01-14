@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\PPL;
 
 use App\Exports\PengaduanExport;
+use App\Models\PPL\MediaModel;
 use App\Models\PPL\RekapPengaduanModels;
+use App\Models\PPL\TabulasiModel;
 use App\Models\Yanzin\SektorModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use app\Http\Controllers\TabulasiController;
 
 class RekapPengaduanController extends Controller
 {
@@ -16,9 +19,19 @@ class RekapPengaduanController extends Controller
         $rek_pengaduan = RekapPengaduanModels::all();
         $user_name = Auth::user()->name;
         $sektors = SektorModel::all();
-        //dd($sektors);
+        $tabulasi = TabulasiModel::all();
+        $jenis_layanan_pengaduan = TabulasiModel::where('jenis_layanan','=','Pengaduan')->get();
+        $jml_jns_layanan_pengaduan = count($jenis_layanan_pengaduan);
+        $jenis_layanan_informasi = TabulasiModel::where('jenis_layanan','=','Informasi')->get();
+        $jml_jns_layanan_informasi = count($jenis_layanan_informasi);
 
-        return view('ppl.base.gabung', compact('rek_pengaduan', 'user_name', 'sektors'));
+        $medias = MediaModel::all();
+        //dd(count($sektors->where('sektor', 'ESDM')));
+        $hasil_rekaps = app('App\Http\Controllers\PPL\TabulasiController')->countRekap();
+        $hasil_rekap_media = app('App\Http\Controllers\PPL\TabulasiController')->countRekapMedia();
+        //dd($test);
+        return view('ppl.base.gabung', compact('hasil_rekaps','rek_pengaduan', 'user_name',
+            'sektors','medias', 'tabulasi','jml_jns_layanan_pengaduan','jml_jns_layanan_informasi','jenis_layanan_informasi','hasil_rekap_media'));
     }
 
     public function index(){
@@ -71,15 +84,16 @@ class RekapPengaduanController extends Controller
     public function rekap(){
         $rek_pengaduan = RekapPengaduanModels::all();
         $user_name = Auth::user()->name;
-        //dd($user_name);
+        //dd($rek_pengaduan);
 
         return view('ppl.base.rekap-pengaduan', compact('rek_pengaduan', 'user_name'));
     }
 
     public function edit($id){
         $rek_pengaduan = RekapPengaduanModels::findOrFail($id);
+        $medias = MediaModel::all();
         //dd($rek_pengaduan);
-        return view('ppl.base.edit-pengaduan', compact('rek_pengaduan'));
+        return view('ppl.base.edit-pengaduan', compact('rek_pengaduan', 'medias'));
     }
 
     public function update(Request $request, $id){

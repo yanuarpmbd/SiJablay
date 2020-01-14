@@ -1,4 +1,3 @@
-
 @extends('master.home-master')
 @section('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -17,51 +16,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        <main>
-            <div class="tabs-container">
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
-                @if(session()->has('bad'))
-                    <div class="alert alert-danger alert-block">
-                        {{ session()->get('bad') }}
-                    </div>
-                @endif
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1">Form Rekap Informasi dan Pengaduan</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2">Data Informasi dan Pengaduan</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3">Tabulasi Informasi dan Pengaduan</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-4">Setting</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-                                @include('ppl.content.form-rekap-pengaduan')
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane">
-                            <div class="panel-body">
-                                @include('ppl.content.rekap-pengaduan')
-                            </div>
-                        </div>
-                        <div id="tab-3" class="tab-pane">
-                            <div class="panel-body">
-                                @include('ppl.content.tabulasi-rekap-pengaduan')
-                            </div>
-                        </div>
-                        <div id="tab-4" class="tab-pane">
-                            <div class="panel-body">
-                                @include('ppl.content.sektor')
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+        @include('ppl.content.tabulasi-rekap-pengaduan')
     </div>
 @endsection
 @section('js')
@@ -81,11 +36,11 @@
 
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
-            $(".select2_demo_3").select2({
-                placeholder: "Pilih Nama...",
-                allowClear: true,
-                minimumInputLength:3,
-            });
+            $(".select2_demo_3").select2();/*({
+                placeholder: "Select a state",
+                allowClear: true
+
+            })*/
 
             $('#data_1 .input-group.date').datepicker({
                 todayBtn: "linked",
@@ -176,3 +131,5 @@
         }
     </script>
 @endsection
+
+

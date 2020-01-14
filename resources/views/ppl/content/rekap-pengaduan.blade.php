@@ -41,9 +41,10 @@
                             <td>{{$r->jenis_layanan}}</td>
                             <td>{{$r->no_telp}}</td>
                             <td>{{$r->sektor}}</td>
+                            <td>{{$r->media}}</td>
                             <td>{{$r->wa_email}}</td>
                             <td>{{$r->rincian_aduan}}</td>
-                            <td>{{$r->penyelesaian}}</td>
+{{--                            <td>{{$r->penyelesaian}}</td>--}}
                             @if($user_name == 'Pengaduan' or 'Superadmin')
                             <td>
                                 <form action="{{route('edit.pengaduan', $r->id)}}">

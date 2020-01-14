@@ -45,12 +45,11 @@
                             <div class="col-6">
                                 <div class="form-group"><label>Media *</label>
                                     <select class="form-control" name="media" id="media">
-                                        <option value="Helpdesk">Helpdesk</option>
-                                        <option value="Email">Email</option>
-                                        <option value="Whatsapp">Whatsapp</option>
-                                        <option value="Sosial Media">Sosial Media</option>
-                                        <option value="SIAP Jateng">SIAP Jateng</option>
+                                      @foreach($medias as $media)
+                                            <option value="{{$media->id}}">{{$media->nama_media}}</option>
+                                        @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="col-6">

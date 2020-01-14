@@ -140,7 +140,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::patch('/settings/update-setting-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateSetting')->name('update.setting-nomor');
         Route::delete('/settings/delete-setting-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@deleteSetting')->name('delete.setting-nomor');
 
-        
+
 
     });
 
@@ -221,10 +221,28 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::delete('/delete/{id}', 'All\SektorController@deleteSektor')->name('delete.sektor');
 
     });
-
-
     //END SEKTOR//
 
+
+    //MEDIA//
+    Route::prefix('media')->group (function(){
+        Route::get('/', 'All\mediaController@formMedia')->name('form.media');
+        Route::post('/', 'All\mediaController@addMedia')->name('add.media');
+        Route::get('/edit/{id}', 'All\mediaController@editMedia')->name('edit.media');
+        Route::patch('/update/{id}', 'All\mediaController@updateMedia')->name('update.media');
+        Route::delete('/detete/{id}', 'All\mediaController@deleteMedia')->name('delete.media');
+
+    });
+    //END MEDIA//
+
+    //TABULASI//
+    Route::prefix('tabulasi')->group (function(){
+        Route::get('/tabulasi', 'PPL\TabulasiController@index')->name('rekap.tabulasi');
+        Route::get ('/ExportTabulasi/ExportTabulasi','PPL\TabulasiController@ExportTabulasi')->name('export.tabulasi');
+        Route::get('/tabulasi/show','PPL\TabulasiController@showTabulasi')->name('show.tabulasi');
+        Route::get('tabulasi/count','PPL\TabulasiController@count')->name('count.tabulasi');
+    });
+    //END TABULASI//
 
 
 

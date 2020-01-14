@@ -15,7 +15,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('ppl.content.edit-pengaduan')
+        @include('ppl.content.edit-sektor')
     </div>
 @endsection
 @section('js')
