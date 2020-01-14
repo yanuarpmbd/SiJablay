@@ -41,7 +41,7 @@ class SettingNomorController extends Controller
         $nomor_terakhir = PenggunaanNomorModel::findOrFail($total_nomor); //bug on 0
 
         if (Carbon::today()->gt(Carbon::parse($tanggal_nomor))){
-            $nomor_spare = PenggunaanNomorModel::orderByDesc('created_at')->where('used', 0)->whereDate('tanggal', Carbon::parse($request->tanggal)->format('Y-m-d'))->first();
+            $nomor_spare = PenggunaanNomorModel::orderBy('created_at')->where('used', 0)->whereDate('tanggal', Carbon::parse($request->tanggal)->format('Y-m-d'))->first();
             //dd($nomor_spare);
             //dd(isset($nomor_spare));
             if (isset($nomor_spare)){
@@ -56,14 +56,10 @@ class SettingNomorController extends Controller
                 return redirect()->back()->with('success', 'NOMOR ANDA ADALAH' .' '. $nomor_spare->count);
             }
             else{
-                return redirect()->back()->with('danger', 'BELUM ADA NOMOR DI TANGGAL'.' '.Carbon::parse($request->tanggal)->toFormattedDateString());
+                return redirect()->back()->with('success', 'BELUM ADA NOMOR DI TANGGAL'.' '.Carbon::parse($request->tanggal)->toFormattedDateString());
             }
 
 
-        }
-        elseif (Carbon::parse($tanggal_nomor)->isFuture()){
-
-            return redirect()->back()->with('danger', 'DILARANG AMBIL NOMOR DI TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() .' KARENA TANGGAL ' .' '. Carbon::parse($request->tanggal)->toFormattedDateString() . ' LEBIH DARI HARI INI') ;
         }
         else{
             //dd($nomor_terakhir);

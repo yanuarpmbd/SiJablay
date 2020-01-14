@@ -3,23 +3,31 @@
 namespace App\Imports;
 
 use App\Models\Sekretariat\ArsipNomor;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ArsipNomorImport implements ToModel, WithHeadingRow, WithBatchInserts
+class ArsipNomorImport implements ToCollection
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function collection(Collection $rows)
     {
-        return new ArsipNomor([
-            'kode' => $row['kode_surat'],
-            'desc' => $row['deskripsi_surat']
-        ]);
+        foreach ($rows as $row){
+            $arsep = ArsipNomor::where('kode', $row[0])->first();
+            //dd($rows[1]);
+            if (!isset($arsep)){
+                ArsipNomor::create([
+                    'kode' => $row[0],
+                    'desc' => $row[1]
+                ]);
+            }
+        }
 
     }
 

@@ -115,8 +115,7 @@ class CreateSPTController extends Controller
         $nomor_terakhir->tanggal = Carbon::now();
         $nomor_terakhir->count = ($total_nomor->count) + 1;
         $nomor_terakhir->used = 1;
-        //dd($nomor_terakhir);
-        $nomor_terakhir->update();
+        $nomor_terakhir->save();
 
 
         //GET INPUT FORM//
