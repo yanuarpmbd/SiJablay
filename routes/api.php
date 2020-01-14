@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/simpeg', 'Sekretariat\DataAsnController@simpeg');
 Route::get('/realisasi', 'API\ApiCJIP@cjip');
+Route::get('/satgas', 'API\SatgasAPIController@satgas');
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',['namespace' => 'App\Http\Controllers'], function ($api){
