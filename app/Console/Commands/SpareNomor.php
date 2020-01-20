@@ -42,13 +42,15 @@ class SpareNomor extends Command
     {
         $spare = SettingNomorModel::first();
         for ($i=1;$i<=$spare->spare;$i++){
-            $total_nomor = PenggunaanNomorModel::latest()->first();
+            $total_nomor = PenggunaanNomorModel::max('count');
+            //dd($total_nomor);
             $nomor_spare = new PenggunaanNomorModel();
-            $nomor_spare->count = ($total_nomor->count) + 1;
-            $nomor_spare->tanggal = Carbon::createFromDate(2020, 01, 13);
+            $nomor_spare->count = ($total_nomor) + 1;
+            $nomor_spare->tanggal = Carbon::createFromDate(2020, 01, 17);
             $nomor_spare->used = 0;
             //dump($nomor_spare->count);
             $nomor_spare->save();
+            sleep(3);
         }
         //die();
         $this->info('Spare Nomor Hari ini sejumlah'.' '.$spare->spare);

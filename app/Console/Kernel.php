@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('spare:day')
             ->weekdays()
             ->timezone('Asia/Jakarta')
-            ->daily();
+            ->dailyAt('23:00');
     }
 
     /**

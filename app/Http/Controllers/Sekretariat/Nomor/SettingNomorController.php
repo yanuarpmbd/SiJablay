@@ -50,7 +50,7 @@ class SettingNomorController extends Controller
                 $nomor_spare->arsip_id = $request->kode;
                 $nomor_spare->perihal = $request->perihal;
                 $nomor_spare->used = 1;
-                //dd($nomor);
+                //dd($nomor_spare);
                 $nomor_spare->update();
 
                 return redirect()->back()->with('success', 'NOMOR ANDA ADALAH' .' '. $nomor_spare->count);
