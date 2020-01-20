@@ -235,10 +235,23 @@ Route::middleware(['web', 'auth'])->group(function () {
     });
     //END MEDIA//
 
+
+    //JENEIS LAYANAN.../////////////////
+    Route::prefix('layanan')->group (function(){
+        Route::get('/', 'PPL\JenisLayananController@formLayanan')->name('form.layanan');
+        Route::post('/', 'PPL\JenisLayananController@addLayanan')->name('add.layanan');
+        Route::get('/edit/{id}', 'PPL\JenisLayananController@editLayanan')->name('edit.layanan');
+        Route::patch('/update/{id}', 'PPL\JenisLayananController@updateLayanan')->name('update.layanan');
+        Route::delete('/detete/{id}', 'PPL\JenisLayananController@deleteLayanan')->name('delete.layanan');
+
+    });
+//// END LAYANAN//////
+
+
     //TABULASI//
     Route::prefix('tabulasi')->group (function(){
         Route::get('/tabulasi', 'PPL\TabulasiController@index')->name('rekap.tabulasi');
-        Route::get ('/ExportTabulasi/ExportTabulasi','PPL\TabulasiController@ExportTabulasi')->name('export.tabulasi');
+        Route::get ('/ExportTabulasi','PPL\TabulasiController@ExportTabulasi')->name('export.tabulasi');
         Route::get('/tabulasi/show','PPL\TabulasiController@showTabulasi')->name('show.tabulasi');
         Route::get('tabulasi/count','PPL\TabulasiController@count')->name('count.tabulasi');
     });

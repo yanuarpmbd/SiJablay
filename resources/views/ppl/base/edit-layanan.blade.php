@@ -2,11 +2,10 @@
 @section('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/footable/footable.core.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style_.css')}}" rel="stylesheet">
-    <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
-    <link href="{{asset('css/plugins/footable/footable.bootstrap.css')}}" rel="stylesheet">
     <style>
         .btn-trans {
             background-color: transparent;
@@ -16,7 +15,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('ppl.content.tabulasi-rekap-pengaduan')
+        @include('ppl.content.edit-layanan')
     </div>
 @endsection
 @section('js')
@@ -26,9 +25,7 @@
     <script src="{{asset('js/pages/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/inspinia.js')}}"></script>
     <script src="{{asset('js/plugins/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
-    <script src="{{asset('js/plugins/footable/footable.js')}}"></script>
-    <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.js')}}"></script>
+    {{--DATEPICKER--}}
     <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
     <script>
         $(document).ready(function () {
@@ -36,24 +33,18 @@
 
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
-            $(".select2_demo_3").select2();/*({
+            $(".select2_demo_3").select2({
                 placeholder: "Select a state",
                 allowClear: true
-
-            })*/
+            });
 
             $('#data_1 .input-group.date').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                startView: "months",
-                minViewMode: "months",
-                showButtonPanel: true,
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true,
-                format: "yyyy-mm"
+                format: "yyyy-mm-dd"
             });
 
 
@@ -89,52 +80,32 @@
 
         });
     </script>
+    <script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
+    <script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
+
     <script>
         $(document).ready(function() {
-            jQuery(function($){
-                $('.footable').footable({
-                    "columns": [{
-                        "type": "text"
-                    },{
-                        "type": "html"
-                    }]
-                });
-            });
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
         });
-    </script>
-    <script>
-        var $rows = $('#tablel tr');
-        $('#myInput').keyup(debounce(function() {
-            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-            $rows.show().filter(function() {
-                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                return !~text.indexOf(val);
-            }).hide();
-        }, 300));
+    </script>
 
-        function debounce(func, wait, immediate) {
-            var timeout;
-            return function() {
-                var context = this, args = arguments;
-                var later = function() {
-                    timeout = null;
-                    if (!immediate) func.apply(context, args);
-                };
-                var callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if (callNow) func.apply(context, args);
-            };
-        };
-    </script>
+    {{--<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        function showTable()
-        {
-            document.getElementById('tablel').style.visibility = 'visible';//shows the table
-            return false; //tells the form not to actaully load the action page
-        }
-    </script>
+        CKEDITOR.replace( 'rincian_aduan' );
+        CKEDITOR.replace( 'penyelesaian' );
+    </script>--}}
+    {{--   <script>
+
+        $('#article-ckeditor').wysiwyg();
+
+        $('#submit-notulen').on('click',function(){
+
+            console.log($('#editor').html());
+
+        });
+    </script>--}}
 @endsection
-
-

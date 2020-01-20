@@ -10,6 +10,12 @@ class TabulasiModel extends Model
     protected $fillable= ['id'];
     public $timestamps = true;
 
+    public function media (){
+        $this->belongsTo(MediaModel::class,'id');
+    }
 
+    public function layanan(){
+        $this->belongsTo(LayananModel::class,'id');
 
+    }
 }

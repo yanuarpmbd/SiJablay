@@ -8,7 +8,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>REKAP PENGADUAN <strong>{{--{{$user_name}}--}}</strong></h5>
+                <h5>REKAP PENGADUAN<strong>{{--{{$user_name}}--}}</strong></h5>
             </div>
             <div class="ibox-content">
                 <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">

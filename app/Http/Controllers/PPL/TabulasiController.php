@@ -11,27 +11,29 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\View\View;
 
 class TabulasiController extends Controller
 {
-    public function index()
+
+
+    public function index(Request $request)
     {
         $user = Auth::user()->id;
         $user_name = Auth::user()->name;
         $bulan = $request->input('bulan');
         $today = date("Y-m");
+        $todays = date("F", strtotime());
 
-        $todays = date("F", strtotime($bulan));
-
+        $query = "CAST(rko_id AS int)ASC";
         $tab = TabulasiModel::where('bulan', '=', $bulan)
             ->orderByRaw($query)
             /*->where('user_id', '=', $user)*/
             ->get();
-        dd($tab);
-
-        return view('ppl.base.tabulasi-rekap-pengaduan', compact('user', 'user_name', 'todays', 'tab', 'today'));
+       // dd($tab);
+        return view('ppl.base.tabulasi-rekap-pengaduan', compact('user', 'user_name', 'todays', 'tab', 'today','bulan'));
     }
 
         public function showTabulasi(Request $request)
@@ -49,27 +51,35 @@ class TabulasiController extends Controller
             ->get();
         $jml_jns_layanan_pengaduan = count($jenis_layanan_pengaduan);
         $jml_jns_layanan_informasi = count($jenis_layanan_informasi);
+        $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', $request->bulan)->get();
         $today = date('Y-m');
         //dd($jenis_layanan_pengaduan);
-        return view('ppl.base.tabulasi-rekap-pengaduan', compact('today','user','jml_jns_layanan_pengaduan','jml_jns_layanan_informasi','jenis_layanan_informasi'));
+        return view('ppl.base.gabung',
+            compact('today',
+            'user',
+            'jml_jns_layanan_pengaduan',
+                'jml_jns_layanan_informasi',
+                'jenis_layanan_informasi',
+                'rek_pengaduan'));
     }
 
 
     public function countRekap(){
 
         $rekap = RekapPengaduanModels::all();
-        $rekap_informasi = RekapPengaduanModels::where('jenis_layanan', 'Informasi')->get();
-        $rekap_pengaduan = RekapPengaduanModels::where('jenis_layanan', 'Pengaduan')->get();
+        $rekap_informasi = RekapPengaduanModels::where('jenis_layanan', '2')->get();
+        $rekap_pengaduan = RekapPengaduanModels::where('jenis_layanan', '3')->get();
 
         ////////////////////////////////////////////////////////////////////////
         $groupedInformasi = $rekap_informasi->groupBy(function ($item, $key) {
             return $item['sektor'];
         });
         //dd($grouped);
-
+        //dd($groupedInformasi);
         $groupCountInformasi = $groupedInformasi->map(function ($item, $key) {
             return collect($item)->count();
         });
+        //dd($groupCountInformasi);
         /////////////////////////////////////////////////////////////////////// BY SECTOR - Informasi
         ///
         ///
@@ -89,100 +99,39 @@ class TabulasiController extends Controller
         /// //////////////////////////////////////////////////////COUNT BY JENIS LAYANAN
 
         $grouped = $rekap->groupBy(function ($item, $key) {
+            //dd($item);
             return $item['jenis_layanan'];
         });
+
         //dd($grouped);
 
         $groupCount = $grouped->map(function ($item, $key) {
             return collect($item)->count();
         });
-
+                //dd($groupCount);
         ///////////////////////////////////////////////////////////
 
-        //dd($groupCount['Informasi']);
+        //dd($groupCount);
 
         $hasil_rekap = array(
-            'total_aduan_informasi' => $groupCount['Informasi'],
+            'total_aduan_informasi' => $groupCount['2'],
             'sektor_aduan_informasi' => $groupCountInformasi,
-            'total_aduan_pengaduan' => $groupCount['Pengaduan'],
+            'total_aduan_pengaduan' => $groupCount['3'],
             'sektor_aduan_pengaduan' => $groupCountPengaduan,
         );
-
+        //dd($groupCountInformasi);
+        //dd($hasil_rekap);
         return $hasil_rekap;
 
     }
 
-    public function countRekapMedia()
+    public function ExportTabulasi(Request $request)
     {
-        $rekap = RekapPengaduanModels::all();
-        $rekap_informasi_media = RekapPengaduanModels::where('jenis_layanan', 'Informasi')->get();
-        $rekap_pengaduan_media = RekapPengaduanModels::where('jenis_layanan', 'Pengaduan')->get();
-
-        /////////////////////////////////////////////BY MEDIA ////////////////////////
-
-        ////////////////////////////////////////////////////////////////////////
-
-        $rekap_informasi_media = RekapPengaduanModels::where('jenis_layanan', 'Informasi')->get();
-
-        $rekap_pengaduan_media = RekapPengaduanModels::where('jenis_layanan', 'Pengaduan')->get();
-        $groupedInformasiMedia = $rekap_informasi_media->groupBy(function ($item, $key) {
-            return $item['media'];
-        });
-        //dd($grouped);
-
-        $groupCountInformasiMedia = $groupedInformasiMedia->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-        /////////////////////////////////////////////////////////////////////// BY SECTOR - Informasi
-        ///
-        ///
-        /// /////////////////////////////////////////////////////////////////// BY SECTOR - PENGADUAN
-        $groupedPengaduanMedia = $rekap_pengaduan_media->groupBy(function ($item, $key) {
-            return $item['media'];
-        });
-        //dd($grouped);
-
-        $groupCountPengaduanMedia = $groupedPengaduanMedia->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-
-        //////////////////////////////////////////////////////////
-        ///
-        ///
-        /// //////////////////////////////////////////////////////COUNT BY JENIS LAYANAN
-
-        $groupeds = $rekap->groupBy(function ($item, $key) {
-            return $item['jenis_layanan'];
-        });
-        //dd($grouped);
-
-        $groupCounts = $groupeds->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-
-        ///////////////////////////////////////////////////////////
-
-        //dd($groupCount['Informasi']);
-
-        $hasil_rekap_media = array(
-            'total_aduan_informasi' => $groupCounts['Informasi'],
-            'sektor_aduan_informasi' => $groupCountInformasiMedia,
-            'total_aduan_pengaduan' => $groupCounts['Pengaduan'],
-            'sektor_aduan_pengaduan' => $groupCountPengaduanMedia,
-        );
-
-        return $hasil_rekap_media;
-
+        //dd($request);
+        $bulan = $request->bulanExport;
+        //dd($bulan);
+        return Excel::download(new TabulasiExport($bulan), 'Tabulasi.xlsx');
     }
-
-
-
-
-    public function ExportTabulasi()
-    {
-        return Excel::download(new TabulasiExport, 'Tabulasi.xlsx');
-    }
-
 
 
 }

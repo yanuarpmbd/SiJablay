@@ -13,13 +13,13 @@
             <div class="ibox-content">
                 <div class="col-4">
                     <form action="{{route('rekap.rko')}}">
-                        <div class="form-group" id="data_1">
+                        <div class="form-group">
                             <label class="col-lg-12 control-label">Bulan</label>
                             <div class="col-lg-12">
-                                <div class="input-group date">
+
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" name="bulan" id="bulan" class="form-control" autocomplete="off">
-                                </div>
+                                    <input type="date" name="bulan" id="bulan" class="form-control" autocomplete="off">
+
                             </div>
                         </div>
                         <div class="form-group">

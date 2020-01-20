@@ -41,7 +41,7 @@
                 allowClear: true
 
             })*/
-
+            console.log('test');
             $('#data_1 .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,

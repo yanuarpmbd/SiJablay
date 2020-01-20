@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\PPL;
 
 use App\Exports\PengaduanExport;
+use App\Models\PPL\LayananModel;
 use App\Models\PPL\MediaModel;
 use App\Models\PPL\RekapPengaduanModels;
 use App\Models\PPL\TabulasiModel;
 use App\Models\Yanzin\SektorModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,23 +17,64 @@ use app\Http\Controllers\TabulasiController;
 
 class RekapPengaduanController extends Controller
 {
-    public function gabung(){
-        $rek_pengaduan = RekapPengaduanModels::all();
+    public function gabung(Request $request){
+        //dd(is_null($request->bulan));
+        //dd($request->bulan);
+        $bulan = $request->bulan;
+        $date = Carbon::parse($bulan);
+        //dd($date);
+        //dd($bulan);
+        if ($bulan == null){
+            $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', Carbon::now()->format('m'))->get();
+            //dd($rek_pengaduan);
+        }
+        else {
+            $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', $date)->whereYear('tanggal', $date)->get();
+            //dd($rek_pengaduan);
+        }
         $user_name = Auth::user()->name;
         $sektors = SektorModel::all();
         $tabulasi = TabulasiModel::all();
-        $jenis_layanan_pengaduan = TabulasiModel::where('jenis_layanan','=','Pengaduan')->get();
-        $jml_jns_layanan_pengaduan = count($jenis_layanan_pengaduan);
-        $jenis_layanan_informasi = TabulasiModel::where('jenis_layanan','=','Informasi')->get();
-        $jml_jns_layanan_informasi = count($jenis_layanan_informasi);
+        //
 
         $medias = MediaModel::all();
-        //dd(count($sektors->where('sektor', 'ESDM')));
-        $hasil_rekaps = app('App\Http\Controllers\PPL\TabulasiController')->countRekap();
-        $hasil_rekap_media = app('App\Http\Controllers\PPL\TabulasiController')->countRekapMedia();
+        $layanans = LayananModel::all();
+//        //dd(count($sektors->where('sektor', 'ESDM')));
+       $hasil_rekaps = app('App\Http\Controllers\PPL\TabulasiController')->countRekap();
+
         //dd($test);
-        return view('ppl.base.gabung', compact('hasil_rekaps','rek_pengaduan', 'user_name',
-            'sektors','medias', 'tabulasi','jml_jns_layanan_pengaduan','jml_jns_layanan_informasi','jenis_layanan_informasi','hasil_rekap_media'));
+       // dd($hasil_rekaps);
+        $tanggal = Carbon::parse($request->tanggal)->format('m');
+        //dd($tanggal);
+        $user = Auth::user()->id;
+        $jenis_layanan_pengaduan = TabulasiModel::where('jenis_layanan','=','Pengaduan')
+            ->whereMonth('tanggal','=',$tanggal)
+            ->get();
+        $jenis_layanan_informasi = TabulasiModel::where('jenis_layanan','=','Informasi')
+
+            ->whereMonth('tanggal','=',$tanggal)
+            ->get();
+        $jml_jns_layanan_pengaduan = count($jenis_layanan_pengaduan);
+        $jml_jns_layanan_informasi = count($jenis_layanan_informasi);
+        $today = date('Y-m');
+        $todays = date("F", strtotime($bulan));
+
+        return view('ppl.base.gabung', compact(
+            'rek_pengaduan',
+            'user_name',
+            'sektors',
+            'tabulasi',
+            'jml_jns_layanan_pengaduan',
+            'jml_jns_layanan_informasi',
+            'jenis_layanan_informasi',
+            'user',
+            'today',
+            'medias',
+            'layanans',
+            'bulan',
+            'hasil_rekaps',
+            'todays'
+        ));
     }
 
     public function index(){
@@ -47,7 +90,7 @@ class RekapPengaduanController extends Controller
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'media' => 'required',
-            'jenis_layanan' => 'required',
+            'layanan' => 'required',
             'sektor' => 'required',
             'rincian_aduan' => 'required',
             'penyelesaian' => 'required',
@@ -57,7 +100,7 @@ class RekapPengaduanController extends Controller
         $nama = $request->input('nama');
         $jenis_kelamin = $request->input('jenis_kelamin');
         $media = $request->input('media');
-        $jenis_layanan = $request->input('jenis_layanan');
+        $jenis_layanan = $request->input('layanan');
         $no_telp = $request->input('no_telp');
         $sektor = $request->input('sektor');
         $wa_email = $request->input('wa_email');
