@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/simpeg', 'Sekretariat\DataAsnController@simpeg');
 Route::get('/realisasi', 'API\ApiCJIP@cjip');
+Route::get('/satgas', 'API\SatgasAPIController@satgas');
 Route::get('/satgas_sektor', 'API\SatgasSektorAPIController@satgas');
 Route::post('/laporSatgas', 'API\LaporSatgasAPIController@LaporSatgas');
 
