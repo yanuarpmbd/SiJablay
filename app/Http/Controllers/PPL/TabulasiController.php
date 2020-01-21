@@ -67,61 +67,77 @@ class TabulasiController extends Controller
     public function countRekap(){
 
         $rekap = RekapPengaduanModels::all();
+        //dd($rekap);
         $rekap_informasi = RekapPengaduanModels::where('jenis_layanan', '2')->get();
         $rekap_pengaduan = RekapPengaduanModels::where('jenis_layanan', '3')->get();
+        //dd($rekap_informasi->isEmpty());\\
 
+        if ($rekap_informasi->isEmpty() or $rekap_pengaduan->isEmpty){
+            $hasil_rekap = array(
+                'total_aduan_informasi' => 0,
+                'sektor_aduan_informasi' => 0,
+                'total_aduan_pengaduan' => 0,
+                'sektor_aduan_pengaduan' => 0,
+            );
+            //dd($groupCountInformasi);
+            //dd($hasil_rekap);
+            return $hasil_rekap;
+        }
+        else{
+            $groupedInformasi = $rekap_informasi->groupBy(function ($item, $key) {
+                return $item['sektor'];
+            });
+            //dd($grouped);
+            //dd($groupedInformasi);
+            $groupCountInformasi = $groupedInformasi->map(function ($item, $key) {
+                return collect($item)->count();
+            });
+            //dd($groupCountInformasi);
+            /////////////////////////////////////////////////////////////////////// BY SECTOR - Informasi
+            ///
+            ///
+            /// /////////////////////////////////////////////////////////////////// BY SECTOR - PENGADUAN
+            $groupedPengaduan = $rekap_pengaduan->groupBy(function ($item, $key) {
+                return $item['sektor'];
+            });
+            //dd($grouped);
+
+            $groupCountPengaduan = $groupedPengaduan->map(function ($item, $key) {
+                return collect($item)->count();
+            });
+
+            //////////////////////////////////////////////////////////
+            ///
+            ///
+            /// //////////////////////////////////////////////////////COUNT BY JENIS LAYANAN
+
+            $grouped = $rekap->groupBy(function ($item, $key) {
+                //dd($item);
+                return $item['jenis_layanan'];
+            });
+
+            //dd($grouped);
+
+            $groupCount = $grouped->map(function ($item, $key) {
+                return collect($item)->count();
+            });
+            //dd($groupCount);
+            ///////////////////////////////////////////////////////////
+
+            //dd($groupCount);
+
+            $hasil_rekap = array(
+                'total_aduan_informasi' => $groupCount['2'],
+                'sektor_aduan_informasi' => $groupCountInformasi,
+                'total_aduan_pengaduan' => $groupCount['3'],
+                'sektor_aduan_pengaduan' => $groupCountPengaduan,
+            );
+            //dd($groupCountInformasi);
+            //dd($hasil_rekap);
+            return $hasil_rekap;
+        }
         ////////////////////////////////////////////////////////////////////////
-        $groupedInformasi = $rekap_informasi->groupBy(function ($item, $key) {
-            return $item['sektor'];
-        });
-        //dd($grouped);
-        //dd($groupedInformasi);
-        $groupCountInformasi = $groupedInformasi->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-        //dd($groupCountInformasi);
-        /////////////////////////////////////////////////////////////////////// BY SECTOR - Informasi
-        ///
-        ///
-        /// /////////////////////////////////////////////////////////////////// BY SECTOR - PENGADUAN
-        $groupedPengaduan = $rekap_pengaduan->groupBy(function ($item, $key) {
-            return $item['sektor'];
-        });
-        //dd($grouped);
 
-        $groupCountPengaduan = $groupedPengaduan->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-
-        //////////////////////////////////////////////////////////
-        ///
-        ///
-        /// //////////////////////////////////////////////////////COUNT BY JENIS LAYANAN
-
-        $grouped = $rekap->groupBy(function ($item, $key) {
-            //dd($item);
-            return $item['jenis_layanan'];
-        });
-
-        //dd($grouped);
-
-        $groupCount = $grouped->map(function ($item, $key) {
-            return collect($item)->count();
-        });
-                //dd($groupCount);
-        ///////////////////////////////////////////////////////////
-
-        //dd($groupCount);
-
-        $hasil_rekap = array(
-            'total_aduan_informasi' => $groupCount['2'],
-            'sektor_aduan_informasi' => $groupCountInformasi,
-            'total_aduan_pengaduan' => $groupCount['3'],
-            'sektor_aduan_pengaduan' => $groupCountPengaduan,
-        );
-        //dd($groupCountInformasi);
-        //dd($hasil_rekap);
-        return $hasil_rekap;
 
     }
 
