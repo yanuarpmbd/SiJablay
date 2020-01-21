@@ -23,7 +23,7 @@ class SektorController extends Controller
 
     public function editSektor($id){
         $edit_sektor = SektorModel::findOrFail($id);
-        return view('ppl.base.edit-pengaduan', compact('edit_sektor'));
+        return view('ppl.base.edit-sektor', compact('edit_sektor'));
     }
 
     public function updateSektor(Request $request, $id){
@@ -32,7 +32,7 @@ class SektorController extends Controller
         $update_sektor->kode_sektor = $request->kode_sektor;
         $update_sektor->update();
 
-        return redirect()->back()->with('success', 'Berhasil Ubah Sektor');
+        return redirect()->route('gabung.pengaduan')->with('success', 'Data berhasil diubah');
     }
 
     public function deleteSektor($id){

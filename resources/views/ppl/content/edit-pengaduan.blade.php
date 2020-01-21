@@ -48,11 +48,9 @@
                 <div class="col-6">
                     <div class="form-group"><label>Media *</label>
                         <select class="form-control" name="media" id="media">
-                            <option value="Helpdesk" {{($rek_pengaduan->media == 'Helpdesk')?"selected":""}}>Helpdesk</option>
-                            <option value="Email" {{($rek_pengaduan->media == 'Email')?"selected":""}}>Email</option>
-                            <option value="Whatsapp" {{($rek_pengaduan->media == 'Whatsapp')?"selected":""}}>Whatsapp</option>
-                            <option value="Sosial Media" {{($rek_pengaduan->media == 'Sosial Media')?"selected":""}}>Sosial Media</option>
-                            <option value="SIAP Jateng" {{($rek_pengaduan->media == 'SIAP Jateng')?"selected":""}}>SIAP Jateng</option>
+                            @foreach($medias as $media)
+                                <option value="{{$media->id}}">{{$media->nama_media}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

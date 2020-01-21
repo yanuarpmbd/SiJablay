@@ -8,7 +8,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>FORM REKAP PENGADUAN</h5>
+                <h5>FORM REKAP PENGADUAN </h5>
             </div>
             <div class="ibox-content">
                 <form class="form-horizontal" action="{{route('store.pengaduan')}}" method="post">
@@ -16,8 +16,8 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-6">
-                                <div class="form-group"><label>Tanggal Pengaduan *</label>
-                                    <input type="date" placeholder="Tanggal" name="tanggal" id="tanggal" class="form-control">
+                                <div class="form-group"><label>Tanggal Pengaduan{{\Illuminate\Support\Carbon::today()->format('yy-m-d')}} *</label>
+                                    <input type="date" placeholder="Tanggal" name="tanggal" value="{{\Illuminate\Support\Carbon::today()->format('yy-m-d')}}" id="tanggal" class="form-control">
                                 </div>
                             </div>
                             <div class="col-6">
@@ -45,29 +45,30 @@
                             <div class="col-6">
                                 <div class="form-group"><label>Media *</label>
                                     <select class="form-control" name="media" id="media">
-                                        <option value="Helpdesk">Helpdesk</option>
-                                        <option value="Email">Email</option>
-                                        <option value="Whatsapp">Whatsapp</option>
-                                        <option value="Sosial Media">Sosial Media</option>
-                                        <option value="SIAP Jateng">SIAP Jateng</option>
+                                      @foreach($medias as $media)
+                                            <option value="{{$media->id}}">{{$media->nama_media}}</option>
+                                        @endforeach
                                     </select>
+
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group"><label>Jenis Layanan *</label>
-                                    <select class="form-control" name="jenis_layanan" id="jenis_layanan">
-                                        <option value="Informasi">Informasi</option>
-                                        <option value="Pengaduan">Pengaduan</option>
+                                    <select class="form-control" name="layanan" id="layanan">
+                                        @foreach($layanans as $layanan)
+                                            <option value="{{$layanan->id}}">{{$layanan->nama_layanan}}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-6">
-                                <div class="form-group"><label>No Telepon</label>
+                                <div class="form-group"><label>No Telepon *</label>
                                     <input placeholder="Nomor Telepon" name="no_telp" id="no_telp" class="form-control">
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group"><label>Sektor *</label>
                                     <select class="form-control" name="sektor" id="sektor">
@@ -81,14 +82,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group"><label>Rincian Aduan *</label>
-                                    <input placeholder="Rincian Aduan" name="rincian_aduan" id="rincian_aduan" class="form-control">
+                                    <textarea placeholder="Rincian Aduan" name="rincian_aduan" id="rincian_aduan" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group"><label>Penyelesaian *</label>
-                                    <input placeholder="Penyelesaian" name="penyelesaian" id="penyelesaian" class="form-control">
+                                    <textarea placeholder="Penyelesaian" name="penyelesaian" id="penyelesaian" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>

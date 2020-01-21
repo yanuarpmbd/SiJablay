@@ -28,6 +28,10 @@ class PokController extends Controller
         $today = date("Y-m");
         $todays = date("F", strtotime($bulan));
         //dd($todays);
+        +
+
+
+
         $query = "CAST(rko_id AS int)ASC";
         $pok = PokModel::where('bulan', '=', $bulan)
             ->orderByRaw($query)
@@ -48,19 +52,19 @@ class PokController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function storePOK(Request $request)
     {
         $user = Auth::user();
         $user_id = Auth::user()->id;
 
         $this->validate($request, [
-            'realisasi_fisik_sebelum' => 'required',
+            'realisasi_fisik_sebelum' => 'required', /**
+             * Store a newly created resource in storage.
+             *
+             * @param  \Illuminate\Http\Request  $request
+             * @return \Illuminate\Http\Response
+             */
             'realisasi_keu_sebelum' => 'required',
             'realisasi_fisik' => 'required',
             'realisasi_keu' => 'required',

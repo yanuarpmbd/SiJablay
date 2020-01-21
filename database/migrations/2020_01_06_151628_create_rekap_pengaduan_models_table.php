@@ -27,6 +27,8 @@ class CreateRekapPengaduanModelsTable extends Migration {
 			$table->string('penyelesaian');
 			$table->timestamps();
 		});
+
+        Schema::table('users', function ($table) { $table->string('status')->after('penyelesaian'); });
 	}
 
 

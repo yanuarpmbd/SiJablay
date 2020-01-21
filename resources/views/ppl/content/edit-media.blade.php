@@ -10,25 +10,21 @@
     </div>
 
     <div class="ibox-title">
-        <h5>FORM EDIT SEKTOR</h5>
+        <h5>FORM EDIT MEDIA</h5>
     </div>
 
-    <form class="form-horizontal" action="{{route('update.sektor', $edit_sektor->id)}}" method="post">
+    <form class="form-horizontal" action="{{route('update.media', $edit_media->id)}}" method="post">
         @csrf
         @method('PATCH')
         <div class="ibox-content">
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group"><label>Nama Sektor *</label>
-                            <input placeholder="Nama Sektor" name="nama_sektor" value="{{$edit_sektor->nama_sektor}}" id="nama_sektor" class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                        <div class="form-group"><label>Nama Media *</label>
+                            <input placeholder="Nama Media" name="nama_media" value="{{$edit_media->nama_media}}" id="nama_media" class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group"><label>Kode Sektor *</label>
-                            <input placeholder="Kode Sektor" name="kode_sektor" value="{{$edit_sektor->kode_sektor}}" id="kode_sektor" class="form-control">
-                        </div>
-                    </div>
+
                 </div>
                 <div class="space-15"></div>
                 <div class="ibox float-e-margins">

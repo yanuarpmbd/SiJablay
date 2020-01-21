@@ -15,7 +15,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        @include('ppl.content.edit-sektor')
+        @include('ppl.content.edit-layanan')
     </div>
 @endsection
 @section('js')
@@ -100,12 +100,12 @@
     </script>--}}
     {{--   <script>
 
-           $('#article-ckeditor').wysiwyg();
+        $('#article-ckeditor').wysiwyg();
 
-           $('#submit-notulen').on('click',function(){
+        $('#submit-notulen').on('click',function(){
 
-               console.log($('#editor').html());
+            console.log($('#editor').html());
 
-           });
-       </script>--}}
+        });
+    </script>--}}
 @endsection
