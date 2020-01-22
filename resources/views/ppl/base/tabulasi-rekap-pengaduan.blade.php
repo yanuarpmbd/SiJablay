@@ -66,7 +66,7 @@
                         borderColor: "rgba(26,179,148,0.7)",
                         pointBackgroundColor: "rgba(26,179,148,1)",
                         pointBorderColor: "#fff",
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: [28, 48, 20, 19, 86, 27, 90]
                     },
                     {
                         label: "Example dataset",
@@ -74,7 +74,7 @@
                         borderColor: "rgba(220,220,220,1)",
                         pointBackgroundColor: "rgba(220,220,220,1)",
                         pointBorderColor: "#fff",
-                        data: [65, 59, 80, 81, 56, 55, 40]
+                        data: [65, 59, 80, 81, 56, 55, 20]
                     }
                 ]
             };

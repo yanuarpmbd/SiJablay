@@ -49,7 +49,7 @@
     <div class="row">
         <table class="footable table table-stripped toggle-arrow-tiny">
             <thead>
-            <tr>
+            <tr class="active">
                 <th>No</th>
                 <th>Sektor</th>
                 <th>Kode Sektor</th>
@@ -136,7 +136,7 @@
     <div class="row">
         <table class="footable table table-stripped toggle-arrow-tiny">
             <thead>
-            <tr>
+            <tr class="active">
                 <th>No</th>
                 <th>Media</th>
                 <th>Edit</th>
@@ -229,7 +229,7 @@
     <div class="row">
         <table class="footable table table-stripped toggle-arrow-tiny">
             <thead>
-            <tr>
+            <tr class="active">
                 <th>No</th>
                 <th>Jenis Layanan</th>
                 <th>Edit</th>

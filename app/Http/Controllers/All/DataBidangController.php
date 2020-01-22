@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\All;
 
 use App\Models\All\KabKotaModels;
+use App\Models\PPL\LayananModel;
+use App\Models\PPL\MediaModel;
 use App\Models\PPL\RekapPengaduanModels;
+use App\Models\PPL\TabulasiModel;
 use App\Models\Yanzin\JenisIzinModel;
 use App\Models\Yanzin\RekapPerizinanModel;
+use App\Models\Yanzin\SektorModel;
 use App\Models\Yanzin\SOPPelayananModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Promosi\KemitraanModel;
@@ -36,6 +41,7 @@ class DataBidangController extends Controller
         $kab_kota = $request->input('kab_kota');
         $pma_pmdn = $request->input('pma_pmdn');
         $sektor = $request->input('sektor');
+
         if ($pma_pmdn == 'all'){
             $pma_invest = DB::table('pma_invest_models')
                 ->where('kab_kota', 'LIKE', '%'.$kabkota.'%')
@@ -71,7 +77,80 @@ class DataBidangController extends Controller
         }
         $rek_pengaduan = RekapPengaduanModels::all();
 
+////////////////////////////////////////////////////////////////////////update/////////////////////////////////////////////////////////
+        $bulan = $request->bulan;
+        $date = Carbon::parse($bulan);
+        //dd($date);
+        //dd($bulan);
+        if ($bulan == null){
+            $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', Carbon::now()->format('m'))->get();
+            //dd($rek_pengaduan);
+        }
+        else {
+            $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', $date)->whereYear('tanggal', $date)->get();
+            //dd($rek_pengaduan);
+        }
+        $user_name = Auth::user()->name;
+        $sektors = SektorModel::all();
+        $tabulasi = TabulasiModel::all();
+        //
 
-        return view('all.base.gabung-bidang', compact('mitra','kabkota', 'kabkotas', 'rek_oss', 'user', 'user_name', 'soppelayanan', 'today', 'todays', 'dropdown', 'rekap_sop', 'rekap', 'pma_invest', 'kab_kotas', 'pma_pmdns', 'pma_pmdn', 'sektors', 'kab_kota', 'rek_pengaduan'));
+        $medias = MediaModel::all();
+        $layanans = LayananModel::all();
+//        //dd(count($sektors->where('sektor', 'ESDM')));
+        $hasil_rekaps = app('App\Http\Controllers\PPL\TabulasiController')->countRekap();
+
+        //dd($test);
+        // dd($hasil_rekaps);
+        $tanggal = Carbon::parse($request->tanggal)->format('m');
+        //dd($tanggal);
+        $user = Auth::user()->id;
+        $jenis_layanan_pengaduan = TabulasiModel::where('jenis_layanan','=','Pengaduan')
+            ->whereMonth('tanggal','=',$tanggal)
+            ->get();
+        $jenis_layanan_informasi = TabulasiModel::where('jenis_layanan','=','Informasi')
+
+            ->whereMonth('tanggal','=',$tanggal)
+            ->get();
+        $jml_jns_layanan_pengaduan = count($jenis_layanan_pengaduan);
+        $jml_jns_layanan_informasi = count($jenis_layanan_informasi);
+        $today = date('Y-m');
+        $todays = date("F", strtotime($bulan));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        return view('all.base.gabung-bidang', compact('mitra',
+            'kabkota',
+            'kabkotas',
+            'rek_oss',
+            'user',
+            'user_name',
+            'soppelayanan',
+            'today',
+            'todays',
+            'dropdown',
+            'rekap_sop',
+            'rekap',
+            'pma_invest',
+            'kab_kotas',
+            'pma_pmdns',
+            'pma_pmdn',
+            'sektors',
+            'kab_kota',
+            'rek_pengaduan',
+            'medias',
+            'layanans',
+            'tabulasi',
+            'hasil_rekaps',
+            'jml_jns_layanan_informasi',
+            'jml_jns_layanan_pengaduan'
+
+        ));
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
     }
 }

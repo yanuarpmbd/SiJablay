@@ -72,7 +72,7 @@ class TabulasiController extends Controller
         $rekap_pengaduan = RekapPengaduanModels::where('jenis_layanan', '3')->get();
         //dd($rekap_informasi->isEmpty());\\
 
-        if ($rekap_informasi->isEmpty() or $rekap_pengaduan->isEmpty){
+        if ($rekap_informasi->isEmpty() or $rekap_pengaduan->isEmpty ()){
             $hasil_rekap = array(
                 'total_aduan_informasi' => 0,
                 'sektor_aduan_informasi' => 0,

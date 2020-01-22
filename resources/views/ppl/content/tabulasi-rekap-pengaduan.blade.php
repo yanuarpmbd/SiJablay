@@ -47,11 +47,10 @@
              </form>
             </div>
 
-            <div class="ibox-content">
                 <table class="footable table table-stripped toggle-arrow-tiny">
                     <thead>
                     <tr class="danger">
-                      <td colspan="16">
+                      <td colspan="17">
                           REKAP HELPDESK BULAN
                           @if($bulan == null)
 
@@ -64,7 +63,7 @@
                     <tr class="info">
                         <td colspan="1"> </td>
                         <td colspan="1"> </td>
-                        <td colspan="3"> JENIS LAYANAN HELPDESK</td>
+                        <td colspan="4"> JENIS LAYANAN HELPDESK</td>
                         <td colspan="11"> RINCIAN MEDIA LAYANAN</td>
                     </tr>
                     <tr class="warning">
@@ -72,6 +71,7 @@
                         <td colspan="1">Bidang</td>
                         <td colspan="1">Infrormasi</td>
                         <td colspan="1">Pengaduan</td>
+                        <td colspan="1">Satgas</td>
                         <td colspan="1">Jumlah</td>
                         <td colspan="1">Twitter</td>
                         <td colspan="1">Lapor Gubernur</td>
@@ -108,6 +108,15 @@
                             {{count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '3'))}}
                                 @endif
                         </td>
+
+                        <td colspan="1">
+                            @if(count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '4')) == 0)
+                                -
+                            @else
+                                {{count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '4'))}}
+                            @endif
+                        </td>
+
                         <td colspan="1">{{(count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '2')) + count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '3')))}}
 
                         </td>
@@ -132,7 +141,10 @@
                         <td colspan="2">Total</td>
                         <td colspan="1">{{count($rek_pengaduan->where('jenis_layanan', '2'))}}</td>
                         <td colspan="1">{{count($rek_pengaduan->where('jenis_layanan', '3'))}}</td>
-                        <td colspan="1">{{(count($rek_pengaduan->where('jenis_layanan', '2')) + count($rek_pengaduan->where('jenis_layanan', '3')))}}</td>
+                        <td colspan="1">{{count($rek_pengaduan->where('jenis_layanan', '4'))}}</td>
+                        <td colspan="1">{{(count($rek_pengaduan->where('jenis_layanan', '2')) +
+                                           count($rek_pengaduan->where('jenis_layanan', '3')) +
+                                           count($rek_pengaduan->where('jenis_layanan', '4')))}}</td>
                         <td colspan="1">{{count($rek_pengaduan->where('media', '1'))}} </td>
                         <td colspan="1">{{count($rek_pengaduan->where('media', '2'))}}</td>
                         <td colspan="1">{{count($rek_pengaduan->where('media', '3'))}}</td>
@@ -156,10 +168,8 @@
                                             )}}</td>
                     </tr>
                     </tbody>
-
-
                 </table>
-            </div>
+
 
 
 

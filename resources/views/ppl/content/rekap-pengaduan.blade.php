@@ -13,7 +13,7 @@
             <div class="ibox-content">
                 <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                     <thead>
-                    <tr>
+                    <tr class="active">
                         <th>Tanggal</th>
                         <th>Nama</th>
                         <th data-breakpoints="all">Jenis Kelamin</th>
@@ -37,14 +37,21 @@
                             <td>{{$r->tanggal}}</td>
                             <td>{{$r->nama}}</td>
                             <td>{{$r->jenis_kelamin}}</td>
-                            <td>{{$r->media}}</td>
-                            <td>{{$r->jenis_layanan}}</td>
+                            <td>
+                                {{$r->mediaRelation->nama_media}}
+                            </td>
+                            <td>
+                                {{$r->layananRelation->nama_layanan}}
+                            </td>
                             <td>{{$r->no_telp}}</td>
-                            <td>{{$r->sektor}}</td>
-                            <td>{{$r->media}}</td>
+                            <td>
+                                {{$r->sektorRelation->nama_sektor}}
+                            </td>
+
+{{-- var @dump($media));--}}
                             <td>{{$r->wa_email}}</td>
                             <td>{{$r->rincian_aduan}}</td>
-{{--                            <td>{{$r->penyelesaian}}</td>--}}
+                            <td>{{$r->penyelesaian}}</td>
                             @if($user_name == 'Pengaduan' or 'Superadmin')
                             <td>
                                 <form action="{{route('edit.pengaduan', $r->id)}}">
