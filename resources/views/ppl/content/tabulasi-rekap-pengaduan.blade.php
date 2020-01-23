@@ -50,7 +50,7 @@
                 <table class="footable table table-stripped toggle-arrow-tiny">
                     <thead>
                     <tr class="danger">
-                      <td colspan="17">
+                      <td colspan="{{count($layanans)+ count($medias) + 4}}">
                           REKAP HELPDESK BULAN
                           @if($bulan == null)
 
@@ -63,26 +63,19 @@
                     <tr class="info">
                         <td colspan="1"> </td>
                         <td colspan="1"> </td>
-                        <td colspan="4"> JENIS LAYANAN HELPDESK</td>
-                        <td colspan="11"> RINCIAN MEDIA LAYANAN</td>
+                        <td colspan="{{count($layanans)+1}}"> JENIS LAYANAN HELPDESK</td>
+                        <td colspan="{{count($medias)+1}}"> RINCIAN MEDIA LAYANAN</td>
                     </tr>
                     <tr class="warning">
                         <td colspan="1">No</td>
-                        <td colspan="1">Bidang</td>
-                        <td colspan="1">Infrormasi</td>
-                        <td colspan="1">Pengaduan</td>
-                        <td colspan="1">Satgas</td>
+                        <td colspan="1">Sektor</td>
+                        @foreach($layanans as $layanan)
+                            <td colspan="1">{{$layanan->nama_layanan}}</td>
+                        @endforeach
                         <td colspan="1">Jumlah</td>
-                        <td colspan="1">Twitter</td>
-                        <td colspan="1">Lapor Gubernur</td>
-                        <td colspan="1">Surat</td>
-                        <td colspan="1">FO-Helpdesk</td>
-                        <td colspan="1">SIAP Jateng</td>
-                        <td colspan="1">SMS</td>
-                        <td colspan="1">Email</td>
-                        <td colspan="1">Facebook</td>
-                        <td colspan="1">Instagram</td>
-                        <td colspan="1">Whatsapp</td>
+                        @foreach($medias as $media)
+                        <td colspan="1">{{$media->nama_media}}</td>
+                        @endforeach
                         <td colspan="1">Jumlah</td>
                     </tr>
 

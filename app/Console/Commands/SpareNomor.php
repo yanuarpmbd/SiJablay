@@ -47,6 +47,7 @@ class SpareNomor extends Command
             $nomor_spare = new PenggunaanNomorModel();
             $nomor_spare->count = ($total_nomor) + 1;
             $nomor_spare->tanggal = Carbon::now();
+            /*$nomor_spare->tanggal = Carbon::createFromDate(2020, 01, 21);*/
             $nomor_spare->used = 0;
             //dump($nomor_spare->count);
             $nomor_spare->save();
