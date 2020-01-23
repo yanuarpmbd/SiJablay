@@ -235,11 +235,11 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     //MEDIA//
     Route::prefix('media')->group (function(){
-        Route::get('/', 'All\mediaController@formMedia')->name('form.media');
-        Route::post('/', 'All\mediaController@addMedia')->name('add.media');
-        Route::get('/edit/{id}', 'All\mediaController@editMedia')->name('edit.media');
-        Route::patch('/update/{id}', 'All\mediaController@updateMedia')->name('update.media');
-        Route::delete('/detete/{id}', 'All\mediaController@deleteMedia')->name('delete.media');
+        Route::get('/', 'All\MediaController@formMedia')->name('form.media');
+        Route::post('/', 'All\MediaController@addMedia')->name('add.media');
+        Route::get('/edit/{id}', 'All\MediaController@editMedia')->name('edit.media');
+        Route::patch('/update/{id}', 'All\MediaController@updateMedia')->name('update.media');
+        Route::delete('/detete/{id}', 'All\MediaController@deleteMedia')->name('delete.media');
 
     });
     //END MEDIA//
