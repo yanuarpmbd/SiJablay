@@ -6,71 +6,18 @@
     <link href="{{asset('css/plugins/footable/footable.core.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style_.css')}}" rel="stylesheet">
-    <style>
-        .doc-title {
-            text-align: center;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 2rem 0;
-            margin: 5rem 0 2rem;
-            text-transform: uppercase;
-        }
-    </style>
 @endsection
-
 @section('content')
-
     <div class="tengah">
-
-        <main>
-            <div class="tabs-container">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#tab-1">Buat SPT</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-2">Rekap SPT</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-3">SPT Terhapus</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-4">Setting SPT</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane active">
-                        <div class="panel-body">
-                            @include('spt.content.spt')
-                        </div>
-                    </div>
-
-
-                    <div id="tab-2" class="tab-pane">
-                        <div class="panel-body">
-                            @include('spt.content.rekap-spt')
-                        </div>
-                    </div>
-
-
-                    <div id="tab-3" class="tab-pane">
-                        <div class="panel-body">
-                            @include('spt.content.spt_terhapus')
-                        </div>
-                    </div>
-
-                    <div id="tab-4" class="tab-pane">
-                        <div class="panel-body">
-                            @include('spt.content.setting-spt')
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </main>
+        @include('spt.content.setting.spt')
     </div>
 @endsection
 @section('js')
-
     <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/pages/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/inspinia.js')}}"></script>
-    <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>
     <script src="{{asset('js/plugins/select2/select2.full.min.js')}}"></script>
     {{--DATEPICKER--}}
     <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
@@ -81,9 +28,8 @@
             $(".select2_demo_1").select2();
             $(".select2_demo_2").select2();
             $(".select2_demo_3").select2({
-                placeholder: "Pilih Nama...",
-                allowClear: true,
-                minimumInputLength:3,
+                placeholder: "Select a state",
+                allowClear: true
             });
 
             $('#data_1 .input-group.date').datepicker({
@@ -129,20 +75,6 @@
         });
     </script>
     <script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
-    <script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
-
-    <script src="{{asset('js/mdb.js')}}"></script>
-    <script src="{{asset('js/mdb.min.js')}}"></script>
-
-    <script>
-        $(document).ready(function() {
-
-            $('.footable').footable();
-            $('.footable2').footable();
-
-        });
-
-    </script>
 
     <script>
         document.getElementById('addPlayer').onclick = function createInputField() {
@@ -173,39 +105,6 @@
                 return false;
             } else {
             }
-        }
-    </script>
-    <script>
-        var $rows = $('#tablel tr');
-        $('#myInput').keyup(debounce(function() {
-            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-            $rows.show().filter(function() {
-                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                return !~text.indexOf(val);
-            }).hide();
-        }, 300));
-
-        function debounce(func, wait, immediate) {
-            var timeout;
-            return function() {
-                var context = this, args = arguments;
-                var later = function() {
-                    timeout = null;
-                    if (!immediate) func.apply(context, args);
-                };
-                var callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if (callNow) func.apply(context, args);
-            };
-        };
-    </script>
-    <script>
-        function showTable()
-        {
-            document.getElementById('table2').style.visibility = 'visible';//shows the table
-            return false; //tells the form not to actaully load the action page
         }
     </script>
 @endsection

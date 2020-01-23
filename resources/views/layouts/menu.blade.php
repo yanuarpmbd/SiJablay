@@ -15,7 +15,7 @@
         <li><a href="{{route('show.setting-nomor')}}">Ambil Nomor</a></li>
         <li><a href="{{route('form.spt')}}">Perjalanan Dinas</a></li>
         <li><a href="{{route('gabung.bidang')}}">Data Internal DPMPTSP</a></li>
-        <li><a href="">Data Eksternal DPMPTSP</a></li>
+        <li><a href="{{route('show.eksternal')}}">Data Eksternal DPMPTSP</a></li>
         @if((Auth::user()->username == 'promosi') || (Auth::user()->username == 'superadmin'))
             <li><a href="{{route('form.kemitraan')}}">Kemitraan</a></li>
         @else

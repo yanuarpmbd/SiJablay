@@ -26,6 +26,14 @@ Route::prefix('kegiatan')->group(function (){
     Route::get('/databidang', 'All\DataBidangController@gabungbidang')->name('gabung.bidang');
 });
 
+/////ROUTE DATA EKSTERNAL///////
+Route::prefix('eksternal')->group(function () {
+    Route::get('/show', 'EKSTERNAL\DataEksternalController@index')->name('show.eksternal');
+});
+
+
+
+
 //AUTH//
 Route::namespace('Auth')->group(function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
@@ -63,6 +71,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/advance', 'SPT\AdvanceSPTController@postSPT')->name('adv.postSpt');
         Route::get('/advance/sppd', 'SPT\AdvanceSPTController@getSPPD')->name('adv.sppd');
         Route::get('/sppd_cetak-adv/{id}', 'SPT\AdvanceSPTController@cetakAdvSppd')->name('cetak-adv.sppd');
+        Route::get('/setting/spt', 'SPT\RekapSPTController@setting')->name('setting.spt');
     });
 
     //All Bidang Sementara//
@@ -295,6 +304,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/edituser/{id}', 'Admin\UserManagerController@edit' );
     Route::patch('/updateuser/{edit}', 'Admin\UserManagerController@update');
     Route::delete('/deleteuser/{id}', 'Admin\UserManagerController@destroy');
+
+
+
 });
 
 
