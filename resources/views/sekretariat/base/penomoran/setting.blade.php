@@ -210,13 +210,18 @@
         });
     </script>
     <script src="{{asset('js/table/js/jquery.table2excel.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.core.js" integrity="sha256-PQ+jsc5fArRdpwTFVK6AMzeRKUUm6nZMfCwp5R0CKqY=" crossorigin="anonymous"></script>
     <script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {
-
-            $('.footable').footable();
-            $('.footable2').footable();
+            $('.footable').footable(
+                {
+                    calculateWidthOverride: function() {
+                        return { width: $(window).width() };
+                    }
+                }
+            );
 
         });
 

@@ -36,7 +36,7 @@
 
                         </div>
                     </form>
-                <table class="footable table table-stripped toggle-arrow-tiny">
+                <table class="footable table table-stripped toggle-arrow-tiny" data-paging="true">
                     <thead>
                     <tr>
                         <th>No</th>
