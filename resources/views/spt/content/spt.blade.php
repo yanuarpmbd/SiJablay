@@ -88,15 +88,15 @@
 
     <div class="space-15">
     </div>
-     <label class="form-group">Dasar Surat Perintah Tugas*</label>
-      <div class="col-12">
+     {{--<label class="form-group">Dasar Surat Perintah Tugas*</label>--}}
+      {{--<div class="col-12">
             <select class="form-control" name="dasar_hukum" id="dasar_hukum">
                 multiple="multiple" required>
                 @foreach($dasar_hukums as $dasar_hukum)
                     <option value="{{$dasar_hukum->id}}">{{$dasar_hukum->dasar_hukum}}</option>
                 @endforeach
             </select>
-     </div>
+     </div>--}}
 
         <div class="space-15">
         </div>

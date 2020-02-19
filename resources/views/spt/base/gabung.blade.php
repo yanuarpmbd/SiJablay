@@ -28,7 +28,7 @@
                     <li class="active"><a data-toggle="tab" href="#tab-1">Buat SPT</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-2">Rekap SPT</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-3">SPT Terhapus</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-4">Setting SPT</a></li>
+                   {{-- <li class=""><a data-toggle="tab" href="#tab-4">Setting SPT</a></li>--}}
                 </ul>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane active">
@@ -51,11 +51,11 @@
                         </div>
                     </div>
 
-                    <div id="tab-4" class="tab-pane">
+                    {{--<div id="tab-4" class="tab-pane">
                         <div class="panel-body">
                             @include('spt.content.setting-spt')
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
 
             </div>
