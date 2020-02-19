@@ -43,6 +43,7 @@ class TabulasiExport implements FromView,ShouldAutoSize
            $tabulasi = TabulasiModel::all();
            $sektors = SektorModel::all();
            $medias = MediaModel::all();
+           $layanans = LayananModel::all();
            $rek_pengaduan = RekapPengaduanModels::all();
            $rekap = RekapPengaduanModels::all();
            $rekap_informasi = RekapPengaduanModels::where('jenis_layanan', '2')->get();
@@ -113,7 +114,8 @@ class TabulasiExport implements FromView,ShouldAutoSize
                    'rekap_pengaduan',
                    'hasil_rekap',
                     'tanggal',
-               'bulan'));
+                    'bulan',
+                    'layanans'));
 
        }
 

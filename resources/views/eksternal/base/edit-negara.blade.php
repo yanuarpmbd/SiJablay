@@ -15,11 +15,7 @@
 @endsection
 @section('content')
     <div class="tengah">
-        <main>
-            <div class="tabs-container">
-                @include('eksternal.content.form-data-eksternal')
-            </div>
-        </main>
+        @include('eksternal.content.edit-negara')
     </div>
 @endsection
 @section('js')
@@ -28,7 +24,6 @@
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/pages/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/inspinia.js')}}"></script>
-    <script src="{{asset('js/jquery.mask.js')}}"></script>
     <script src="{{asset('js/plugins/select2/select2.full.min.js')}}"></script>
     {{--DATEPICKER--}}
     <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
@@ -44,17 +39,12 @@
             });
 
             $('#data_1 .input-group.date').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                startView: "months",
-                minViewMode: "months",
-                showButtonPanel: true,
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true,
-                format: "yyyy-mm"
+                format: "yyyy-mm-dd"
             });
 
 
@@ -102,30 +92,6 @@
         });
 
     </script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'article-ckeditor' );
-    </script>
-    <script>
 
-        $('#article-ckeditor').wysiwyg();
 
-        $('#submit-notulen').on('click',function(){
-
-            console.log($('#editor').html());
-
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.money2').mask("#.##0,00", {reverse: true});
-        });
-    </script>
-    {{--<script>
-        $(function() {
-            $("#currency").maskMoney({thousands:'.', decimal:',', allowZero:true, prefix: 'Rp '});
-        })
-    </script>--}}
 @endsection
-
-
