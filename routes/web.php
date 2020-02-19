@@ -33,7 +33,6 @@ Route::prefix('eksternal')->group(function () {
 
 
 
-
 //AUTH//
 Route::namespace('Auth')->group(function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
@@ -51,6 +50,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/settings/edit-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@editNomor')->name('edit.nd');
         Route::patch('/settings/update-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateNomor')->name('update.nd');
     //KEPALAAAAAAA//
+    Route::post('setting_kode', 'Sekretariat\Nomor\SettingNomorController@filterKode')->name('setting.kode');
     Route::get('kepala/rekap', 'Admin\RekapController@showRekap')->name('rekap.kepala');
 
     //SPT dan SPPD//

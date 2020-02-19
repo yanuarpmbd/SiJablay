@@ -17,8 +17,8 @@
                 <h5>Ambil Nomor</h5>
             </div>
             <div class="ibox-content">
-                @isset($kategoris)
-                    <div class="row">
+
+                    {{--<div class="row">
                         @foreach($kategoris as $kategori)
                             @if($kategori->id == 2)
 
@@ -29,21 +29,20 @@
                             @endif
 
                         @endforeach
-                    </div>
+                    </div>--}}
 
                     <div class="row">
-                        @foreach($kategoris as $kategori)
-                            @if($kategori->id == 2)
 
-                            @else
+
+
                                 <div class="col-12">
-                                    <form class="form-horizontal" action="{{route('add.nd')}}" method="post" id="{{str_replace(' ', '', (strtolower($kategori->nama_kategori)))}}" style="display: none">
+                                    <form class="form-horizontal" action="{{route('add.nd')}}" method="post" >
                                         @csrf
                                         <div class="ibox-content">
                                             <div class="row">
                                                 <div class="col-12">
 
-                                                        <input name="kategori" id="kategori" value="{{$kategori->id}}" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                                        <input name="kategori" id="kategori" value="4" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
                                                         <input name="user_id" id="user_id" value="{{Auth::user()->id}}" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
 
                                                 </div>
@@ -97,13 +96,10 @@
                                         </div>
                                     </form>
                                 </div>
-                            @endif
 
-                        @endforeach
+
 
                     </div>
-
-                @endisset
 
                 @isset($nomors)
                     <div class="row">

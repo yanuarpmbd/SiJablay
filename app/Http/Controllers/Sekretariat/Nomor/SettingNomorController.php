@@ -18,7 +18,8 @@ class SettingNomorController extends Controller
         $kategoris = KategoriNomorModel::all();
         $settings = SettingNomorModel::all();
         $nomors = PenggunaanNomorModel::orderByDesc('updated_at')->get();
-        $kodes = ArsipNomor::all();
+        $kodes_null = ArsipNomor::where('is_able', 0)->get();
+        $kodes = ArsipNomor::where('is_able', 1)->get();
         $today = date('Y-m-d');
        // $total_nomor = PenggunaanNomorModel::all()->count();
        // dd($total_nomor);
@@ -27,7 +28,7 @@ class SettingNomorController extends Controller
         //dd(date('H:i:s'));
 
         //dd($nomor_terakhir);
-        return view('sekretariat.base.penomoran.setting', compact('kategoris', 'settings', 'nomors', 'kodes', 'today'));
+        return view('sekretariat.base.penomoran.setting', compact('kategoris', 'settings', 'nomors', 'kodes' ,'kodes_null', 'today'));
     }
 
     //////NOMOR//////
@@ -181,5 +182,19 @@ class SettingNomorController extends Controller
     }
 
     ////////END SETTING////////
+    ///
+
+    public function filterKode(Request $request){
+
+        foreach ($request->kode as $id){
+            $update = ArsipNomor::findOrFail($id);
+            $update->is_able = 1;
+            //dump($update);
+            $update->update();
+        }
+
+        return redirect()->route('show.setting-nomor')->with('success', 'Berhasil nambah kode surat');
+        //die();
+    }
 
 }
