@@ -115,7 +115,7 @@
 
                 @isset($nomors)
                     <div class="row">
-                        <table class="footable table table-stripped toggle-arrow-tiny">
+                        <table class="footable table table-stripped toggle-arrow-tiny" data-limit-navigation="5">
                             <thead>
                             <tr>
                                 <th>No</th>
@@ -162,7 +162,7 @@
                             <tfoot>
                             <tr>
                                 <td colspan="5" class="text-center">
-                                    <ul class="pagination">
+                                    <ul class="pagination pagination-centered">
                                     </ul>
                                 </td>
                             </tr>
