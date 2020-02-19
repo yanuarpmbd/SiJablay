@@ -9,6 +9,7 @@ use App\Models\Sekretariat\DataAsnModel;
 use App\Models\Sekretariat\PLTModel;
 use App\Models\Sekretariat\RekModel;
 use App\Models\Sekretariat\SettingModels;
+use App\Models\SPT\DasarHukumModel;
 use App\PivotName;
 use Barryvdh\DomPDF\Facade as PDF;
 use Cake\Chronos\Date;
@@ -24,6 +25,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SPT\DasarHukumController;
 
 class RekapSPTController extends Controller
 {
@@ -54,7 +56,9 @@ class RekapSPTController extends Controller
             }
         }
         dd($t);*/
-        return view('spt.base.rekap-spt', compact('spt', 'nama', 'get_nama', 'user_name', 'na', 'b_mgk' ,'b_mlh', 'b_spt'));
+
+       $dasar_hukums=DasarHukumModel::all();
+        return view('spt.base.rekap-spt', compact('spt', 'nama', 'get_nama', 'user_name', 'na', 'b_mgk' ,'b_mlh', 'b_spt','dasar_hukums'));
     }
     /**
      * @param $id

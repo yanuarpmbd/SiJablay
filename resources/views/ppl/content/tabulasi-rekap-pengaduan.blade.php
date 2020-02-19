@@ -50,6 +50,14 @@
                 <table class="footable table table-stripped toggle-arrow-tiny">
                     <thead>
                     <tr class="danger">
+
+
+
+
+
+
+
+
                       <td colspan="{{count($layanans)+ count($medias) + 4}}">
                           REKAP HELPDESK BULAN
                           @if($bulan == null)
@@ -148,6 +156,7 @@
                         <td colspan="1">{{count($rek_pengaduan->where('media', '8'))}}</td>
                         <td colspan="1">{{count($rek_pengaduan->where('media', '9'))}}</td>
                         <td colspan="1">{{count($rek_pengaduan->where('media', '10'))}}</td>
+                        <td colspan="1">{{count($rek_pengaduan->where('media', '11'))}}</td>
                         <td colspan="1"> {{(count($rek_pengaduan->where('media', '1')) +
                                            count($rek_pengaduan->where('media', '2')) +
                                            count($rek_pengaduan->where('media', '3')) +
@@ -157,7 +166,8 @@
                                            count($rek_pengaduan->where('media', '7')) +
                                            count($rek_pengaduan->where('media', '8')) +
                                            count($rek_pengaduan->where('media', '9')) +
-                                           count($rek_pengaduan->where('media', '10'))
+                                           count($rek_pengaduan->where('media', '10'))+
+                                           count($rek_pengaduan->where('media', '11'))
                                             )}}</td>
                     </tr>
                     </tbody>

@@ -242,7 +242,7 @@
                 <tr>
                     <td style="text-align: center">{{$loop->iteration}}</td>
                     <td style="text-align: center">{{$layanan->nama_layanan}}</td>
-
+{{--{{dd($layanan)}}--}}
                     <td>
                         <form action="{{route('edit.layanan', $layanan->id)}}" style="margin: 0">
                             <button class="btn btn-block btn-outline-success" id="edit-kategori">Edit</button>

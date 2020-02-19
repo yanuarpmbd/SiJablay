@@ -29,9 +29,99 @@ Route::prefix('kegiatan')->group(function (){
 /////ROUTE DATA EKSTERNAL///////
 Route::prefix('eksternal')->group(function () {
     Route::get('/show', 'EKSTERNAL\DataEksternalController@index')->name('show.eksternal');
+    Route::post('/filter', 'EKSTERNAL\DataEksternalController@filter')->name('filter');
+    Route::post('/', 'EKSTERNAL\EksporImporController@addEksporImpor')->name('add.eksporimpor');
+    Route::get('/edit/{id}', 'EKSTERNAL\EksporImporController@editEksporImpor')->name('edit.eksporimpor');
+    Route::post('/update/{id}', 'EKSTERNAL\EksporImporController@updateEksporImpor')->name('update.eksporimpor');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\EksporImporController@deleteEksporImpor')->name('delete.eksporimpor');
+    Route::get ('/ExportEksporImpor','EKSTERNAL\EksporImporController@EksporImporExport')->name('export.eksporimpor');
+
+});
+Route::prefix('pelabuhan')->group(function () {
+    Route::post('/', 'EKSTERNAL\PelabuhanController@addPelabuhan')->name('add.pelabuhan');
+    Route::get('/edit/{id}', 'EKSTERNAL\PelabuhanController@editPelabuhan')->name('edit.pelabuhan');
+    Route::post('/update/{id}', 'EKSTERNAL\PelabuhanController@updatePelabuhan')->name('update.pelabuhan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\PelabuhanController@deletePelabuhan')->name('delete.pelabuhan');
+});
+Route::prefix('penanaman')->group(function () {
+    Route::post('/', 'EKSTERNAL\StatusPenanamanModalController@addStatusPenanaman')->name('add.penanaman');
+    Route::get('/edit/{id}', 'EKSTERNAL\StatusPenanamanModalController@editStatusPenanaman')->name('edit.penanaman');
+    Route::post('/update/{id}', 'EKSTERNAL\StatusPenanamanModalController@updateStatusPenanaman')->name('update.penanaman');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\StatusPenanamanModalController@deleteStatusPenanaman')->name('delete.penanaman');
+});
+Route::prefix('kepemilikan')->group(function () {
+    Route::post('/', 'EKSTERNAL\KepemilikanModalController@addKepemilikanModal')->name('add.kepemilikan');
+    Route::get('/edit/{id}', 'EKSTERNAL\KepemilikanModalController@editKepemilikanModal')->name('edit.kepemilikan');
+    Route::post('/update/{id}', 'EKSTERNAL\KepemilikanModalController@updateKepemilikanModal')->name('update.kepemilikan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\KepemilikanModalController@deleteKepemilikanModal')->name('delete.kepemilikan');
+});
+Route::prefix('bayarpekerja')->group(function () {
+    Route::post('/', 'EKSTERNAL\BayarPekerjaController@addBayarPekerja')->name('add.bayarpekerja');
+    Route::get('/edit/{id}', 'EKSTERNAL\BayarPekerjaController@editBayarPekerja')->name('edit.bayarpekerja');
+    Route::post('/update/{id}', 'EKSTERNAL\BayarPekerjaController@updateBayarPekerja')->name('update.bayarpekerja');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\BayarPekerjaController@deleteBayarPekerja')->name('delete.bayarpekerja');
+});
+Route::prefix('pengeluaranpekerja')->group(function () {
+    Route::post('/', 'EKSTERNAL\PengeluaranPekerjaController@addPengeluaranPekerja')->name('add.pengeluaranpekerja');
+    Route::get('/edit/{id}', 'EKSTERNAL\PengeluaranPekerjaController@editPengeluaranPekerja')->name('edit.pengeluaranpekerja');
+    Route::post('/update/{id}', 'EKSTERNAL\PengeluaranPekerjaController@updatePengeluaranPekerja')->name('update.pengeluaranpekerja');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\PengeluaranPekerjaController@deletePengeluaranPekerja')->name('delete.pengeluaranpekerja');
+});
+Route::prefix('bahanbakar')->group(function () {
+    Route::post('/', 'EKSTERNAL\BahanBakarController@addBahanBakar')->name('add.bahanbakar');
+    Route::get('/edit/{id}', 'EKSTERNAL\BahanBakarController@editBahanBakar')->name('edit.bahanbakar');
+    Route::post('/update/{id}', 'EKSTERNAL\BahanBakarController@updateBahanBakar')->name('update.bahanbakar');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\BahanBakarController@deleteBahanBakar')->name('delete.bahanbakar');
+});
+Route::prefix('listrik')->group(function () {
+    Route::post('/', 'EKSTERNAL\ListrikController@addListrik')->name('add.listrik');
+    Route::get('/edit/{id}', 'EKSTERNAL\ListrikController@editListrik')->name('edit.listrik');
+    Route::post('/update/{id}', 'EKSTERNAL\ListrikController@updateListrik')->name('update.listrik');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\ListrikController@deleteListrik')->name('delete.listrik');
+});
+Route::prefix('pengeluaranperusahaan')->group(function () {
+    Route::post('/', 'EKSTERNAL\PengeluaranPerusahaanController@addPengeluaranPerusahaan')->name('add.pengeluaranperusahaan');
+    Route::get('/edit/{id}', 'EKSTERNAL\PengeluaranPerusahaanController@editPengeluaranPerusahaan')->name('edit.pengeluaranperusahaan');
+    Route::post('/update/{id}', 'EKSTERNAL\PengeluaranPerusahaanController@updatePengeluaranPerusahaan')->name('update.pengeluaranperusahaan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\PengeluaranPerusahaanController@deletePengeluaranPerusahaan')->name('delete.pengeluaranperusahaan');
+});
+Route::prefix('pendapatanperusahaan')->group(function () {
+    Route::post('/', 'EKSTERNAL\NilaiPendapatanPerusahaanController@addNilaiPendapatanPerusahaan')->name('add.nilaipendapatanperusahaan');
+    Route::get('/edit/{id}', 'EKSTERNAL\NilaiPendapatanPerusahaanController@editNilaiPendapatanPerusahaan')->name('edit.nilaipendapatanperusahaan');
+    Route::post('/update/{id}', 'EKSTERNAL\NilaiPendapatanPerusahaanController@updateNilaiPendapatanPerusahaan')->name('update.nilaipendapatanperusahaan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\NilaiPendapatanPerusahaanController@deleteNilaiPendapatanPerusahaan')->name('delete.nilaipendapatanperusahaan');
+});
+Route::prefix('nilaitambah')->group(function () {
+    Route::post('/', 'EKSTERNAL\NilaiTambahPerusahaanController@addNilaiTambahPerusahaan')->name('add.nilaitambahperusahaan');
+    Route::get('/edit/{id}', 'EKSTERNAL\NilaiTambahPerusahaanController@editNilaiTambahPerusahaan')->name('edit.nilaitambahperusahaan');
+    Route::post('/update/{id}', 'EKSTERNAL\NilaiTambahPerusahaanController@updateNilaiTambahPerusahaan')->name('update.nilaitambahperusahaan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\NilaiTambahPerusahaanController@deleteNilaiTambahPerusahaan')->name('delete.nilaitambahperusahaan');
+});
+Route::prefix('stokawal')->group(function () {
+    Route::post('/', 'EKSTERNAL\SelisihStokAwalController@addSelisihStokAwal')->name('add.stokawal');
+    Route::get('/edit/{id}', 'EKSTERNAL\SelisihStokAwalController@editSelisihStokAwal')->name('edit.stokawal');
+    Route::post('/update/{id}', 'EKSTERNAL\SelisihStokAwalController@updateSelisihStokAwal')->name('update.stokawal');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\SelisihStokAwalController@deleteSelisihStokAwal')->name('delete.stokawal');
+});
+Route::prefix('barangmodal')->group(function () {
+    Route::post('/', 'EKSTERNAL\BarangModalTetapController@addBarangModalTetap')->name('add.barangmodal');
+    Route::get('/edit/{id}', 'EKSTERNAL\BarangModalTetapController@editBarangModalTetap')->name('edit.barangmodal');
+    Route::post('/update/{id}', 'EKSTERNAL\BarangModalTetapController@updateBarangModalTetap')->name('update.barangmodal');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\BarangModalTetapController@deleteBarangModalTetap')->name('delete.barangmodal');
+});
+Route::prefix('penjualan')->group(function () {
+    Route::post('/', 'EKSTERNAL\PenjualanBarangController@addPenjualanBarang')->name('add.penjualan');
+    Route::get('/edit/{id}', 'EKSTERNAL\PenjualanBarangController@editPenjualanBarang')->name('edit.penjualan');
+    Route::post('/update/{id}', 'EKSTERNAL\PenjualanBarangController@updatePenjualanBarang')->name('update.penjualan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\PenjualanBarangController@deletePenjualanBarang')->name('delete.penjualan');
 });
 
-
+Route::prefix('negara')->group(function () {
+    Route::post('/', 'EKSTERNAL\NegaraTujuanController@addNegara')->name('add.negara');
+    Route::get('/edit/{id}', 'EKSTERNAL\NegaraTujuanController@editNegara')->name('edit.negara');
+    Route::post('/update/{id}', 'EKSTERNAL\NegaraTujuanController@updateNegara')->name('update.negara');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\NegaraTujuanController@deleteNegara')->name('delete.negara');
+});
 
 
 //AUTH//
@@ -71,7 +161,12 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/advance', 'SPT\AdvanceSPTController@postSPT')->name('adv.postSpt');
         Route::get('/advance/sppd', 'SPT\AdvanceSPTController@getSPPD')->name('adv.sppd');
         Route::get('/sppd_cetak-adv/{id}', 'SPT\AdvanceSPTController@cetakAdvSppd')->name('cetak-adv.sppd');
-        Route::get('/setting/spt', 'SPT\RekapSPTController@setting')->name('setting.spt');
+
+        Route::get('/setting/spt', 'SPT\CreateSPTController@gabung')->name('setting.spt');
+        Route::post('/setting/formDasarHukum','SPT\DasarHukumController@addDasarHukum')->name('add.dasar');
+        Route::get('setting/edit/{id}', 'SPT\DasarHukumController@editDasarHukum')->name('edit.dasar');
+        Route::patch('/setting/update/{id}', 'SPT\DasarHukumController@updateDasarHukum')->name('update.dasar');
+        Route::delete('/setting/detete/{id}', 'SPT\DasarHukumcontroller@deleteDasarHukum')->name('delete.dasar');
     });
 
     //All Bidang Sementara//

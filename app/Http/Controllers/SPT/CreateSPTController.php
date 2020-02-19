@@ -8,6 +8,7 @@ use App\Models\PD\SptModel;
 use App\Models\Sekretariat\DataAsnModel;
 use App\Models\Sekretariat\PenggunaanNomorModel;
 use App\Models\Sekretariat\RekModel;
+use App\Models\SPT\DasarHukumModel;
 use App\PivotName;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -56,6 +57,7 @@ class CreateSPTController extends Controller
 
         $spt_terhapus = SptModel::onlyTrashed()->where('user_id', '=', $user)->get();
         //dd($spt_terhapus);
+        $dasar_hukums=DasarHukumModel::all();
 
         if (count($spt) == 0){
             $sptnol = 'Belum Ada SPT';
@@ -82,7 +84,7 @@ class CreateSPTController extends Controller
 
 //dd($na);
 
-        return view('spt.base.gabung', compact('today','spt_terhapus', 'nama', 'rek' ,'user_name', 'spt', 'user',  'na'));
+        return view('spt.base.gabung', compact('today','spt_terhapus', 'nama', 'rek' ,'user_name', 'spt', 'user',  'na','dasar_hukums'));
     }
 
     /**
