@@ -141,6 +141,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::patch('/settings/update-nomor/{id}', 'Sekretariat\Nomor\SettingNomorController@updateNomor')->name('update.nd');
     //KEPALAAAAAAA//
     Route::post('setting_kode', 'Sekretariat\Nomor\SettingNomorController@filterKode')->name('setting.kode');
+    Route::post('unsetting_kode', 'Sekretariat\Nomor\SettingNomorController@unFilterKode')->name('unsetting.kode');
     Route::get('kepala/rekap', 'Admin\RekapController@showRekap')->name('rekap.kepala');
 
     //SPT dan SPPD//

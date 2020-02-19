@@ -33,7 +33,7 @@ class SettingNomorController extends Controller
 
     //////NOMOR//////
     public function addNomor(Request $request){
-		
+
         $tanggal_nomor = Carbon::parse($request->tanggal)->format('Y-m-d').' '.$request->time;
         //dd(Carbon::today()->gt(Carbon::parse($tanggal_nomor)));
         //dd( Carbon::parse($request->tanggal)->format('Y-m-d'));
@@ -194,6 +194,19 @@ class SettingNomorController extends Controller
         }
 
         return redirect()->route('show.setting-nomor')->with('success', 'Berhasil nambah kode surat');
+        //die();
+    }
+
+    public function unFilterKode(Request $request){
+
+        foreach ($request->kode as $id){
+            $update = ArsipNomor::findOrFail($id);
+            $update->is_able = 0;
+            //dump($update);
+            $update->update();
+        }
+
+        return redirect()->route('show.setting-nomor')->with('success', 'Berhasil hapus kode surat');
         //die();
     }
 

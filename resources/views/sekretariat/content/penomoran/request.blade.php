@@ -46,19 +46,19 @@
                                                         <input name="user_id" id="user_id" value="{{Auth::user()->id}}" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
 
                                                 </div>
-                                                {{--<div class="col-6">
-                                                    <div class="form-group"><label>Perihal </label>
-                                                        <input placeholder="Perihal Surat" name="perihal" id="perihal" class="form-control"> --}}{{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}{{--
-                                                    </div>
-                                                </div>--}}
                                                 <div class="col-6">
+                                                    <div class="form-group"><label>Perihal </label>
+                                                        <input placeholder="Perihal Surat" name="perihal" id="perihal" class="form-control"> <span class="help-block m-b-none">{{--Example block-level help text here.--}}</span>
+                                                    </div>
+                                                </div>
+                                                {{--<div class="col-6">
                                                     <div class="form-group"><label>Perihal</label>
                                                         <select class="form-control" name="perihal" id="perihal">
                                                             <option value="Cuti"> Cuti </option>
                                                             <option value="Pengadaan Barang dan Jasa"> Pengadaan Barang dan Jasa </option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div>--}}
                                                 <div class="col-6">
                                                     <div class="form-group"><label>Tanggal</label>
                                                         <div class="input-group date">

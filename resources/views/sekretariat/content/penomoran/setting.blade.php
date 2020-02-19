@@ -38,6 +38,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
+                            <th>Diskripsi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,7 +46,8 @@
                         @foreach($kodes as $ko)
                             <tr>
                                 <td style="text-align: left">{{$loop->iteration}}</td>
-                                <td style="text-align: left">{{$ko->spare}}</td>
+                                <td style="text-align: left">{{$ko->kode}}</td>
+                                <td style="text-align: left">{{$ko->desc}}</td>
                             </tr>
                         @endforeach
 
@@ -62,6 +64,75 @@
 
             </div>
         </div>
+
+
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Kode Surat Unavailibility</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form class="form-horizontal" action="{{route('unsetting.kode')}}" method="post">
+                    @csrf
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="form-group" id="kode">
+                                <label class="col-lg-12 control-label">Kode Surat*</label>
+                                <select class="select2_demo_3 form-control" name="kode[]" id="kode"
+                                        style="width: 100%" multiple required>
+                                    @foreach($kodes as $kode)
+                                        <option value="{{$kode->id}}">{{$kode->kode}} | {{$kode->desc}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button class="btn btn-sm btn-white" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+                <table class="footable table table-stripped toggle-arrow-tiny" data-paging="true">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode</th>
+                        <th>Diskripsi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($kodes_null as $ko)
+                        <tr>
+                            <td style="text-align: left">{{$loop->iteration}}</td>
+                            <td style="text-align: left">{{$ko->kode}}</td>
+                            <td style="text-align: left">{{$ko->desc}}</td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination">
+                            </ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
+
+
+
     </div>
     <div class="col-lg-12">
         @if ($message = Session::get('success'))
