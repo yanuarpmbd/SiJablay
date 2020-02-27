@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\StatusPenanamanModalExport;
 use App\Models\EKSTERNAL\StatusPenanamanModalModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,5 +52,11 @@ class StatusPenanamanModalController extends Controller
         $delete_status_penanaman = StatusPenanamanModalModel::findOrFail($id);
         $delete_status_penanaman->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function StatusPenanamanModalExport()
+    {
+
+        return (new StatusPenanamanModalExport())->download('Status Penanaman Modal.xlsx');
     }
 }

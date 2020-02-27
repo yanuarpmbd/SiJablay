@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\BayarPekerjaExport;
 use App\Models\EKSTERNAL\BayarPekerjaModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,5 +60,11 @@ class BayarPekerjaController extends Controller
         $delete_bayar_pekerja = BayarPekerjaModel::findOrFail($id);
         $delete_bayar_pekerja->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function BayarPekerjaExport()
+    {
+
+        return (new BayarPekerjaExport())->download('Banyaknya Pekerjaan dibayar.xlsx');
     }
 }

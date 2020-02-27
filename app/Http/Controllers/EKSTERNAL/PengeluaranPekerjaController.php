@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\PengeluaranPekerjaExport;
 use App\Models\EKSTERNAL\PengeluaranPekerjaModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,5 +58,11 @@ class PengeluaranPekerjaController extends Controller
         $delete_pengeluaran_pekerja = PengeluaranPekerjaModel::findOrFail($id);
         $delete_pengeluaran_pekerja->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function PengeluaranPekerjaExport()
+    {
+
+        return (new PengeluaranPekerjaExport())->download('Pengeluaran Pekerja.xlsx');
     }
 }

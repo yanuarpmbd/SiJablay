@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\KepemilikanModalExport;
 use App\Models\EKSTERNAL\KepemilikanModalModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,5 +54,11 @@ class KepemilikanModalController extends Controller
         $delete_kepemilka_modal = KepemilikanModalModel::findOrFail($id);
         $delete_kepemilka_modal->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function KepemilikanModalExport()
+    {
+
+        return (new KepemilikanModalExport())->download('Kepemilikan Modal.xlsx');
     }
 }

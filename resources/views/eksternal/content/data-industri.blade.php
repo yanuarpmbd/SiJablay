@@ -11,6 +11,19 @@
                 <h5>Banyaknya Perusahaan/Usaha Menengah dan Besar menurut Kabupaten/Kota dan Status Penanaman Modal</h5>
             </div>
 
+            <div class="col-md-6">
+                <form action="{{route('export.penanaman')}}">
+
+                    {{--@if(isset($bulan))--}}
+                       {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                   {{-- @else--}}
+
+                   {{-- @endif--}}
+                    <button class="btn btn-app btn-danger" href="{{route('export.penanaman')}}" type="submit">Download</button>
+                </form>
+            </div>
+
+
             <div class="ibox-content">
                 <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                     <thead>
@@ -63,9 +76,10 @@
                        <td></td>
                        <td colspan="1">Total</td>
                        <td></td>
-                       <td></td>
-                       <td></td>
-                       <td></td>
+                       <td>{{$rek_statuspenanaman->sum('pmdn')}}</td>
+                       <td>{{$rek_statuspenanaman->sum('ppma')}}</td>
+                       <td>{{$rek_statuspenanaman->sum('non_fasilitas')}}</td>
+                       <td>{{$rek_statuspenanaman->sum('jumlah')}}</td>
                    </tr>
                 </table>
             </div>
@@ -74,6 +88,18 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <H5>Banyaknya Perusahaan/Usaha Menengah dan Besar menurut Kabupaten/Kota dan Kepemilikan Modal</H5>
+                </div>
+
+                <div class="col-md-6">
+                    <form action="{{route('export.kepemilikan')}}">
+
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.kepemilikan')}}" type="submit">Download</button>
+                    </form>
                 </div>
 
                 <div class="ibox-content">
@@ -127,11 +153,12 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_kepemilikan->sum('pem_pusat')}}</td>
+                            <td>{{$rek_kepemilikan->sum('pem_daerah')}}</td>
+                            <td>{{$rek_kepemilikan->sum('swasta_nas')}}</td>
+                            <td>{{$rek_kepemilikan->sum('asing')}}</td>
+                            <td>{{$rek_kepemilikan->sum('jumlah')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -141,7 +168,17 @@
                 <div class="ibox-title">
                     <H5>Banyaknya Perusahaan/Usaha Menengah dan Besar dan Pekerja Dibayar/Tidak Dibayar Menurut Kabupaten/Kota dan Jenis Kelamin</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.bayarpekerja')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.bayarpekerja')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -207,11 +244,15 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_bayarpekerja->sum('banyak_perusahaan')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('produksi_pria')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('produksi_wanita')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('jml_produksi')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('lainnya_pria')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('lainnya_wanita')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('jml_lainnya')}}</td>
+                            <td>{{$rek_bayarpekerja->sum('total')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -222,7 +263,17 @@
                 <div class="ibox-title">
                     <H5>Pengeluaran Perusahaan/Usaha Menengah dan Besar untuk Pekerja Menurut Kabupaten/Kota dan Jenis Pengeluaran</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.pengeluaranpekerja')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.pengeluaranpekerja')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -282,11 +333,14 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('banyak_perusahaan')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('produksi_upah')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('produksi_insentif')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('lainnya_upah')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('lainnya_insentif')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('jumlah')}}</td>
+                            <td>{{$rek_pengeluaranpekerja->sum('pengeluaran_pekerja')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -295,6 +349,17 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <H5>Banyaknya Bahan Bakar dan Pelumas yang Digunakan menurut Kabupaten/Kota dan Jenis Bahan Bakar</H5>
+                </div>
+                <div class="col-md-6">
+                <form action="{{route('export.bahanbakar')}}">
+
+                    {{--@if(isset($bulan))--}}
+                    {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                    {{-- @else--}}
+
+                    {{-- @endif--}}
+                    <button class="btn btn-app btn-danger" href="{{route('export.bahanbakar')}}" type="submit">Download</button>
+                </form>
                 </div>
 
                 <div class="ibox-content">
@@ -350,11 +415,13 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_bahanbakar->sum('bensin')}}</td>
+                            <td>{{$rek_bahanbakar->sum('solar')}}</td>
+                            <td>{{$rek_bahanbakar->sum('batubara')}}</td>
+                            <td>{{$rek_bahanbakar->sum('gas')}}</td>
+                            <td>{{$rek_bahanbakar->sum('lpg')}}</td>
+                            <td>{{$rek_bahanbakar->sum('pelumas')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -364,7 +431,17 @@
                 <div class="ibox-title">
                     <H5>Tenaga Listrik yang Diproduksi Sendiri, Dibeli, dan Dijual menurut Kabupaten/Kota</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.listrik')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.listrik')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -423,10 +500,11 @@
                         <tr class="danger">
                             <td></td>
                             <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$rek_listrik->sum('produksi_sendiri')}}</td>
+                            <td>{{$rek_listrik->sum('dibeli_banyaknya')}}</td>
+                            <td>{{$rek_listrik->sum('dibeli_nilai')}}</td>
+                            <<td>{{$rek_listrik->sum('dijual_banyaknya')}}</td>
+                            <td>{{$rek_listrik->sum('dijual_nilai')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -436,7 +514,17 @@
                 <div class="ibox-title">
                     <H5>Pengeluaran Perusahaan/Usaha Menengah dan Besar menurut Kabupaten/Kota</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.pengeluaranperusahaan')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.pengeluaranperusahaan')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -490,11 +578,13 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('dijual_nilai')}}</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('bahan_bakar')}}</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('pengeluaran_jasa')}}</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('sewa')}}</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('pengeluaran_lain')}}</td>
+                            <td>{{$rek_pengeluaran_perusahaan->sum('jumlah')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -503,6 +593,17 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <H5>Nilai Pendapatan Perusahaan/Usaha Menengah dan Besar menurut Kabupaten/Kota</H5>
+                </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.nilaipendapatanperusahaan')}}">
+
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.nilaipendapatanperusahaan')}}" type="submit">Download</button>
+                    </form>
                 </div>
 
                 <div class="ibox-content">
@@ -558,11 +659,13 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_nilaipendapatan->sum('barang_dihasilkan')}}</td>
+                            <td>{{$rek_nilaipendapatan->sum('tenaga_listrik')}}</td>
+                            <td>{{$rek_nilaipendapatan->sum('jasa_industri')}}</td>
+                            <td>{{$rek_nilaipendapatan->sum('selisih_nilai_stok')}}</td>
+                            <td>{{$rek_nilaipendapatan->sum('penerimaan')}}</td>
+                            <td>{{$rek_nilaipendapatan->sum('jumlah')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -572,7 +675,17 @@
                 <div class="ibox-title">
                     <H5>Nilai Tambah Perusahaan/Usaha Menengah dan Besar menurut Kabupaten/Kota</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.nilaitambahperusahaan')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.nilaitambahperusahaan')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -624,11 +737,12 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_nilaitambah->sum('nilai_output')}}</td>
+                            <td>{{$rek_nilaitambah->sum('biaya_input')}}</td>
+                            <td>{{$rek_nilaitambah->sum('harga_pasar')}}</td>
+                            <td>{{$rek_nilaitambah->sum('pajak_tak_langsung')}}</td>
+                            <td>{{$rek_nilaitambah->sum('biaya_faktor_prduksi')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -637,6 +751,17 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <H5>Selisih Nilai Stok Awal dan Akhir Tahun menurut Kabupaten/Kota</H5>
+                </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.stokawal')}}">
+
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.stokawal')}}" type="submit">Download</button>
+                    </form>
                 </div>
 
                 <div class="ibox-content">
@@ -688,11 +813,11 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_stokawal->sum('bahan_baku')}}</td>
+                            <td>{{$rek_stokawal->sum('setengah_jadi')}}</td>
+                            <td>{{$rek_stokawal->sum('barang_jadi')}}</td>
+                            <td>{{$rek_stokawal->sum('jumlah_selisih')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -702,7 +827,17 @@
                 <div class="ibox-title">
                     <H5>Pembelian/Penambahan dan Pembuatan/Perbaikan Barang Modal Tetap Menurut Kabupaten/Kota</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.barangmodal')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.barangmodal')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -756,11 +891,13 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_barangmodal->sum('tanah')}}</td>
+                            <td>{{$rek_barangmodal->sum('gedung')}}</td>
+                            <td>{{$rek_barangmodal->sum('mesin')}}</td>
+                            <td>{{$rek_barangmodal->sum('kendaraan')}}</td>
+                            <td>{{$rek_barangmodal->sum('tetap_lainnya')}}</td>
+                            <td>{{$rek_barangmodal->sum('jumlah')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -770,7 +907,17 @@
                 <div class="ibox-title">
                     <H5>Penjualan/Pengurangan Barang Modal</H5>
                 </div>
+                <div class="col-md-6">
+                    <form action="{{route('export.penjualan')}}">
 
+                        {{--@if(isset($bulan))--}}
+                        {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
+                        {{-- @else--}}
+
+                        {{-- @endif--}}
+                        <button class="btn btn-app btn-danger" href="{{route('export.penjualan')}}" type="submit">Download</button>
+                    </form>
+                </div>
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                         <thead>
@@ -793,6 +940,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {{--{{dump($rek_penjualan)}}--}}
                          @foreach($rek_penjualan as $j)
                         <tr>
                             <td>{{$loop->iteration}}</td>
@@ -824,11 +972,13 @@
                          @endforeach
                         <tr class="danger">
                             <td></td>
-                            <td colspan="1">Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="2">Total</td>
+                            <td>{{$rek_penjualan->sum('jual_tanah')}}</td>
+                            <td>{{$rek_penjualan->sum('jual_gedung')}}</td>
+                            <td>{{$rek_penjualan->sum('jual_mesin')}}</td>
+                            <td>{{$rek_penjualan->sum('jual_kendaraan')}}</td>
+                            <td>{{$rek_penjualan->sum('jual_tetap_lainnya')}}</td>
+                            <td>{{$rek_penjualan->sum('jual_jumlah')}}</td>
                         </tr>
                     </table>
                 </div>

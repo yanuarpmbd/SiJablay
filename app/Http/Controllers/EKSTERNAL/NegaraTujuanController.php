@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\NegaraTujuanExport;
 use App\Models\EKSTERNAL\NegaraTujuanModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,5 +44,11 @@ class NegaraTujuanController extends Controller
         $delete_negara = NegaraTujuanModel::findOrFail($id);
         $delete_negara->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function NegaraTujuanExport()
+    {
+
+        return (new NegaraTujuanExport())->download('Negara Tujuan.xlsx');
     }
 }

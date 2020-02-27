@@ -11,71 +11,70 @@
                                 <div class="ibox-title">
                                     <H5>Volume dan Nilai Menurut Jenis Komoditi di Provinsi Jawa Tengah</H5>
                                 </div>
-                                <div class="form-group">
-                                    <form action="{{route('filter')}}" method="post">
-                                        @csrf
-                                        <div class="col-md-6">
-                                            <label class="col-lg-1 control-label"> Dari Tahun</label>
-                                            <select class="form-control" name="from_tahun" id="from_tahun">
-                                                    <option value="" selected>Dari Tahun</option>
-                                                @foreach($tahuns as $tahun)
-                                                <option value="{{$tahun}}">{{$tahun}} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+           {{--<div class="form-group">
+                 <form action="{{route('filter')}}" method="post">
+                     @csrf
+                     <div class="col-md-6">
+                         <label class="col-lg-1 control-label"> Dari Tahun</label>
+                         <select class="form-control" name="from_tahun" id="from_tahun">
+                             <option value="" selected>Dari Tahun</option>
+                             @foreach($tahuns as $tahun)
+                                 <option value="{{$tahun}}">{{$tahun}} </option>
+                             @endforeach
+                         </select>
+                     </div>
 
-                                        <div class="col-md-6">
-                                            <label class="col-lg-1 control-label">Sampai Tahun</label>
-                                            <select class="form-control" name="to_tahun" id="to_tahun">
-                                                    <option value="" selected>Sampai Tahun</option>
-                                                @foreach($tahuns as $tahun)
-                                                <option value="{{$tahun}}">{{$tahun}} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                       {{-- {{dd($r->tahun)}}--}}
-                                        <div class="col-md-6">
-                                            <label class="col-lg-12 control-label">Jenis Volume Nilai</label>
-                                            <select class="form-control" name="volume" id="volume">
-                                                <option value="" selected>Pilih Ekspor/ Import </option>
-                                                @foreach($volumes as $volume)
-                                                <option value="{{$volume}}">{{$volume}} </option>
-                                               @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="col-lg-12 control-label">Jenis Komoditi</label>
-                                            <select class="form-control" name="komoditi" id="komoditi">
-                                                <option value="" selected>Pilih Jenis Komoditi</option>
-                                                @foreach($komoditis as $komoditi)
-                                                <option value="{{$komoditi}}">{{$komoditi}} </option>
-                                               @endforeach
-                                            </select>
-                                        </div>
+                     <div class="col-md-6">
+                         <label class="col-lg-1 control-label">Sampai Tahun</label>
+                         <select class="form-control" name="to_tahun" id="to_tahun">
+                             <option value="" selected>Sampai Tahun</option>
+                             @foreach($tahuns as $tahun)
+                                 <option value="{{$tahun}}">{{$tahun}} </option>
+                             @endforeach
+                         </select>
+                     </div>
+                     --}}{{-- {{dd($r->tahun)}}--}}{{--
+                     <div class="col-md-6">
+                         <label class="col-lg-12 control-label">Jenis Volume Nilai</label>
+                         <select class="form-control" name="volume" id="volume">
+                             <option value="" selected>Pilih Ekspor/ Import </option>
+                             @foreach($volumes as $volume)
+                                 <option value="{{$volume}}">{{$volume}} </option>
+                             @endforeach
+                         </select>
+                     </div>
+                     <div class="col-md-6">
+                         <label class="col-lg-12 control-label">Jenis Komoditi</label>
+                         <select class="form-control" name="komoditi" id="komoditi">
+                             <option value="" selected>Pilih Jenis Komoditi</option>
+                             @foreach($komoditis as $komoditi)
+                                 <option value="{{$komoditi}}">{{$komoditi}} </option>
+                             @endforeach
+                         </select>
+                     </div>
 
-                                        <div class="ibox-content">
-                                                <div class="col-md-6">
-                                                    <button class="btn btn-app btn-success" type="submit">Submit</button>
-                                                </div>
-                                        </div>
+                     <div class="ibox-content">
+                         <div class="col-md-6">
+                             <button class="btn btn-app btn-success" type="submit">Submit</button>
+                         </div>
+                     </div>
+                 </form>
+           </div>--}}
+                                <div class="col-md-6">
+                                    <form action="{{route('export.eksporimpor')}}">
+                                        @if(isset($tahun))
+                                            <input name="bulanExport" value="{{ $tahun }}" hidden>
+                                        @else
+
+                                        @endif
+                                        <button class="btn btn-app btn-danger" href="{{route('export.eksporimpor')}}" type="submit">Download</button>
                                     </form>
-                                    <div class="col-md-6">
-                                        <form action="{{route('export.eksporimpor')}}">
-                                            @if(isset($tahun))
-                                                <input name="bulanExport" value="{{ $tahun }}" hidden>
-                                            @else
-
-                                            @endif
-                                            <button class="btn btn-app btn-danger" href="{{route('export.eksporimpor')}}" type="submit">Download</button>
-                                        </form>
-                                    </div>
                                 </div>
-
                                 <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
                                         <thead>
                                         <tr class="active">
                                             <th colspan="2"></th>
-                                            <th colspan="4">Volume dan Nilai {{$volume}} Menurut Jenis Komoditi</th>
+                                            <th colspan="4">Volume dan Nilai EKspor & Impor Menurut Jenis Komoditi</th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="2"></th>
@@ -140,8 +139,9 @@
                                             <td colspan="1">Total</td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
+                                           {{-- <td>{{(sum($rek_eksporimpor->volume))}}</td>--}}
+                                            <td>{{$rek_eksporimpor->sum('volume')}}</td>
+                                            <td>{{$rek_eksporimpor->sum('nilai')}}</td>
                                         </tr>
                                     </table>
                             </div>
@@ -152,16 +152,16 @@
                     <H5>Volume dan Nilai Ekspor Menurut Pelabuhan Muat di Provinsi Jawa Tengah</H5>
                 </div>
 
-                <div class="form-group">
-                    <form action="{{route('filter')}}" method="post">
+                {{--<div class="form-group">
+                    <form action="{{route('filterpelabuhan')}}" method="post">
                         @csrf
                         <div class="col-md-6">
                             <label class="col-lg-1 control-label"> Dari Tahun</label>
                             <select class="form-control" name="from_tahun" id="">
                                 <option value="" selected>Dari Tahun</option>
-                                {{--@foreach($tahuns as $tahun)--}}
-                                <option value="{{--{{$tahun}}--}}">{{--{{$tahun}}--}} </option>
-                                {{-- @endforeach--}}
+                                @foreach($tahunpelabuhan as $tahun)
+                                <option value="{{$tahun}}">{{$tahun}} </option>
+                                 @endforeach
                             </select>
                         </div>
 
@@ -169,29 +169,29 @@
                             <label class="col-lg-1 control-label">Sampai Tahun</label>
                             <select class="form-control" name="to_tahun" id="tahun">
                                 <option value="" selected>Sampai Tahun</option>
-                                {{--@foreach($tahuns as $tahun)--}}
-                                <option value="{{--{{$tahun}}--}}">{{--{{$tahun}}--}} </option>
-                                {{--@endforeach--}}
+                                @foreach($tahunpelabuhan as $tahun)
+                                <option value="{{$tahun}}">{{$tahun}} </option>
+                                @endforeach
 
                             </select>
                         </div>
-                        {{-- {{dd($r->tahun)}}--}}
+                        --}}{{-- {{dd($r->tahun)}}--}}{{--
                         <div class="col-md-6">
                             <label class="col-lg-12 control-label">Jenis Volume dan Nilai</label>
                             <select class="form-control" name="volume" id="tahun">
                                 <option value="" selected>Pilih Ekspor/ Import </option>
-                                {{--@foreach($volumes as $volume)--}}
-                                <option value="{{--{{$volume}}--}}">{{--{{$volume}}--}} </option>
-                                {{--@endforeach--}}
+                                @foreach($volumepelabuhan as $volume)
+                                <option value="{{$volume}}">{{$volume}} </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-lg-12 control-label">Jenis Komoditi</label>
+                            <label class="col-lg-12 control-label">Pelabuhan</label>
                             <select class="form-control" name="komoditi" id="tahun">
                                 <option value="" selected>Pilih Jenis Komoditi</option>
-                                {{--@foreach($komoditis as $komoditi)--}}
-                                <option value="{{--{{$komoditi}}--}}">{{--{{$komoditi}}--}} </option>
-                                {{--@endforeach--}}
+                                @foreach($pelabuhan as $pelabuh)
+                                <option value="{{$pelabuh}}">{{$pelabuh}} </option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -199,21 +199,21 @@
                             <div class="col-md-6">
                                 <button class="btn btn-app btn-success" type="submit">Submit</button>
                             </div>
+                        </div>
+                    </form>
+                </div>--}}
                             <div class="col-md-6">
-                                <form action="{{--{{route('export.tabulasi')}}--}}">
+                                <form action="{{route('export.pelabuhan')}}">
 
-                                    {{-- @if(isset($bulan))--}}
-                                    <input name="bulanExport" value="{{--{{ $bulan }}--}}" hidden>
-                                    {{--@else
+                                     @if(isset($bulan))
+                                    <input name="bulanExport" value="{{ $bulan }}" hidden>
+                                    @else
 
-                                    @endif--}}
-                                    <button class="btn btn-app btn-danger" href="{{--{{route('export.tabulasi')}}--}}" type="submit">Download</button>
+                                    @endif
+                                    <button class="btn btn-app btn-danger" href="{{route('export.pelabuhan')}}" type="submit">Download</button>
                                 </form>
                             </div>
-                        </div>
 
-                    </form>
-                </div>
 
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
@@ -273,8 +273,8 @@
                             <td colspan="1">Total</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$rek_pelabuhan->sum('volume')}}</td>
+                            <td>{{$rek_pelabuhan->sum('nilai')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -285,16 +285,16 @@
                     <H5>Volume dan Nilai Ekspor Menurut Negara Tujuan di Provinsi Jawa Tengah</H5>
                 </div>
 
-                <div class="form-group">
+                {{--<div class="form-group">
                     <form action="{{route('filter')}}" method="post">
                         @csrf
                         <div class="col-md-6">
                             <label class="col-lg-1 control-label"> Dari Tahun</label>
                             <select class="form-control" name="from_tahun" id="">
                                 <option value="" selected>Dari Tahun</option>
-                                {{--@foreach($tahuns as $tahun)--}}
-                                    <option value="{{--{{$tahun}}--}}">{{--{{$tahun}}--}} </option>
-                               {{-- @endforeach--}}
+                                --}}{{--@foreach($tahuns as $tahun)--}}{{--
+                                    <option value="--}}{{--{{$tahun}}--}}{{--">--}}{{--{{$tahun}}--}}{{-- </option>
+                               --}}{{-- @endforeach--}}{{--
                             </select>
                         </div>
 
@@ -302,51 +302,52 @@
                             <label class="col-lg-1 control-label">Sampai Tahun</label>
                             <select class="form-control" name="to_tahun" id="tahun">
                                 <option value="" selected>Sampai Tahun</option>
-                                {{--@foreach($tahuns as $tahun)--}}
-                                    <option value="{{--{{$tahun}}--}}">{{--{{$tahun}}--}} </option>
-                                {{--@endforeach--}}
+                                --}}{{--@foreach($tahuns as $tahun)--}}{{--
+                                    <option value="--}}{{--{{$tahun}}--}}{{--">--}}{{--{{$tahun}}--}}{{-- </option>
+                                --}}{{--@endforeach--}}{{--
 
                             </select>
                         </div>
-                        {{-- {{dd($r->tahun)}}--}}
+                        --}}{{-- {{dd($r->tahun)}}--}}{{--
                         <div class="col-md-6">
                             <label class="col-lg-12 control-label">Jenis Volume dan Nilai</label>
                             <select class="form-control" name="volume" id="tahun">
                                 <option value="" selected>Pilih Ekspor/ Import </option>
-                                {{--@foreach($volumes as $volume)--}}
-                                    <option value="{{--{{$volume}}--}}">{{--{{$volume}}--}} </option>
-                                {{--@endforeach--}}
+                                --}}{{--@foreach($volumes as $volume)--}}{{--
+                                    <option value="--}}{{--{{$volume}}--}}{{--">--}}{{--{{$volume}}--}}{{-- </option>
+                                --}}{{--@endforeach--}}{{--
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-lg-12 control-label">Jenis Komoditi</label>
+                            <label class="col-lg-12 control-label">Negara Tujuan</label>
                             <select class="form-control" name="komoditi" id="tahun">
                                 <option value="" selected>Pilih Jenis Komoditi</option>
-                                {{--@foreach($komoditis as $komoditi)--}}
-                                    <option value="{{--{{$komoditi}}--}}">{{--{{$komoditi}}--}} </option>
-                                {{--@endforeach--}}
+                                --}}{{--@foreach($komoditis as $komoditi)--}}{{--
+                                    <option value="--}}{{--{{$komoditi}}--}}{{--">--}}{{--{{$komoditi}}--}}{{-- </option>
+                                --}}{{--@endforeach--}}{{--
                             </select>
                         </div>
+                    </form>
+                </div>--}}
+                <div class="ibox-content">
+                    {{-- <div class="col-md-6">
+                         <button class="btn btn-app btn-success" type="submit">Submit</button>
+                     </div>--}}
 
-                        <div class="ibox-content">
                             <div class="col-md-6">
-                                <button class="btn btn-app btn-success" type="submit">Submit</button>
-                            </div>
-                            <div class="col-md-6">
-                                <form action="{{--{{route('export.tabulasi')}}--}}">
+                                <form action="{{route('export.negara')}}">
 
                                     {{-- @if(isset($bulan))--}}
                                     <input name="bulanExport" value="{{--{{ $bulan }}--}}" hidden>
                                     {{--@else
 
                                     @endif--}}
-                                    <button class="btn btn-app btn-danger" href="{{--{{route('export.tabulasi')}}--}}" type="submit">Download</button>
+                                    <button class="btn btn-app btn-danger" href="{{route('export.negara')}}" type="submit">Download</button>
                                 </form>
                             </div>
                         </div>
 
-                    </form>
-                </div>
+
 
                 <div class="ibox-content">
                     <table class="footable" id="tablel" data-paging="true" data-sorting="true" data-show-toggle="true" data-filtering="true">
@@ -406,8 +407,8 @@
                             <td colspan="1">Total</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$rek_pelabuhan->sum('volume')}}</td>
+                            <td>{{$rek_pelabuhan->sum('nilai')}}</td>
                         </tr>
                     </table>
                 </div>

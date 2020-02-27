@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Eksternal;
 
+use App\Exports\ListrikExport;
 use App\Models\EKSTERNAL\ListrikModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,5 +54,10 @@ class ListrikController extends Controller
         $delete_listrik = ListrikModel::findOrFail($id);
         $delete_listrik->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+    public function ListrikExport()
+    {
+
+        return (new ListrikExport())->download('Tenaga Listrik yang diproduksi.xlsx');
     }
 }

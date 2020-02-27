@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\SelisihStokExport;
 use App\Models\EKSTERNAL\SelisihStokAwalModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,5 +52,11 @@ class SelisihStokAwalController extends Controller
         $delete_selisih_stok_awal = SelisihStokAwalModel::findOrFail($id);
         $delete_selisih_stok_awal->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function SelisihStokAwalExport()
+    {
+
+        return (new SelisihStokExport())->download('Selisih Stok Awal.xlsx');
     }
 }

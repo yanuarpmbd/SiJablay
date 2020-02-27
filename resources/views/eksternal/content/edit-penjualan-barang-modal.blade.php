@@ -26,32 +26,32 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Tanah *</label>
-                                <input placeholder="" name="jual_tanah" id="jual_tanah" value="{{$edit_penjualan_barang->jual_tanah}}" class="form-control">
+                                <input placeholder="" name="jual_tanah" value="{{$edit_penjualan_barang->jual_tanah}}" id="jual_tanah" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Gedung*</label>
-                                <input placeholder="" name="jual_gedung" id="jual_gedung" value="{{$edit_penjualan_barang->jual_gedung}}" class="form-control">
+                                <input placeholder="" name="jual_gedung" value="{{$edit_penjualan_barang->jual_gedung}}" id="jual_jual_gedung" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Mesin dan Perlengkapan *</label>
-                                <input placeholder="" name="jual_mesin" id="jual_mesin" value="{{$edit_penjualan_barang->jual_mesin}}" class="form-control">
+                                <input placeholder="" name="jual_mesin" value="{{$edit_penjualan_barang->jual_mesin}}" id="jual_mesin" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Kendaraan *</label>
-                                <input placeholder="" name="jual_kendaraan" id="jual_kendaraan" value="{{$edit_penjualan_barang->jual_kendaraan}}" class="form-control">
+                                <input placeholder="" name="jual_kendaraan" value="{{$edit_penjualan_barang->jual_kendaraan}}" id="jual_kendaraan" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Modal Tetap Lainnya *</label>
-                                <input placeholder="" name="jual_tetap_lainnya" id="jual_tetap_lainnya" value="{{$edit_penjualan_barang->jual_tetap_lainnya}}" class="form-control">
+                                <input placeholder="" name="jual_tetap_lainnya" value="{{$edit_penjualan_barang->jual_tetap_lainnya}}" id="jual_tetap_lainnya" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group"><label>Jumlah *</label>
-                                <input placeholder="" name="jual_jumlah" id="jual_jumlah" value="{{$edit_penjualan_barang->jumlah}}" class="form-control">
+                                <input placeholder="" name="jual_jumlah" id="jual_jumlah" value="{{$edit_penjualan_barang->jual_jumlah}}" class="form-control">
                             </div>
                         </div>
 

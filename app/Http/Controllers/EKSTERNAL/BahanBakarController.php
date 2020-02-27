@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\BahanBakarExport;
 use App\Models\EKSTERNAL\BahanBakarModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,5 +56,11 @@ class BahanBakarController extends Controller
         $dekete_bahan_bakar = BahanBakarModel::findOrFail($id);
         $dekete_bahan_bakar->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function BahanBakarExport()
+    {
+
+        return (new BahanBakarExport())->download('Bahan Bakar.xlsx');
     }
 }

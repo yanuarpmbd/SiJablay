@@ -8,7 +8,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>FORM EDIT Banyaknya Perusahaan/Usaha Menengah dan Besar dan Pekerja Dibayar/Tidak Dibayar Menurut Kabupaten/Kota dan Jenis Kelamin</h5>
+                <h5>FORM EDIT Pengeluaran Perusahaan/Usaha Menengah dan Besar untuk Pekerja Menurut Kabupaten/Kota dan Jenis Pengeluaran</h5>
             </div>
             <div class="ibox-content">
                 <form class="form-horizontal" action="{{route('update.pengeluaranpekerja', $edit_pengeluaran_pekerja->id)}}" method="post">

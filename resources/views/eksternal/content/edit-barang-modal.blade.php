@@ -8,7 +8,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>FORM EDIT </h5>
+                <h5>FORM EDIT Pembelian/Penambahan dan Pembuatan/Perbaikan Barang Modal Tetap Menurut Kabupaten/Kota</h5>
             </div>
             <div class="ibox-content">
                 <form class="form-horizontal" action="{{route('update.barangmodal', $edit_barang_modal_tetap->id)}}" method="post">

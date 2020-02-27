@@ -18,6 +18,11 @@ class SettingNomorController extends Controller
         $kategoris = KategoriNomorModel::all();
         $settings = SettingNomorModel::all();
         $nomors = PenggunaanNomorModel::orderByDesc('updated_at')->get();
+        //dd($nomors);
+       /* foreach ($nomors as $nomor){
+
+            dd($nomor->kodenomor);
+        }*/
         $kodes_null = ArsipNomor::where('is_able', 0)->get();
         $kodes = ArsipNomor::where('is_able', 1)->get();
         $today = date('Y-m-d');

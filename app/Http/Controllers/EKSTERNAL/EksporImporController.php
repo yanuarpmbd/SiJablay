@@ -58,7 +58,8 @@ class EksporImporController extends Controller
         //dd($request);
 //        $tahun = EksporImporModel::groupBy('tahun')->pluck('tahun');;
 //        dd($tahun);
-        return Excel::download(new ExporImporExport(), 'Jenis Komoditi.xlsx');
+      /* /* return Excel::download(new ExporImporExport(), 'Jenis Komoditi.xlsx');*/
+        return (new ExporImporExport)->download('Jenis Komoditi.xlsx');
     }
 
 }

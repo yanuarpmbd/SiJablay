@@ -42,6 +42,17 @@ class DataEksternalController extends Controller
         $tahuns = EksporImporModel::groupBy('tahun')->pluck('tahun');
         $volumes = EksporImporModel::groupBy('jenis_volume')->pluck('jenis_volume');
         $komoditis = EksporImporModel::groupBy('jenis_komoditi')->pluck('jenis_komoditi');
+
+        $rek_pelabuhan = PelabuhanModel::Filter(
+            $request->from_tahun,
+            $request->to_tahun,
+            $request->volume,
+            $request->pelabuhan_muat
+        )->get();
+        $tahunpelabuhan = PelabuhanModel::groupBy('tahun')->pluck('tahun');
+        $volumepelabuhan = PelabuhanModel::groupBy('jenis_volume')->pluck('jenis_volume');
+        $pelabuhan = PelabuhanModel::groupBy('pelabuhan_muat')->pluck('pelabuhan_muat');
+
         $rek_pelabuhan = PelabuhanModel::all();
         $rek_negara = NegaraTujuanModel::all();
         $rek_statuspenanaman = StatusPenanamanModalModel::all();
@@ -77,7 +88,10 @@ class DataEksternalController extends Controller
         'rek_nilaitambah',
         'rek_stokawal',
         'rek_barangmodal',
-        'rek_penjualan'));
+        'rek_penjualan',
+        'tahunpelabuhan',
+         'volumepelabuhan',
+         'pelabuhan'));
     }
 
     public function filter(Request $request){
@@ -115,6 +129,10 @@ class DataEksternalController extends Controller
         $volumes = EksporImporModel::groupBy('jenis_volume')->pluck('jenis_volume');
         $komoditis = EksporImporModel::groupBy('jenis_komoditi')->pluck('jenis_komoditi');
 
+        $tahunpelabuhan = PelabuhanModel::groupBy('tahun')->pluck('tahun');
+        $volumepelabuhan = PelabuhanModel::groupBy('jenis_volume')->pluck('jenis_volume');
+        $pelabuhan = PelabuhanModel::groupBy('pelabuhan_muat')->pluck('pelabuhan_muat');
+
         //$rek_eksporimpor = EksporImporModel::whereBetween()->whereYear()->get();
         $rek_pelabuhan = PelabuhanModel::all();
         $rek_negara = NegaraTujuanModel::all();
@@ -125,6 +143,11 @@ class DataEksternalController extends Controller
         $rek_bahanbakar = BahanBakarModel::all();
         $rek_listrik = ListrikModel::all();
         $rek_pengeluaran_perusahaan = PengeluaranPerusahaanModel::all();
+        $rek_nilaipendapatan = NilaiPendapatanPerusahaanModel::all();
+        $rek_nilaitambah = NilaiTambahPerusahaanModel::all();
+        $rek_stokawal = SelisihStokAwalModel::all();
+        $rek_barangmodal = BarangModalTetapModels::all();
+        $rek_penjualan = PenjualanBarangModalModels::all();
         $sum_rek = DB::table('ekspor_impor_models')
                             ->whereBetween('tahun', [$request->from_tahun, $request->to_tahun])
                             ->groupBy('tahun')
@@ -144,10 +167,19 @@ class DataEksternalController extends Controller
             'rek_pengeluaranpekerja',
             'rek_bahanbakar',
             'rek_listrik',
-            'rek_pengeluaran_perusahaan'
+            'rek_pengeluaran_perusahaan',
+            'rek_nilaipendapatan',
+            'rek_nilaitambah',
+            'rek_stokawal',
+            'rek_barangmodal',
+            'rek_penjualan',
+            'tahunpelabuhan',
+            'volumepelabuhan',
+            'pelabuhan'
         ));
 
     }
+
 
     public function rekap(){
      /*   /*$rek_eksporimpor = EksporImporModel::all();

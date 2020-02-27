@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\BarangModalExport;
 use App\Models\EKSTERNAL\BarangModalTetapModels;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,5 +56,11 @@ class BarangModalTetapController extends Controller
         $delete_barang_modal_tetap = BarangModalTetapModels::findOrFail($id);
         $delete_barang_modal_tetap->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function BarangModalTetapExport()
+    {
+
+        return (new BarangModalExport())->download('Penambahan Barang Modal.xlsx');
     }
 }

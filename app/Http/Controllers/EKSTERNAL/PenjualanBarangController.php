@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\PenjualanBarangExport;
 use App\Models\EKSTERNAL\PenjualanBarangModalModels;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class PenjualanBarangController extends Controller
     public function editPenjualanBarang($id)
     {
         $edit_penjualan_barang= PenjualanBarangModalModels::findOrFail($id);
-        return view('eksternal.base.edit-penjualan-barang', compact('edit_penjualan_barang'));
+        return view('eksternal.base.edit-penjualan-barang-modal', compact('edit_penjualan_barang'));
     }
 
     public function updatePenjualanBarang(Request $request, $id)
@@ -39,12 +40,12 @@ class PenjualanBarangController extends Controller
         $update_penjualan_barang = PenjualanBarangModalModels::findOrFail($id);
         $update_penjualan_barang->kabupaten_kota = $request->kabupaten_kota;
         $update_penjualan_barang->tahun = $request->tahun;
-        $update_penjualan_barang->jual_tanah = $request->tanah;
-        $update_penjualan_barang->jual_gedung = $request->gedung;
-        $update_penjualan_barang->jual_mesin = $request->mesin;
-        $update_penjualan_barang->jual_kendaraan = $request->kendaraan;
-        $update_penjualan_barang->jual_tetap_lainnya = $request->tetap_lainnya;
-        $update_penjualan_barang->jual_jumlah = $request->jumlah;
+        $update_penjualan_barang->jual_tanah = $request->jual_tanah;
+        $update_penjualan_barang->jual_gedung = $request->jual_gedung;
+        $update_penjualan_barang->jual_mesin = $request->jual_mesin;
+        $update_penjualan_barang->jual_kendaraan = $request->jual_kendaraan;
+        $update_penjualan_barang->jual_tetap_lainnya = $request->jual_tetap_lainnya;
+        $update_penjualan_barang->jual_jumlah = $request->jual_jumlah;
         $update_penjualan_barang->update();
 
         return redirect()->route('show.eksternal')->with('success', 'Data berhasil diubah');
@@ -55,5 +56,11 @@ class PenjualanBarangController extends Controller
         $delete_penjualan_barang = PenjualanBarangModalModels::findOrFail($id);
         $delete_penjualan_barang->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+
+    public function PenjualanBarangExport()
+    {
+
+        return (new PenjualanBarangExport())->download('Penjualan Barang Modal.xlsx');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\NilaiTambahPerusahaanExport;
 use App\Models\EKSTERNAL\NilaiTambahPerusahaanModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,5 +54,10 @@ class NilaiTambahPerusahaanController extends Controller
         $delete_nilai_tambah_perusahaan = NilaiTambahPerusahaanModel::findOrFail($id);
         $delete_nilai_tambah_perusahaan->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+    public function NilaiTambahPerusahaanExport()
+    {
+
+        return (new NilaiTambahPerusahaanExport())->download('Nilai Tambah Perusahaan.xlsx');
     }
 }

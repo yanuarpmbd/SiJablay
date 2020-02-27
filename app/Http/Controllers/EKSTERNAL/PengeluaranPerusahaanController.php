@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\PengeluaranPerusahaanExport;
 use App\Models\EKSTERNAL\PengeluaranPerusahaanModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,5 +56,10 @@ class PengeluaranPerusahaanController extends Controller
         $delete_pengeluaran_perusahaan = PengeluaranPerusahaanModel::findOrFail($id);
         $delete_pengeluaran_perusahaan->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+    }
+    public function PengeluaranPerusahaanExport()
+    {
+
+        return (new PengeluaranPerusahaanExport())->download('Pengeluaran Perusahaan.xlsx');
     }
 }
