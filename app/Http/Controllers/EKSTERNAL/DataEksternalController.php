@@ -9,15 +9,18 @@ use App\Models\EKSTERNAL\BayarPekerjaModel;
 use App\Models\EKSTERNAL\EksporImporModel;
 use App\Models\EKSTERNAL\KepemilikanModalModel;
 use App\Models\EKSTERNAL\ListrikModel;
+use App\Models\EKSTERNAL\LokerModel;
 use App\Models\EKSTERNAL\NegaraTujuanModel;
 use App\Models\EKSTERNAL\NilaiPendapatanPerusahaanModel;
 use App\Models\EKSTERNAL\NilaiTambahPerusahaanModel;
 use App\Models\EKSTERNAL\PelabuhanModel;
+use App\Models\EKSTERNAL\PendidikanModels;
 use App\Models\EKSTERNAL\PengeluaranPekerjaModel;
 use App\Models\EKSTERNAL\PengeluaranPerusahaanModel;
 use App\Models\EKSTERNAL\PenjualanBarangModalModels;
 use App\Models\EKSTERNAL\SelisihStokAwalModel;
 use App\Models\EKSTERNAL\StatusPenanamanModalModel;
+use App\Models\EKSTERNAL\UmrModels;
 use App\Models\PenjualanBarangModels;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -67,6 +70,9 @@ class DataEksternalController extends Controller
         $rek_stokawal = SelisihStokAwalModel::all();
         $rek_barangmodal = BarangModalTetapModels::all();
         $rek_penjualan = PenjualanBarangModalModels::all();
+        $rek_umr = UmrModels::all();
+        $rek_pendidikan = PendidikanModels::all();
+        $rek_loker = LokerModel::all();
         //dd($rek_eksporimpor);
       /*  $user_name = Auth::user()->name;*/
         return view('eksternal.base.gabung',compact('rek_eksporimpor',
@@ -91,7 +97,10 @@ class DataEksternalController extends Controller
         'rek_penjualan',
         'tahunpelabuhan',
          'volumepelabuhan',
-         'pelabuhan'));
+         'pelabuhan',
+        'rek_umr',
+        'rek_pendidikan',
+        'rek_loker'));
     }
 
     public function filter(Request $request){

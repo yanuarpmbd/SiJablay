@@ -18,7 +18,7 @@
             </div>
             <div class="ibox-content">
 
-                    {{--<div class="row">
+                    <div class="row">
                         @foreach($kategoris as $kategori)
                             @if($kategori->id == 2)
 
@@ -29,7 +29,9 @@
                             @endif
 
                         @endforeach
-                    </div>--}}
+                    </div>
+{{--nomor sementara--}}
+
 
                     <div class="row">
 
@@ -42,7 +44,7 @@
                                             <div class="row">
                                                 <div class="col-12">
 
-                                                        <input name="kategori" id="kategori" value="4" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                                        <input name="kategori" id="kategori" value="kategori" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
                                                         <input name="user_id" id="user_id" value="{{Auth::user()->id}}" hidden> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
 
                                                 </div>
@@ -111,7 +113,7 @@
 
                 @isset($nomors)
                     <div class="row">
-                        <table class="footable table table-stripped toggle-arrow-tiny" data-limit-navigation="5">
+                        <table class="footable table table-stripped toggle-arrow-tiny" data-limit-navigation="5" data-sorting="true" data-show-toggle="true" data-filtering="true">
                             <thead>
                             <tr>
                                 <th>No</th>

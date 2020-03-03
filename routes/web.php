@@ -137,6 +137,27 @@ Route::prefix('penjualan')->group(function () {
     Route::delete('/hapus/{id}', 'EKSTERNAL\PenjualanBarangController@deletePenjualanBarang')->name('delete.penjualan');
     Route::get ('/jual','EKSTERNAL\PenjualanBarangController@PenjualanBarangExport')->name('export.penjualan');
 });
+Route::prefix('umr')->group(function () {
+    Route::post('/', 'EKSTERNAL\UmrController@addUmr')->name('add.umr');
+    Route::get('/edit/{id}', 'EKSTERNAL\UmrController@editUmr')->name('edit.umr');
+    Route::post('/update/{id}', 'EKSTERNAL\UmrController@updateUmr')->name('update.umr');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\UmrController@deleteUmr')->name('delete.umr');
+    Route::get ('/umr','EKSTERNAL\UmrController@UmrExport')->name('export.umr');
+});
+Route::prefix('pendidikan')->group(function () {
+    Route::post('/', 'EKSTERNAL\PendidikanController@addPendidikan')->name('add.pendidikan');
+    Route::get('/edit/{id}', 'EKSTERNAL\PendidikanController@editpendidikan')->name('edit.pendidikan');
+    Route::post('/update/{id}', 'EKSTERNAL\PendidikanController@updatependidikan')->name('update.pendidikan');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\PendidikanController@deletependidikan')->name('delete.pendidikan');
+    Route::get ('/pendidikan','EKSTERNAL\PendidikanController@UmrExport')->name('export.pendidikan');
+});
+Route::prefix('loker')->group(function () {
+    Route::post('/', 'EKSTERNAL\LokerController@addLoker')->name('add.loker');
+    Route::get('/edit/{id}', 'EKSTERNAL\LokerController@editLoker')->name('edit.loker');
+    Route::post('/update/{id}', 'EKSTERNAL\LokerController@updateLoker')->name('update.loker');
+    Route::delete('/hapus/{id}', 'EKSTERNAL\LokerController@deleteLoker')->name('delete.loker');
+    Route::get ('/pendidikan','EKSTERNAL\LokerController@LokerExport')->name('export.pendidikan');
+});
 
 Route::prefix('negara')->group(function () {
     Route::post('/', 'EKSTERNAL\NegaraTujuanController@addNegara')->name('add.negara');
