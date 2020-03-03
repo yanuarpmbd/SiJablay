@@ -149,14 +149,14 @@ Route::prefix('pendidikan')->group(function () {
     Route::get('/edit/{id}', 'EKSTERNAL\PendidikanController@editpendidikan')->name('edit.pendidikan');
     Route::post('/update/{id}', 'EKSTERNAL\PendidikanController@updatependidikan')->name('update.pendidikan');
     Route::delete('/hapus/{id}', 'EKSTERNAL\PendidikanController@deletependidikan')->name('delete.pendidikan');
-    Route::get ('/pendidikan','EKSTERNAL\PendidikanController@UmrExport')->name('export.pendidikan');
+    Route::get ('/pendidikan','EKSTERNAL\PendidikanController@PendidikanExport')->name('export.pendidikan');
 });
 Route::prefix('loker')->group(function () {
     Route::post('/', 'EKSTERNAL\LokerController@addLoker')->name('add.loker');
     Route::get('/edit/{id}', 'EKSTERNAL\LokerController@editLoker')->name('edit.loker');
     Route::post('/update/{id}', 'EKSTERNAL\LokerController@updateLoker')->name('update.loker');
     Route::delete('/hapus/{id}', 'EKSTERNAL\LokerController@deleteLoker')->name('delete.loker');
-    Route::get ('/pendidikan','EKSTERNAL\LokerController@LokerExport')->name('export.pendidikan');
+    Route::get ('/pendidikan','EKSTERNAL\LokerController@LokerExport')->name('export.loker');
 });
 
 Route::prefix('negara')->group(function () {

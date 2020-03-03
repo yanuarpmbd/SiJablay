@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\DataLokerExport;
 use App\Models\EKSTERNAL\LokerModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class LokerController extends Controller
         $add_loker->tahun = $request->tahun;
         $add_loker->pencari_laki = $request->pencari_laki;
         $add_loker->pencari_perempuan = $request->pencari_perempuan;
-        $add_loker->pencari_jumlah = $request->lowongan_laki;
+        $add_loker->pencari_jumlah = $request->pencari_jumlah;
         $add_loker->lowongan_laki = $request->lowongan_laki;
         $add_loker->lowongan_perempuan = $request->lowongan_perempuan;
         $add_loker->lowongan_jumlah = $request->lowongan_jumlah;
@@ -50,16 +51,16 @@ class LokerController extends Controller
         return redirect()->route('show.eksternal')->with('success', 'Data berhasil diubah');
     }
 
-    public function deleteUmr($id)
+    public function deleteLoker($id)
     {
         $dekete_loker = LokerModel::findOrFail($id);
         $dekete_loker->delete();
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
     }
 
-    public function UmrExport()
+    public function LokerExport()
     {
 
-        return (new BahanBakarExport())->download('Bahan Bakar.xlsx');
+        return (new DataLokerExport())->download('Pencari Kerja dan Lowongan Kerja.xlsx');
     }
 }

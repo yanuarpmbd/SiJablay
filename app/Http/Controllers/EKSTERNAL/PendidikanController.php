@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\DataPendidikanExport;
 use App\Models\EKSTERNAL\PendidikanModels;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,6 +55,6 @@ class PendidikanController extends Controller
     public function PendidikanExport()
     {
 
-        return (new BahanBakarExport())->download('Bahan Bakar.xlsx');
+        return (new DataPendidikanExport())->download('Tigkat Pendidikan Pencari Kerja.xlsx');
     }
 }

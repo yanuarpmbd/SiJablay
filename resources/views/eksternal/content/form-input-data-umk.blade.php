@@ -3,7 +3,7 @@
         <div class="ibox-title">
             <H5>Form Kebutuhan Hidup Layak dan Upah Minimum Kabupaten / Kota</H5>
         </div>
-
+     <div class="ibox-content">
         <form class="form-horizontal" action="{{route('add.umr')}}" method="post">
             @csrf
             <div class="row">
@@ -33,9 +33,9 @@
                 </div>
             </div>
         </form>
+     </div>
 
-    </div>
-</div>
+
 
 <div class="row">
     <div class="col-lg-12">
@@ -190,5 +190,9 @@
                 </form>
             </div>
         </div>
+    </div>
+</div>
+
+
     </div>
 </div>

@@ -34,10 +34,11 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-1">Volume & Nilai</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-2">Form Input Volume & Nilai</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3">Data Industri Manufaktur</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-4">Form Data Industri Manufaktur</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-5">Kebutuhan Hidup Layak & UMK</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-6">Form Kebutuhan Hidup Layak & UMK</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3">Kebutuhan Hidup Layak & UMK</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-4">Form Kebutuhan Hidup Layak & UMK</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-5">Data Industri Manufaktur</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-6">Form Data Industri Manufaktur</a></li>
+
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -52,24 +53,25 @@
                         </div>
                         <div id="tab-3" class="tab-pane">
                             <div class="panel-body">
-                                @include('eksternal.content.data-industri')
+                                @include('eksternal.content.data-umk')
                             </div>
                         </div>
                         <div id="tab-4" class="tab-pane">
                             <div class="panel-body">
-                                @include('eksternal.content.form-input-data-industri')
+                                @include('eksternal.content.form-input-data-umk')
                             </div>
                         </div>
                         <div id="tab-5" class="tab-pane">
                             <div class="panel-body">
-                                @include('eksternal.content.data-umk')
+                                @include('eksternal.content.data-industri')
                             </div>
                         </div>
                         <div id="tab-6" class="tab-pane">
                             <div class="panel-body">
-                                @include('eksternal.content.form-input-data-umk')
+                                @include('eksternal.content.form-input-data-industri')
                             </div>
                         </div>
+
                     </div>
 
 

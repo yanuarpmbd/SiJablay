@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EKSTERNAL;
 
+use App\Exports\DataUmrExport;
 use App\Models\EKSTERNAL\UmrModels;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,9 +48,9 @@ class UmrController extends Controller
         return redirect()->back()->with('success', 'Data Berhasil di Hapus');
     }
 
-    public function LokerExport()
+    public function UmrExport()
     {
 
-        return (new BahanBakarExport())->download('Bahan Bakar.xlsx');
+        return (new DataUmrExport())->download('Upah minimum Kabupaten Kota.xlsx');
     }
 }

@@ -78,14 +78,14 @@
                     <H5>Jumlah Pencari Pekerja Terdaftar Menurut Tingkat Pendidikan</H5>
                 </div>
                 <div class="col-md-6">
-                    <form action="{{--{{route('export.pendidikan')}}--}}">
+                    <form action="{{route('export.pendidikan')}}">
 
                         {{--@if(isset($bulan))--}}
                         {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
                         {{-- @else--}}
 
                         {{-- @endif--}}
-                        <button class="btn btn-app btn-danger" href="{{--{{route('export.pendidikan')}}--}}" type="submit">Download</button>
+                        <button class="btn btn-app btn-danger" href="{{route('export.pendidikan')}}" type="submit">Download</button>
                     </form>
                 </div>
                 <div class="ibox-content">
@@ -222,14 +222,14 @@
                     <H5>Pencari Kerja Terdaftar dan Lowongan Kerja Menurut Kabupaten / Kota</H5>
                 </div>
                 <div class="col-md-6">
-                    <form action="{{--{{route('export.loker')}}--}}">
+                    <form action="{{route('export.loker')}}">
 
                         {{--@if(isset($bulan))--}}
                         {{-- <input name="bulanExport" value="{{ $bulan }}" hidden>--}}
                         {{-- @else--}}
 
                         {{-- @endif--}}
-                        <button class="btn btn-app btn-danger" href="{{--{{route('export.loker')}}--}}" type="submit">Download</button>
+                        <button class="btn btn-app btn-danger" href="{{route('export.loker')}}" type="submit">Download</button>
                     </form>
                 </div>
                 <div class="ibox-content">
@@ -278,7 +278,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{route('delete.pendidikan', $l->id)}}" method="post">
+                                        <form action="{{route('delete.loker', $l->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-block btn-outline-danger">Hapus</button>
@@ -292,12 +292,13 @@
                             <td></td>
                             <td>Total</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{{--{{$rek_pendidikan->sum('jumlah')}}--}}</td>
+                            <td>{{$rek_loker->sum('pencari_laki')}}</td>
+                            <td>{{$rek_loker->sum('pencari_perempuan')}}</td>
+                            <td>{{$rek_loker->sum('pencari_jumlah')}}</td>
+                            <td>{{$rek_loker->sum('lowongan_laki')}}</td>
+                            <td>{{$rek_loker->sum('pencari_laki')}}</td>
+                            <td>{{$rek_loker->sum('lowongan_jumlah')}}</td>
+
 
                         </tr>
                     </table>
