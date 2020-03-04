@@ -451,3 +451,6 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 
 
+
+// MediaManager
+ctf0\MediaManager\MediaRoutes::routes();
