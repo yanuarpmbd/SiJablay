@@ -180,4 +180,70 @@
             return false; //tells the form not to actaully load the action page
         }
     </script>
+
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    var data = {!!json_encode($rekap_charts)!!};
+    var sektor = [];
+    var rekap_series = [];
+
+    data.forEach(collect);
+    function collect(item){
+        //console.log(item)
+        sektor.push(item.sektor);
+        rekap_series.push(item.jumlah)
+    }
+
+
+        //console.log(sektor)
+    Highcharts.chart('chartTabulasi', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Rekap Helpdesk'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+
+            categories:sektor,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Jumlah',
+            data: rekap_series
+        }]
+    });
+</script>
+
+
+
 @endsection

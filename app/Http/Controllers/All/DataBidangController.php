@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\All;
 
 use App\Models\All\KabKotaModels;
+use App\Models\Perencanaan\RekapPerencanaanModels;
 use App\Models\PPL\LayananModel;
 use App\Models\PPL\MediaModel;
 use App\Models\PPL\RekapPengaduanModels;
@@ -41,7 +42,7 @@ class DataBidangController extends Controller
         $kab_kota = $request->input('kab_kota');
         $pma_pmdn = $request->input('pma_pmdn');
         $sektor = $request->input('sektor');
-
+        $rek_perencanaan = RekapPerencanaanModels::all();
         if ($pma_pmdn == 'all'){
             $pma_invest = DB::table('pma_invest_models')
                 ->where('kab_kota', 'LIKE', '%'.$kabkota.'%')
@@ -144,7 +145,8 @@ class DataBidangController extends Controller
             'tabulasi',
             'hasil_rekaps',
             'jml_jns_layanan_informasi',
-            'jml_jns_layanan_pengaduan'
+            'jml_jns_layanan_pengaduan',
+            'rek_perencanaan'
 
         ));
 

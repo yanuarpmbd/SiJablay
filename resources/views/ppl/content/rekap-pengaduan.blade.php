@@ -17,6 +17,7 @@
                         <th>Tanggal</th>
                         <th>Nama</th>
                         <th data-breakpoints="all">Jenis Kelamin</th>
+                        <th>Jenis Pengaduan</th>
                         <th>Media</th>
                         <th>Jenis Layanan</th>
                         <th data-breakpoints="all">Nomor Telepon</th>
@@ -34,21 +35,29 @@
                     <tbody>
                     @foreach($rek_pengaduan as $r)
                         <tr>
+
                             <td>{{$r->tanggal}}</td>
                             <td>{{$r->nama}}</td>
                             <td>{{$r->jenis_kelamin}}</td>
+                            <td>{{$r->jenis_pengaduan}}</td>
                             <td>
                                 {{$r->mediaRelation->nama_media}}
                             </td>
-                            <td>
+                           {{-- <td>
                                 {{$r->layananRelation->nama_layanan}}
-                            </td>
-                            <td>{{$r->no_telp}}</td>
+                            </td>--}}
                             <td>
-                                {{$r->sektorRelation->nama_sektor}}
+                                {{ !empty($r->layananRelation) ? $r->layananRelation->nama_layanan:'' }}
                             </td>
 
-{{-- var @dump($media));--}}
+                            <td>{{$r->no_telp}}</td>
+                            {{--<td>
+                                {{$r->sektorRelation->nama_sektor}}
+                            </td>--}}
+                            <td>
+                                {{ !empty($r->sektorRelation) ? $r->sektorRelation->nama_sektor:'' }}
+                            </td>
+
                             <td>{{$r->wa_email}}</td>
                             <td>{{$r->rincian_aduan}}</td>
                             <td>{{$r->penyelesaian}}</td>

@@ -66,7 +66,7 @@ class AllBidangController extends Controller
     {
         $allbidang = BidangModel::find($id);
         $download = $allbidang->dok;
-        //dd($download);
+        dd($download);
 
         return Storage::download($download);
     }

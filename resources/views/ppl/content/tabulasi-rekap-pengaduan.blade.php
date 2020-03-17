@@ -25,11 +25,10 @@
                     <strong>{{ $message }}</strong>
                 </div>
             @endif
-        <div class="ibox float-e-margins">
+        <di class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>REKAP TABULASI <strong>{{--{{$user_name}}--}}</strong></h5>
             </div>
-
             <div class="col-6">
              <form action="{{ route('gabung.pengaduan') }}">
                     <div class="form-group" id="data_1">
@@ -46,18 +45,9 @@
                     </div>
              </form>
             </div>
-
                 <table class="footable table table-stripped toggle-arrow-tiny">
                     <thead>
                     <tr class="danger">
-
-
-
-
-
-
-
-
                       <td colspan="{{count($layanans)+ count($medias) + 4}}">
                           REKAP HELPDESK BULAN
                           @if($bulan == null)
@@ -81,17 +71,16 @@
                             <td colspan="1">{{$layanan->nama_layanan}}</td>
                         @endforeach
                         <td colspan="1">Jumlah</td>
+
                         @foreach($medias as $media)
                         <td colspan="1">{{$media->nama_media}}</td>
                         @endforeach
                         <td colspan="1">Jumlah</td>
                     </tr>
-
                     </thead>
                     <tbody>
                     @isset($sektors)
                     @foreach($sektors as $sektor)
-
                     <tr class="active">
                         <td colspan="1">{{$loop->iteration}}</td>
                         <td colspan="1">{{$sektor->nama_sektor}}</td>
@@ -109,7 +98,6 @@
                             {{count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '3'))}}
                                 @endif
                         </td>
-
                         <td colspan="1">
                             @if(count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '4')) == 0)
                                 -
@@ -117,9 +105,7 @@
                                 {{count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '4'))}}
                             @endif
                         </td>
-
                         <td colspan="1">{{(count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '2')) + count($rek_pengaduan->where('sektor', $sektor->id)->where('jenis_layanan', '3')))}}
-
                         </td>
                         @foreach($medias as $media)
 
@@ -171,12 +157,7 @@
                                             )}}</td>
                     </tr>
                     </tbody>
-                </table>
-
-
-
-
-
+                    </table>
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <div class="form-group">
@@ -192,8 +173,21 @@
                     </div>
                 </div>
             </div>
+        </di>
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <figure class="highcharts-figure">
+                        <div id="chartTabulasi"></div>
+                        <p class="highcharts-description">
+
+                        </p>
+                    </figure>
+                </div>
+            </div>
 
 
-        </div>
+
     </div>
 </div>
+
+

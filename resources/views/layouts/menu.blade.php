@@ -12,7 +12,7 @@
         <li><a href="{{route('home')}}">Home</a></li>
         <li><a href="{{route('gabung.kegiatan')}}">Kegiatan</a></li>
         <li><a href="{{route('gabung.notulen')}}">Notulen</a></li>
-        <li><a href="{{route('show.setting-nomor')}}">Ambil Nomor</a></li>
+        <li><a href="{{route('show.setting-nomor')}}">Ambil Nomor Khusus</a></li>
         <li><a href="{{route('form.spt')}}">Perjalanan Dinas</a></li>
         <li><a href="{{route('gabung.bidang')}}">Data Internal DPMPTSP</a></li>
         <li><a href="{{route('show.eksternal')}}">Data Eksternal DPMPTSP</a></li>

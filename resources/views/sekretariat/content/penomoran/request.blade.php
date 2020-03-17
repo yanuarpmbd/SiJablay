@@ -18,7 +18,7 @@
             </div>
             <div class="ibox-content">
 
-                    <div class="row">
+                    {{--<div class="row">
                         @foreach($kategoris as $kategori)
                             @if($kategori->id == 2)
 
@@ -29,7 +29,7 @@
                             @endif
 
                         @endforeach
-                    </div>
+                    </div>--}}
 {{--nomor sementara--}}
 
 

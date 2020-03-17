@@ -36,6 +36,7 @@
                     <li class=""><a data-toggle="tab" href="#tab-3">Rekap Data Investasi OSS</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-4">Rekap Realisasi Investasi</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-5">Rekap Pengaduan</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-6">Rekap Perencanaan</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane active">
@@ -61,6 +62,11 @@
                     <div id="tab-5" class="tab-pane">
                         <div class="panel-body">
                             @include('ppl.content.rekap-pengaduan')
+                        </div>
+                    </div>
+                    <div id="tab-6" class="tab-pane">
+                        <div class="panel-body">
+                            @include('perencanaan.content.rekap-perencanaan')
                         </div>
                     </div>
                 </div>

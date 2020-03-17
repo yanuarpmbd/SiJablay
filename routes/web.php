@@ -24,6 +24,8 @@ Route::post('import-nomor', 'Sekretariat\NomorController@postimportArsipNomor')-
 Route::prefix('kegiatan')->group(function (){
     Route::get('/', 'All\KegiatanController@showKegiatan')->name('get.kegiatan');
     Route::get('/databidang', 'All\DataBidangController@gabungbidang')->name('gabung.bidang');
+
+
 });
 
 /////ROUTE DATA EKSTERNAL///////
@@ -166,6 +168,13 @@ Route::prefix('negara')->group(function () {
     Route::delete('/hapus/{id}', 'EKSTERNAL\NegaraTujuanController@deleteNegara')->name('delete.negara');
 });
 
+//PERENCANAAN//
+Route::prefix('perencanaan')->group(function () {
+    Route::get('/upload', 'Perencanaan\RekapPerencanaanController@upload')->name('upload.perencanaan');
+    Route::post('/upload/proses', 'Perencanaan\RekapPerencanaanController@prosesUpload')->name('add.perencanaan');
+    Route::get('/download', 'Perencanaan\RekapPerencanaanController@download')->name('download.perencanaan');
+    Route::delete('/hapus/{id}', 'Perencanaan\RekapPerencanaanController@delete')->name('delete.perencanaan');
+});
 //AUTH//
 Route::namespace('Auth')->group(function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');

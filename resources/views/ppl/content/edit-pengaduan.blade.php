@@ -16,7 +16,7 @@
     <form class="form-horizontal" action="{{route('update.pengaduan', $rek_pengaduan->id)}}" method="post">
         @csrf
         @method('PATCH')
-        <div class="ibox-content">
+        @method('PATCH')  <div class="ibox-content">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group"><label>Tanggal Pengaduan *</label>
@@ -43,6 +43,29 @@
                         </select>
                     </div>
                 </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group"><label>Jenis Pengaduan *</label>
+                        <select class="form-control" name="jenis_pengaduan" id="jenis_pengaduan">
+                            <option value="Pengaduan Langsung" {{($rek_pengaduan->jenis_pengaduan == 'Pengaduan Langsung')?"selected":""}}>Pengaduan Langsung</option>
+                            <option value="Pengaduan Tidak Langsung" {{($rek_pengaduan->jenis_pengaduan == 'Pengaduan Tidak Langsung')?"selected":""}}>Pengaduan Tidak Langsung</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group"><label>Jenis Layanan *</label>
+                        <select class="form-control" name="jenis_layanan" id="jenis_layanan">
+                            @foreach($layanans as $layanan)
+                                <option value="{{$layanan->id}}">{{$layanan->nama_layanan}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
             </div>
             <div class="row">
                 <div class="col-6">
@@ -55,23 +78,21 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="form-group"><label>Jenis Layanan *</label>
-                        <select class="form-control" name="jenis_layanan" id="jenis_layanan">
-                            <option value="Informasi" {{($rek_pengaduan->jenis_layanan == 'Informasi')?"selected":""}}>Informasi</option>
-                            <option value="Pengaduan" {{($rek_pengaduan->jenis_layanan == 'Pengaduan')?"selected":""}}>Pengaduan</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
                     <div class="form-group"><label>No Telepon</label>
                         <input value="{{$rek_pengaduan->no_telp}}" name="no_telp" id="no_telp" class="form-control">
                     </div>
                 </div>
+
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <div class="form-group"><label>Sektor *</label>
                         <select class="form-control" name="sektor" id="sektor">
+                            @foreach($sektors as $sektor)
+                                <option value="{{$sektor->id}}">{{$sektor->nama_sektor}}</option>
+                        @endforeach
+
+                        {{--<select class="form-control" name="sektor" id="sektor">
                             <option value="Penanaman Modal" {{($rek_pengaduan->sektor == 'Penanaman Modal')?"selected":""}}>Penanaman Modal</option>
                             <option value="Tenaga Kerja, Transmigrasi dan Kependudukan" {{($rek_pengaduan->sektor == 'Tenaga Kerja, Transmigrasi dan Kependudukan')?"selected":""}}>Tenaga Kerja, Transmigrasi dan Kependudukan</option>
                             <option value="Koperasi dan UKM" {{($rek_pengaduan->sektor == 'Koperasi dan UKM')?"selected":""}}>Koperasi dan UKM</option>
@@ -90,11 +111,9 @@
                             <option value="ESDM" {{($rek_pengaduan->sektor == 'ESDM')?"selected":""}}>ESDM</option>
                             <option value="Pendidikan" {{($rek_pengaduan->sektor == 'Pendidikan')?"selected":""}}>Pendidikan</option>
                             <option value="Lainnya" {{($rek_pengaduan->sektor == 'Lainnya'?"selected":"")}}>Lainnya</option>
-                        </select>
+                        </select>--}}
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-12">
                     <div class="form-group"><label>Rincian Aduan *</label>
                         <input value="{{$rek_pengaduan->rincian_aduan}}" name="rincian_aduan" id="rincian_aduan" class="form-control">

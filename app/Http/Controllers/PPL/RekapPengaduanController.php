@@ -29,16 +29,31 @@ class RekapPengaduanController extends Controller
             //dd($rek_pengaduan);
         }
         else {
-            $rek_pengaduan = RekapPengaduanModels::whereMonth('tanggal', $date)->whereYear('tanggal', $date)->get();
+            $rek_pengaduan = RekapPengaduanModels::with('sektorRelation')->whereMonth('tanggal', $date)->whereYear('tanggal', $date)->get();
             //dd($rek_pengaduan);
+
+            //dd($rekap_charts);
         }
+        $all_rekaps = RekapPengaduanModels::with('sektorRelation')->get();
+        $get_charts = $all_rekaps->groupBy('sektorRelation.nama_sektor');
+        $rekap_charts = collect();
+        foreach ($get_charts as $key => $chart){
+            $rekap = array(
+                'sektor' => $key,
+                'jumlah' => count($chart)
+            );
+            $rekap_charts->push($rekap);
+        }
+        //dd($rekap_charts);
+        //dd($rek_pengaduan);
         $user_name = Auth::user()->name;
         $sektors = SektorModel::all();
         $tabulasi = TabulasiModel::all();
         //
-
         $medias = MediaModel::all();
         $layanans = LayananModel::all();
+
+
 //        //dd(count($sektors->where('sektor', 'ESDM')));
        $hasil_rekaps = app('App\Http\Controllers\PPL\TabulasiController')->countRekap();
 
@@ -59,6 +74,7 @@ class RekapPengaduanController extends Controller
         $today = date('Y-m');
         $todays = date("F", strtotime($bulan));
 
+
         return view('ppl.base.gabung', compact(
             'rek_pengaduan',
             'user_name',
@@ -73,7 +89,8 @@ class RekapPengaduanController extends Controller
             'layanans',
             'bulan',
             'hasil_rekaps',
-            'todays'
+            'todays',
+            'rekap_charts'
         ));
     }
 
@@ -88,6 +105,7 @@ class RekapPengaduanController extends Controller
         $this->validate($request,[
             'tanggal' => 'required',
             'nama' => 'required',
+            'jenis_pengaduan' => 'required',
             'jenis_kelamin' => 'required',
             'media' => 'required',
             'layanan' => 'required',
@@ -98,6 +116,7 @@ class RekapPengaduanController extends Controller
 
         $tanggal = $request->input('tanggal');
         $nama = $request->input('nama');
+        $jenis_pengaduan = $request->input('jenis_pengaduan');
         $jenis_kelamin = $request->input('jenis_kelamin');
         $media = $request->input('media');
         $jenis_layanan = $request->input('layanan');
@@ -110,6 +129,7 @@ class RekapPengaduanController extends Controller
         $post = new RekapPengaduanModels();
         $post->tanggal = $tanggal;
         $post->nama = $nama;
+        $post->jenis_pengaduan = $jenis_pengaduan;
         $post->jenis_kelamin = $jenis_kelamin;
         $post->media = $media;
         $post->jenis_layanan = $jenis_layanan;
@@ -127,32 +147,40 @@ class RekapPengaduanController extends Controller
     public function rekap(){
         $rek_pengaduan = RekapPengaduanModels::all();
         $user_name = Auth::user()->name;
-        //dd($rek_pengaduan);
-
+       // dd($rek_pengaduan);
+        //foreach ($rek_pengaduan as $r) {
+            //dd($r->nama);
+        //}
         return view('ppl.base.rekap-pengaduan', compact('rek_pengaduan', 'user_name'));
     }
 
     public function edit($id){
         $rek_pengaduan = RekapPengaduanModels::findOrFail($id);
         $medias = MediaModel::all();
+        $layanans = LayananModel:: all();
+        $sektors = SektorModel::all();
         //dd($rek_pengaduan);
-        return view('ppl.base.edit-pengaduan', compact('rek_pengaduan', 'medias'));
+        return view('ppl.base.edit-pengaduan', compact('rek_pengaduan', 'medias','layanans','sektors'));
     }
 
     public function update(Request $request, $id){
-        $this->validate($request,[
+       /* $this->validate($request,[
             'tanggal' => 'required',
             'nama' => 'required',
+            'jenis_pengaduan' => 'required',
             'jenis_kelamin' => 'required',
             'media' => 'required',
+            'no_telp' => 'required',
             'jenis_layanan' => 'required',
             'sektor' => 'required',
+            'wa_email' => 'required',
             'rincian_aduan' => 'required',
             'penyelesaian' => 'required',
-        ]);
+        ]);*/
 
         $tanggal = $request->input('tanggal');
         $nama = $request->input('nama');
+        $jenis_pengaduan = $request->input('jenis_pengaduan');
         $jenis_kelamin = $request->input('jenis_kelamin');
         $media = $request->input('media');
         $jenis_layanan = $request->input('jenis_layanan');
@@ -165,6 +193,7 @@ class RekapPengaduanController extends Controller
         $post = RekapPengaduanModels::findOrFail($id);
         $post->tanggal = $tanggal;
         $post->nama = $nama;
+        $post->jenis_pengaduan = $jenis_pengaduan;
         $post->jenis_kelamin = $jenis_kelamin;
         $post->media = $media;
         $post->jenis_layanan = $jenis_layanan;

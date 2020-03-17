@@ -104,6 +104,7 @@ class DataAsnController extends Controller
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($ch);
             $decodes = json_decode($result);
+            //dd($decode);
             $decode2 = $decodes->item;
         }
         else{
@@ -116,7 +117,6 @@ class DataAsnController extends Controller
             $decodes = json_decode($result);
             $decode2 = $decodes->item;
         }
-
         return view('all.base.gabung-kepegawaian', compact('decode','decode2', 'user', 'user_name', 'now1', 'now2', 'now'));
 
     }

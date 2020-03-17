@@ -23,11 +23,11 @@ class SettingNomorController extends Controller
 
             dd($nomor->kodenomor);
         }*/
-        $kodes_null = ArsipNomor::where('is_able', 0)->get();
-        $kodes = ArsipNomor::all();
-        $today = date('Y-m-d');
         /*$kodes_null = ArsipNomor::where('is_able', 0)->get();
-        $kodes = ArsipNomor::where('is_able', 1)->get();  ambil nomor khusus */
+        $kodes = ArsipNomor::all();*/
+        $today = date('Y-m-d');
+        $kodes_null = ArsipNomor::where('is_able', 0)->get();
+        $kodes = ArsipNomor::where('is_able', 1)->get(); /* ambil nomor khusus */
 
        // $total_nomor = PenggunaanNomorModel::all()->count();
        // dd($total_nomor);

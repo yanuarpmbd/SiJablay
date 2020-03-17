@@ -20,6 +20,20 @@
                                     <input type="date" placeholder="Tanggal" name="tanggal" value="{{\Illuminate\Support\Carbon::today()->format('yy-m-d')}}" id="tanggal" class="form-control">
                                 </div>
                             </div>
+                            {{--<div class="col-6">
+                                <div class="form-group"><label>Nomor Pengaduan</label>
+                                    @foreach($rek_pengaduan as $r)
+                                    <input placeholder="{{$loop->iteration}}" name="no_pengaduan" id="no_pengaduan" class="form-control" readonly>
+                                @endforeach
+                                </div>
+                            </div>--}}
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group"><label>Nama *</label>
+                                    <input placeholder="Nama" name="nama" id="nama" class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                </div>
+                            </div>
                             <div class="col-6">
                                 <div class="form-group"><label>WA/Email/Alamat Medsos</label>
                                     <input placeholder="WA/Email/Alamat Medsos" name="wa_email" id="wa_email" class="form-control">
@@ -28,8 +42,11 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <div class="form-group"><label>Nama *</label>
-                                    <input placeholder="Nama" name="nama" id="nama" class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                <div class="form-group"><label>Jenis Pengaduan *</label>
+                                    <select class="form-control" name="jenis_pengaduan" id="jenis_pengaduan">
+                                        <option value="Pengaduan Langsung">Pengaduan Langsung</option>
+                                        <option value="Pengaduan Tidak Langsung">Pengaduan Tidak Langsung</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -52,23 +69,17 @@
 
                                 </div>
                             </div>
-
                             <div class="col-6">
                                 <div class="form-group"><label>Jenis Layanan *</label>
-                                    <select class="form-control" name="layanan" id="layanan">
+                                    <select class="form-control" name="jenis_layanan" id="jenis_layanan">
                                         @foreach($layanans as $layanan)
                                             <option value="{{$layanan->id}}">{{$layanan->nama_layanan}}</option>
-                                    @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-6">
-                                <div class="form-group"><label>No Telepon *</label>
-                                    <input placeholder="Nomor Telepon" name="no_telp" id="no_telp" class="form-control">
-                                </div>
-                            </div>
-
+                        </div>
+                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group"><label>Sektor *</label>
                                     <select class="form-control" name="sektor" id="sektor">
@@ -78,6 +89,12 @@
                                     </select>
                                 </div>
                             </div>
+                                <div class="col-6">
+                                    <div class="form-group"><label>No Telepon *</label>
+                                        <input placeholder="Nomor Telepon" name="no_telp" id="no_telp" class="form-control">
+                                    </div>
+                                </div>
+
                         </div>
                         <div class="row">
                             <div class="col-12">

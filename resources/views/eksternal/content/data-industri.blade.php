@@ -197,7 +197,7 @@
                             <th colspan="1">Kabupaten / Kota</th>
                             <th colspan="1">Tahun</th>
                             <th colspan="1">Banyaknya Perusahaan</th>
-                            <th colspan="1">Pria</th>
+                            <th colspan="1" >Pria</th>
                             <th colspan="1">Wanita</th>
                             <th colspan="1">Jumlah</th>
                             <th colspan="1">Pria</th>
@@ -281,7 +281,7 @@
                             <th colspan="4"></th>
                             <th colspan="2">Tenaga Kerja Produksi</th>
                             <th colspan="2">Tenaga Kerja Lainnya</th>
-                            <th colspan="4"></th>
+                            <th colspan="3"></th>
                         </tr>
                         <tr>
                             <th colspan="1">NO</th>
@@ -292,7 +292,7 @@
                             <th colspan="1">Insentif Lainnya</th>
                             <th colspan="1">Upah / Gaji</th>
                             <th colspan="1">Insentif Lainnya</th>
-                            <th colspan="1">Jumlah</th>
+                            <th data-breakpoints="all" colspan="1">Jumlah</th>
                             <th colspan="1">Pengeluaran per Pekerja</th>
                              @if($user_name == 'Pengaduan' or 'Superadmin')
                             <th>Edit</th>
@@ -850,7 +850,7 @@
                             <th colspan="1">Mesin & Perlengkapan</th>
                             <th colspan="1">Kendaraan</th>
                             <th colspan="1">Modal Tetap Lainnya</th>
-                            <th colspan="1">Jumlah</th>
+                            <th data-breakpoints="all" colspan="1">Jumlah</th>
 
                              @if($user_name == 'Pengaduan' or 'Superadmin')
                             <th>Edit</th>
