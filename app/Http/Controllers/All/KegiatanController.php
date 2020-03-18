@@ -22,6 +22,7 @@ class KegiatanController extends Controller
         //$user = Auth::user()->id;
         $keg = KegiatanModels::whereMonth('tanggal', '=', $bulan)->get();
 
+//dd($keg);
         $tempat = TempatKegModels::all();
         foreach ($keg as $k){
             $cek_tmp = KegiatanModels::where('tempat', '=', $k->tempat)->exists();

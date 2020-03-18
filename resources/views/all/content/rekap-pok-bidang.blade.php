@@ -52,7 +52,7 @@
                         <td colspan="15">PELAKSANAAN APBD PROVINSI JAWA TENGAH</td>
                     </tr>
                     <tr>
-                        <td colspan="15">TAHUN ANGGARAN 2019</td>
+                        <td colspan="15">TAHUN ANGGARAN 2020</td>
                     </tr>
                     <tr>
                         <td colspan="15">SAMPAI DENGAN BULAN {{$todays}}</td>

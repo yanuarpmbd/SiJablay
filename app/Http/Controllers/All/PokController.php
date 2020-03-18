@@ -28,11 +28,11 @@ class PokController extends Controller
         $today = date("Y-m");
         $todays = date("F", strtotime($bulan));
         //dd($todays);
-        +
 
 
 
         $query = "CAST(rko_id AS int)ASC";
+        //dd($query);
         $pok = PokModel::where('bulan', '=', $bulan)
             ->orderByRaw($query)
            /*->where('user_id', '=', $user)*/
@@ -262,7 +262,7 @@ class PokController extends Controller
     public function destroy($id)
     {
         $pok = PokModel::findOrFail($id);
-        //dd($pok);
+        dd($pok);
         $pok->delete();
     }
     //
