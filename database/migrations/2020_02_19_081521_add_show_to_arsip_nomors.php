@@ -13,9 +13,9 @@ class AddShowToArsipNomors extends Migration
      */
     public function up()
     {
-        Schema::table('arsip_nomors', function (Blueprint $table) {
+        /*Schema::table('arsip_nomors', function (Blueprint $table) {
             $this->integer('is_able');
-        });
+        });*/
     }
 
     /**

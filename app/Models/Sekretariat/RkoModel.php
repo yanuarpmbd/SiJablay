@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RkoModel extends Model
 {
-    protected $table = 'rko_models';
+    protected $table = 'rko_models_baru';
 
     protected $primaryKey = 'id';
 
