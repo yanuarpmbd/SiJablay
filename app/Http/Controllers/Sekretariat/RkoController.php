@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Sekretariat;
 
 use App\Models\Admin\User;
+use App\Models\All\SubRkoModel;
+use App\Models\All\TargetSubRkoModel;
 use App\Models\Sekretariat\RkoModel;
 use App\Models\Sekretariat\SubKegiatanModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -78,16 +81,34 @@ class RkoController extends Controller
     }
 
 
-    public function ngisiRKO(\http\Env\Request $request){
+    public function ngisiRKO(Request $request){
 
-        $rko = new RkoModels();
-        $rko->nama_kegiatan = $request->nama_kegiatan;
-        $rko->jumlah_anggaran = $request->jumlah_anggaran;
-        $rko->target_fisik = $request->target_fisik;
+        //dd($request->all());
+
+        $rko = new SubRkoModel();
+        $rko->rko_id = $request->kegiatan;
+        $rko->nama_kegiatan = $request->nama_sub_rko;
+        $rko->jumlah_anggaran = $request->jml_anggaran_sub_rko;
         $rko->user_id = Auth::user()->id;
         $rko->save();
 
-        return redirect()->route('show.rko')->with('success', 'Data Berhasil Ditambahkan');
+        $this_year = Carbon::now();
+
+        for ($i=1;$i<=count($request->target_sub_rko);$i++){
+            $rko_target = new TargetSubRkoModel();
+            $rko_target->target = $request->target_sub_rko[$i];
+            if ($i<=9){
+                $rko_target->bulan = $this_year->year . '-0' . $i;
+            }
+            else{
+                $rko_target->bulan = $this_year->year . '-' . $i;
+            }
+            $rko_target->sub_rko_id = $rko->id;
+            //dd($rko_target);
+            $rko_target->save();
+        }
+
+        return redirect()->route('gabung.pok')->with('success', 'Data SUB KEGIATAN Berhasil Ditambahkan');
 
     }
 

@@ -90,7 +90,79 @@
                         </div>--}}
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="form-group" id="data_1">
+                                <label class="col-lg-12 control-label" required>Bulan</label>
+                                <div class="col-lg-12">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" name="bulan" id="bulan" class="form-control" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">ROK</div>
+
+                                    <table class="table table-responsive table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama Kegiatan</th>
+                                            <th>Anggaran</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($dropdown as $rko)
+                                        <tr data-toggle="collapse" id="table{{$loop->iteration}}" data-target=".table1">
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$rko->nama_kegiatan}}</td>
+                                            <td>{{$rko->jml_anggaran}}</td>
+                                        </tr>
+
+                                        <tr class="collapse table{{$loop->iteration}}">
+                                            <td colspan="999">
+                                                <div>
+                                                    @foreach($rko->subRko as $subRko)
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama Sub Kegiatan</th>
+                                                            <th>Jumlah Sub Kegiatan</th>
+                                                            <th>Target Bulan</th>
+                                                            <th>Realisasi Keu</th>
+                                                            <th>Realisasi Fisik</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$subRko->nama_kegiatan}}</td>
+                                                            <td>{{$subRko->jumlah_anggaran}}</td>
+                                                            <td id="bulan"></td>
+                                                            <td>
+                                                                <input type="text" name="realisasi_keu">
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="realisasi_fisik">
+                                                            </td>
+                                                            <td>
+                                                                <button>edit</button>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {{--<div class="col-6">
                                 <div class="form-group" id="pd">
                                     <label class="col-lg-12 control-label" required>RKO Kegiatan</label>
                                     <select class="select2_demo_2 form-control" name="rko_id" id="rko_id">
@@ -141,7 +213,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group"><label>Realisasi Fisik (Rp) *</label>
                                         <input placeholder="Realisasi Fisik (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_fisik" id="realisasi_fisik"
-                                               class="form-control" required> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                               class="form-control" required> --}}{{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}{{--
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +221,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group"><label>Realisasi Keuangan (Rp) *</label>
                                         <input placeholder="Realisasi Keuangan (Rp)" data-mask="#.##0" data-mask-reverse="true" name="realisasi_keu" id="realisasi_keu"
-                                               class="form-control" required> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                               class="form-control" required> --}}{{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}{{--
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +229,10 @@
                                 <div class="col-lg-12">
                                     <div class="form-group"><label>Keterangan *</label>
                                         <input placeholder="Keterangan" name="ket" id="ket"
-                                               class="form-control" required> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                                               class="form-control" required> --}}{{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}{{--
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">

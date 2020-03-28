@@ -33,6 +33,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-1">Form POK</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-2">Rekap POK</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3">RKO</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -43,6 +44,11 @@
                         <div id="tab-2" class="tab-pane">
                             <div class="panel-body">
                                 @include('all.content.rekap-pok-bidang')
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane">
+                            <div class="panel-body">
+                                @include('all.content.rko')
                             </div>
                         </div>
                     </div>
@@ -63,6 +69,7 @@
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.js')}}"></script>
     <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
     <script>
+
         $(document).ready(function () {
 
 
@@ -84,8 +91,17 @@
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true,
-                format: "yyyy-mm"
-            });
+                format: "yyyy-mm",
+                onSelect: function() {
+                    display("Selected date: " + dateText + ", Current Selected Value= " + this.value);
+                    $(this).change();
+                }
+            }
+                .on("change", function() {
+                    display("Change event");
+                }));
+
+
 
 
             var lineData = {
@@ -119,6 +135,10 @@
             new Chart(ctx, {type: 'line', data: lineData, options: lineOptions});
 
         });
+
+        function display(msg) {
+            $("<p>").html(msg).appendTo(document.body);
+        }
     </script>
     <script>
         $(document).ready(function() {
@@ -191,5 +211,8 @@
             return false; //tells the form not to actaully load the action page
         }
     </script>
+
+
+
 
 @endsection

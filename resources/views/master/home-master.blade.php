@@ -330,5 +330,12 @@
         }
     }
 </script>
+<script>
+    function bulan() {
+        var x = document.getElementById("bulan").value;
+        console.log(x);
+        document.getElementById("bulan").innerHTML = "You selected: " + x;
+    }
+</script>
 </body>
 </html>

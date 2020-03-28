@@ -19,23 +19,7 @@
         <div class="ibox-content">
 
             <div class="row">
-                <div class="col-4">
-                    <div class="col-lg-12">
-                        <div class="form-group"><label>Nama Kegiatan</label>
-                            <input placeholder="Nama Kegiatan" name="nama_kegiatan" id="nama_kegiatan"
-                                   class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="col-lg-12">
-                        <div class="form-group"><label>Jumlah Anggaran</label>
-                            <input placeholder="Jumlah Anggaran" data-mask="#.##0" data-mask-reverse="true" name="jml_anggaran" id="jml_anggaran"
-                                   class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
+                <div class="col-12">
                     <div class="col-lg-12">
                         <div class="form-group"><label>Bidang</label>
                             <select class="form-control" name="bidang" id="bidang">
@@ -46,6 +30,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row" id="rko">
+                <div class="col-6">
+                    <div class="col-lg-12">
+                        <div class="form-group"><label>Nama Kegiatan</label>
+                            <input placeholder="Nama Kegiatan" name="nama_kegiatan[]" id="nama_kegiatan"
+                                   class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-lg-12">
+                        <div class="form-group"><label>Jumlah Anggaran</label>
+                            <input placeholder="Jumlah Anggaran" data-mask="#.##0" data-mask-reverse="true" name="jml_anggaran[]" id="jml_anggaran"
+                                   class="form-control"> {{--<span class="help-block m-b-none">Example block-level help text here.</span>--}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
            {{-- <div class="row">
                 <div class="col-8" id="input-player-list">

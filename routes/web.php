@@ -196,6 +196,15 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('unsetting_kode', 'Sekretariat\Nomor\SettingNomorController@unFilterKode')->name('unsetting.kode');
     Route::get('kepala/rekap', 'Admin\RekapController@showRekap')->name('rekap.kepala');
 
+
+    Route::get('rko-baru', 'Sekretariat\RkoController@showForm')->name('show.formRKO');
+    Route::post('rko-baru', 'Sekretariat\RkoController@ngisiRKO')->name('post.formRKO');
+    Route::get('rko-baru/{id}', 'Sekretariat\RkoController@edit')->name('edit.formRKO');
+    Route::patch('rko-baru/{id}', 'Sekretariat\RkoController@update')->name('update.formRKO');
+    Route::delete('rko-baru/{id}', 'Sekretariat\RkoController@destroy')->name('delete.formRKO');
+    Route::get('rko-baru/rekap', 'Sekretariat\RkoController@rekapRko')->name('rekap.formRKO');
+
+
     //SPT dan SPPD//
     Route::prefix('spt')->group(function (){
         Route::get('/all', 'SPT\CreateSPTController@gabung')->name('form.spt');

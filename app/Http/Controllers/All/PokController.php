@@ -4,6 +4,7 @@ namespace App\Http\Controllers\All;
 
 use App\app\Models\All\PokModel;
 use App\Exports\PokExport;
+use App\Models\All\SubRkoModel;
 use App\Models\NewPok\SubMenuPokModels;
 use App\Models\Sekretariat\SubMenuKegiatanModels;
 use Maatwebsite\Excel\Facades\Excel;
@@ -158,8 +159,8 @@ class PokController extends Controller
     }*/
 
     public function nampilkePOK(){
-        $rkos = RkoModels::all(); // nek nggo nampilke semua bidang
-        $rko_bidangs = RkoModels::where('user_id', Auth::user()->id); // salah satu bidang tok
+        $rkos = RkoModel::all(); // nek nggo nampilke semua bidang
+        $rko_bidangs = RkoModel::where('user_id', Auth::user()->id); // salah satu bidang tok
 
         return view('terserah', compact('rkos'));
     }
@@ -286,7 +287,16 @@ class PokController extends Controller
     public function gabungPOK(Request $request)
     {
         $user = Auth::user()->id;
-        $dropdown = RkoModel::where('user_id', '=', $user)->get(['nama_kegiatan', 'id']);
+        $dropdown = RkoModel::where('bidang', '=', $user)->get(['nama_kegiatan' , 'jml_anggaran', 'id']);
+
+        /*foreach ($dropdown as $rko){
+            //dd($rko->subRko);
+            foreach ($rko->subRko as $target){
+                //dd($target->targetSub);
+            }
+        }*/
+
+        //dd($dropdown);
         $dropdown2= SubMenuKegiatanModels::where('user_id', '=', $user)->get(['nama_sub_keg', 'id']);
         $today = date('Y-m');
         $user = Auth::user()->id;
