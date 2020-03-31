@@ -27,7 +27,7 @@
         @endif
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>REKAP POK BULAN {{$todays}}</h5>
+                <h5>REKAP POK BULAN</h5>
             </div>
             <div class="col-6">
                 <form action="{{ route('rekap.pok') }}">
@@ -45,7 +45,7 @@
                     </div>
                 </form>
             </div>
-            <div class="ibox-content">
+            {{--<div class="ibox-content">
                 <table class="footable table table-stripped toggle-arrow-tiny">
                     <thead>
                     <tr>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 </div>

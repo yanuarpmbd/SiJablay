@@ -286,6 +286,17 @@ class PokController extends Controller
 
     public function gabungPOK(Request $request)
     {
+        if (isset($request->bulan)){
+            $req_bulan = Carbon::createFromFormat('Y-m-d', $request->bulan.'-1');
+            $bulan = Carbon::createFromFormat('m', $request->bulan);
+            $tahun = Carbon::createFromFormat('Y', $request->bulan);
+        }
+        else{
+            $req_bulan = Carbon::now()->format('Y-m-d');
+            $bulan = Carbon::now()->format('m');
+            $tahun = Carbon::now()->format('Y');
+        }
+
         $user = Auth::user()->id;
         $dropdown = RkoModel::where('bidang', '=', $user)->get(['nama_kegiatan' , 'jml_anggaran', 'id']);
 
@@ -295,19 +306,24 @@ class PokController extends Controller
                 //dd($target->targetSub);
             }
         }*/
+        //dd($user);
+
+        //dd($bulan);
 
         //dd($dropdown);
-        $dropdown2= SubMenuKegiatanModels::where('user_id', '=', $user)->get(['nama_sub_keg', 'id']);
+        $dropdown2= SubMenuKegiatanModels::where('user_id', '=', $user)
+            /*->whereYear('bulan', $tahun)
+            ->whereMonth('bulan', $bulan)*/
+            ->get();
+        //dd($dropdown2);
         $today = date('Y-m');
         $user = Auth::user()->id;
         $user_name = Auth::user()->name;
-        $bulan = $request->input('bulan');
-        $todays = date("F", strtotime($bulan));
         $query = "CAST(rko_id AS int)ASC";
         $pok = PokModel::where('bulan', '=', $bulan)
             ->orderByRaw($query)
             ->get();
 
-        return view('all.base.gabung-pok', compact('dropdown','today', 'user', 'user_name', 'todays', 'pok','dropdown2'));
+        return view('all.base.gabung-pok', compact('dropdown', 'req_bulan', 'bulan','tahun','today', 'user', 'user_name', 'pok','dropdown2'));
     }
 }

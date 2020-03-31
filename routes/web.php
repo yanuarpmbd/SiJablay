@@ -203,6 +203,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::patch('rko-baru/{id}', 'Sekretariat\RkoController@update')->name('update.formRKO');
     Route::delete('rko-baru/{id}', 'Sekretariat\RkoController@destroy')->name('delete.formRKO');
     Route::get('rko-baru/rekap', 'Sekretariat\RkoController@rekapRko')->name('rekap.formRKO');
+    Route::post('pok-baru', 'All\PokController@ngisiPok')->name('isi.pok');
 
 
     //SPT dan SPPD//

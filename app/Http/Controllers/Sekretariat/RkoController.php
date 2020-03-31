@@ -85,6 +85,14 @@ class RkoController extends Controller
 
         //dd($request->all());
 
+        if (isset($request->tahun)){
+            $tahun = $request->tahun;
+        }
+        else{
+            $tahun = Carbon::now()->format('Y');
+        }
+
+
         $rko = new SubRkoModel();
         $rko->rko_id = $request->kegiatan;
         $rko->nama_kegiatan = $request->nama_sub_rko;
@@ -98,10 +106,10 @@ class RkoController extends Controller
             $rko_target = new TargetSubRkoModel();
             $rko_target->target = $request->target_sub_rko[$i];
             if ($i<=9){
-                $rko_target->bulan = $this_year->year . '-0' . $i;
+                $rko_target->bulan = Carbon::createFromFormat('Y-m-d', $tahun . '-0' . $i.'-1');
             }
             else{
-                $rko_target->bulan = $this_year->year . '-' . $i;
+                $rko_target->bulan = Carbon::createFromFormat('Y-m-d', $tahun . '-' . $i.'-1');
             }
             $rko_target->sub_rko_id = $rko->id;
             //dd($rko_target);
