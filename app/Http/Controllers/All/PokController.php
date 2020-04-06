@@ -4,6 +4,8 @@ namespace App\Http\Controllers\All;
 
 use App\app\Models\All\PokModel;
 use App\Exports\PokExport;
+use App\Models\NewPok\SubMenuPokModels;
+use App\Models\Sekretariat\SubMenuKegiatanModels;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Sekretariat\RkoModel;
 use App\Models\Sekretariat\TargetRealisasiModel;
@@ -96,6 +98,8 @@ class PokController extends Controller
             $jml->jml_anggaran;
         }
         $jml_anggarans = str_replace('.','', ($jml->jml_anggaran));
+
+
         /*$pok_sblm = PokModel::where('bulan', '<', $bulan)->where('user_id', '=', $user_id)->get();
         $sum_reafis_sblm = 0;
         foreach ($pok_sblm as $reafis_sebelum){
@@ -144,13 +148,21 @@ class PokController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showPOK()
+    /*public function showPOK()
     {
         $user = Auth::user()->id;
         $dropdown = RkoModel::where('bidang', '=', $user)->get(['nama_kegiatan', 'id']);
+
         $today = date('Y-m');
         //dd($dropdown);
-        return view('all.base.show-pok', compact('dropdown','today'));
+        return view('all.base.show-pok', compact('dropdown','today','dropdown2'));
+    }*/
+
+    public function nampilkePOK(){
+        $rkos = RkoModels::all(); // nek nggo nampilke semua bidang
+        $rko_bidangs = RkoModels::where('user_id', Auth::user()->id); // salah satu bidang tok
+
+        return view('terserah', compact('rkos'));
     }
 
     /**
@@ -163,9 +175,10 @@ class PokController extends Controller
     {
         $pok = PokModel::findOrFail($id);
         $dropdown = RkoModel::all(['nama_kegiatan', 'id']);
+
         $user = Auth::user()->username;
 
-        return view('all.base.edit-pok', compact('pok', 'dropdown', 'user'));
+        return view('all.base.edit-pok', compact('pok', 'dropdown', 'user','dropdown2'));
     }
 
     /**
@@ -274,7 +287,8 @@ class PokController extends Controller
     public function gabungPOK(Request $request)
     {
         $user = Auth::user()->id;
-        $dropdown = RkoModel::where('bidang', '=', $user)->get(['nama_kegiatan', 'id']);
+        $dropdown = RkoModel::where('user_id', '=', $user)->get(['nama_kegiatan', 'id']);
+        $dropdown2= SubMenuKegiatanModels::where('user_id', '=', $user)->get(['nama_sub_keg', 'id']);
         $today = date('Y-m');
         $user = Auth::user()->id;
         $user_name = Auth::user()->name;
@@ -285,6 +299,6 @@ class PokController extends Controller
             ->orderByRaw($query)
             ->get();
 
-        return view('all.base.gabung-pok', compact('dropdown','today', 'user', 'user_name', 'todays', 'pok'));
+        return view('all.base.gabung-pok', compact('dropdown','today', 'user', 'user_name', 'todays', 'pok','dropdown2'));
     }
 }

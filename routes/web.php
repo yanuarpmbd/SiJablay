@@ -269,9 +269,17 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/tambahpegawai', 'sekretariat\TambahPegawaiController@addpegawai')->name('tambah.pegawai');
 
         Route::get('/RKO', 'Sekretariat\RkoController@showForm')->name('show.rko');
-        Route::post('/RKO', 'Sekretariat\RkoController@storeRKO')->name('post.rko');
+        /*Route::post('/RKO', 'Sekretariat\RkoController@storeRKO')->name('post.rko');*/
+        Route::post('/RKO', 'Sekretariat\RkoController@ngisiRKO')->name('post.rko');
+
         Route::get('/rekRKO', 'Sekretariat\RkoController@rekapRKO')->name('rek.rko');
         Route::get('/RKO/{id}', 'Sekretariat\RkoController@edit')->name('edit.rko');
+
+        Route::post('/Submenu', 'Sekretariat\SubMenuControler@showForm')->name('show.submenu');
+        Route::post('/Submenu', 'Sekretariat\SubMenuControler@ngisiSubRKO')->name('add.submenu');
+        Route::delete('/Submenu/{id}', 'Sekretariat\SubMenuControler@deleteSubKeg')->name('delete.submenu');
+        Route::get('/Submenu/{id}', 'Sekretariat\SubMenuControler@editSubKeg')->name('edit.submenu');
+
         Route::patch('/RKO/update/{id}', 'Sekretariat\RkoController@update')->name('update.rko');
         Route::get('RKO/delete/{id}', 'Sekretariat\RkoCOntroller@destroy')->name('delete.rko');
         Route::get('/TargetRealisasi', 'Sekretariat\TargetRealisasiController@showForm')->name('show.targetrealisasi');
@@ -303,7 +311,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     //POK//
     Route::prefix('POK')->group(function (){
-        Route::get('/POK', 'All\PokController@showPOK')->name('show.pok');
+        Route::get('/POK', 'All\PokController@nampilkePOK')->name('show.pok');
         Route::post('/POK', 'All\PokController@storePOK')->name('post.pok');
         Route::get('/rekapPOK', 'All\PokController@rekapPOK')->name('rekap.pok');
         Route::get('/{id}', 'All\PokController@edit')->name('edit.pok');

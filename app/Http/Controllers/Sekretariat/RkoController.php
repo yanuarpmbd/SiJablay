@@ -74,8 +74,23 @@ class RkoController extends Controller
             ]);
         }*/
 
-        return redirect()->route('show.rko')->with('success', 'Data Berhasil Ditambahkan');
+        /*return redirect()->route('show.rko')->with('success', 'Data Berhasil Ditambahkan');*/
     }
+
+
+    public function ngisiRKO(\http\Env\Request $request){
+
+        $rko = new RkoModels();
+        $rko->nama_kegiatan = $request->nama_kegiatan;
+        $rko->jumlah_anggaran = $request->jumlah_anggaran;
+        $rko->target_fisik = $request->target_fisik;
+        $rko->user_id = Auth::user()->id;
+        $rko->save();
+
+        return redirect()->route('show.rko')->with('success', 'Data Berhasil Ditambahkan');
+
+    }
+
 
     /**
      * Display the specified resource.

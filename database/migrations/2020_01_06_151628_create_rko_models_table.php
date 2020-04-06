@@ -12,12 +12,13 @@ class CreateRkoModelsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('rko_models', function(Blueprint $table)
+		Schema::create('rko_models_baru', function(Blueprint $table)
 		{
 			$table->integer('id')->unsigned();
 			$table->string('nama_kegiatan');
-			$table->string('jml_anggaran');
-			$table->string('bidang');
+			$table->bigInteger('jumlah_anggaran');
+			$table->integer('target_fisik');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}

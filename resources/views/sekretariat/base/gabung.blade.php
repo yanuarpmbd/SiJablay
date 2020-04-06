@@ -25,6 +25,8 @@
                         <li class=""><a data-toggle="tab" href="#tab-8">Target Realisasi RKO</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-9">Rekap Target Realisasi</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-10">Rekap Target RKO</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-11">Sub Kegiatan</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-12">Rekap Sub Kegiatan</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -76,6 +78,16 @@
                         <div id="tab-10" class="tab-pane">
                             <div class="panel-body">
                                 @include('sekretariat.content.rekap-rko')
+                            </div>
+                        </div>
+                        <div id="tab-11" class="tab-pane">
+                            <div class="panel-body">
+                                @include('sekretariat.content.sub-kegiatan')
+                            </div>
+                        </div>
+                        <div id="tab-12" class="tab-pane">
+                            <div class="panel-body">
+                                @include('sekretariat.content.rekap-sub-kegiatan')
                             </div>
                         </div>
                     </div>

@@ -275,5 +275,60 @@
         }
     }
 </script>
+
+<script>
+    document.getElementById('addSubKeg').onclick = function createInputField() {
+        var input = document.createElement('input');
+        var input2 = document.createElement('input');
+        var input3 = document.createElement('input');
+        var lineBreak = document.createElement('br');
+        var testId = "nama_sub_keg";
+        var i = 0;
+        var x = document.getElementsByTagName('INPUT').length - 2;
+        var col8 = document.createElement('div');
+        col8.className ='col-4';
+        var col4 = document.createElement('div');
+        col4.className ='col-4';
+        input.setAttribute('id', testId + i);
+        input.className = 'form-control';
+        input.name = 'nama_sub_keg[]';
+        input.placeholder = 'Sub Kegiatan';
+        input2.setAttribute('id', testId + i);
+        input2.className = 'form-control';
+        input2.name = 'jml_anggaran_sub[]';
+        input2.placeholder = 'Anggaran';
+        input3.setAttribute('id', testId + i);
+        input3.className = 'form-control';
+        input3.name = 'tager_sub[]';
+        input3.placeholder = 'Target fisik';
+        for (i = 0; i < x; i++) {
+            i;
+            var aplayer1 = document.getElementById('input-player-list');
+
+            aplayer1.appendChild(col8);
+            aplayer1.appendChild(input);
+            aplayer1.appendChild(col4);
+            aplayer1.appendChild(input2);
+            aplayer1.appendChild(col4);
+            aplayer1.appendChild(input3);
+            aplayer1.appendChild(lineBreak);
+        }
+
+
+
+    }
+
+    document.getElementById('removeSubKeg').onclick = function removeInputField() {
+
+        var x = document.getElementsByTagName('INPUT').length;
+        console.log(x);
+        if ( x > 2 ) {
+            $('#input-player-list input:last').remove();
+            $('#input-player-list br:last').remove();
+            return false;
+        } else {
+        }
+    }
+</script>
 </body>
 </html>

@@ -9,6 +9,7 @@ use App\Models\Sekretariat\PLTModel;
 use App\Models\Sekretariat\RekModel;
 use App\Models\Sekretariat\RkoModel;
 use App\Models\Sekretariat\SettingModels;
+use App\Models\Sekretariat\SubMenuKegiatanModels;
 use App\Models\Sekretariat\TargetRealisasiModel;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
@@ -55,6 +56,7 @@ class SettingController extends Controller
         $username = Auth::user()->name;
         $todays = date('F-Y');
         $rek_rko = RkoModel::all();
+        $sub_keg = SubMenuKegiatanModels::all();
 
         $bulan = $request->input('bulan_input');
         $bulans = date('F-Y', strtotime($bulan));
@@ -63,7 +65,25 @@ class SettingController extends Controller
         //$target = TargetRealisasiModel::all();
         $rko = TargetRealisasiModel::where('bulan', '=', $today)->get();
 
-        return view('sekretariat.base.gabung', compact('user', 'rek_rko', 'bulans', 'kepala', 'plt', 'kabid', 'plh', 'rek', 'id', 'nomor', 'bidang', 'today', 'target', 'dropdown', 'username', 'todays', 'bulan', 'rko'));
+        return view('sekretariat.base.gabung', compact('user',
+            'rek_rko',
+            'bulans',
+            'kepala',
+            'plt',
+            'kabid',
+            'plh',
+            'rek',
+            'id',
+            'nomor',
+            'bidang',
+            'today',
+            'target',
+            'dropdown',
+            'username',
+            'todays',
+            'bulan',
+            'rko',
+        'sub_keg'));
     }
 
     public function plh()
