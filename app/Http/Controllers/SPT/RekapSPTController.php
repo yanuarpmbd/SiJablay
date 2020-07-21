@@ -618,7 +618,7 @@ class RekapSPTController extends Controller
 
 
         //dd($kpa);
-        if ($bidang == 'Sekretariat'){
+        if ($bidang == 'Sekretariat' || 'Promosi'){
             $kpa = DataAsnModel::where('jabatan', 'LIKE', 'Kepala Dinas%')->get();
             foreach ($kpa as $sek){
             }
@@ -629,6 +629,8 @@ class RekapSPTController extends Controller
                 //dd($kbd->nama);
             }
         }
+
+
 
 
 
