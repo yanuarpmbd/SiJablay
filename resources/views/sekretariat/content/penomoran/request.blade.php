@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
     <div class="col-lg-12">
         @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">
@@ -16,7 +16,7 @@
             <div class="ibox-title">
                 <h5>Ambil Nomor</h5>
             </div>
-            <div class="ibox-content">
+          {{--  <div class="ibox-content">
 
                     <div class="row">
                         @foreach($kategoris as $kategori)
@@ -29,7 +29,7 @@
                             @endif
 
                         @endforeach
-                    </div>
+                    </div> --}}
 {{--nomor sementara--}}
 
 

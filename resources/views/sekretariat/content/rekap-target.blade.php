@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
     <div class="col-lg-12">
         @if ($message = Session::get('warning'))
             <div class="alert alert-warning alert-block">
@@ -46,7 +46,11 @@
                     @foreach($target as $t)
                         <tr>
                             <td>{{date('F, Y', strtotime($t->bulan))}}</td>
+                            @isset($t->rko)
                             <td>{{$t->rko->nama_kegiatan}}</td>
+                            @else
+                                <td>kosong</td>
+                            @endisset
                             <td>{{$t->target}}</td>
                             <td>
                                 <form action="{{route('edit.targetrealisasi', $t->id)}}">

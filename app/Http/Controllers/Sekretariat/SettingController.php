@@ -52,6 +52,11 @@ class SettingController extends Controller
         $nomor = NumberModel::all()->where('user_id', '=', $user);
         $today = date('Y-m');
         $target = TargetRealisasiModel::all();
+//foreach($target as $t){
+//dump($t->rko);
+//};
+//die();
+//dd($target[0]->rko);
         $dropdown = RkoModel::all(['nama_kegiatan', 'id']);
         $username = Auth::user()->name;
         $todays = date('F-Y');
