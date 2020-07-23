@@ -618,7 +618,7 @@ class RekapSPTController extends Controller
 
 
         //dd($kpa);
-        if ($bidang == 'Sekretariat'){
+        if ($bidang == 'Sekretariat' || 'Promosi'){
             $kpa = DataAsnModel::where('jabatan', 'LIKE', 'Kepala Dinas%')->get();
             foreach ($kpa as $sek){
             }
@@ -630,9 +630,10 @@ class RekapSPTController extends Controller
             }
         }
 
+       
 
 
-        //dd($kbd->nama);
+        //dd($sek->nama);
 
         foreach ($spt->pivot as $s){
             $namas = $s->namad;
@@ -676,7 +677,7 @@ class RekapSPTController extends Controller
             $templateProcessor = new TemplateProcessor('storage/spt/draft_SPPD_1.docx');
 
             //dd($clone);
-            if ($bidang == 'Sekretariat'){
+            if ($bidang == 'Sekretariat' || 'Promosi'){
                 $templateProcessor->setValue('kabid', $sek->nama);
                 $templateProcessor->setValue('nip_kabid', $sek->nip);
             }
@@ -740,7 +741,7 @@ class RekapSPTController extends Controller
             $templateProcessor = new TemplateProcessor('storage/spt/draft_SPPD_2.docx');
 
             //dd($clone);
-            if ($bidang == 'Sekretariat'){
+            if ($bidang == 'Sekretariat' || 'Promosi'){
                 $templateProcessor->setValue('kabid', $sek->nama);
                 $templateProcessor->setValue('nip_kabid', $sek->nip);
             }
@@ -816,7 +817,7 @@ class RekapSPTController extends Controller
             $templateProcessor = new TemplateProcessor('storage/spt/draft_SPPD_3.docx');
 
             //dd($clone);
-            if ($bidang == 'Sekretariat'){
+            if ($bidang == 'Sekretariat' || 'Promosi'){
                 $templateProcessor->setValue('kabid', $sek->nama);
                 $templateProcessor->setValue('nip_kabid', $sek->nip);
             }
@@ -903,7 +904,7 @@ class RekapSPTController extends Controller
             $templateProcessor = new TemplateProcessor('storage/spt/draft_SPPD_4.docx');
 
             //dd($clone);
-            if ($bidang == 'Sekretariat'){
+            if ($bidang == 'Sekretariat' || 'Promosi'){
                 $templateProcessor->setValue('kabid', $sek->nama);
                 $templateProcessor->setValue('nip_kabid', $sek->nip);
             }
@@ -1022,7 +1023,7 @@ class RekapSPTController extends Controller
             $namas = $s->namad;
             //dd($namas);
         }
-        if ($bidang == 'Sekretariat'){
+        if ($bidang == 'Sekretariat' || 'Promosi'){
             $kpa = DataAsnModel::where('jabatan', '=', 'Sekretaris')->get();
             foreach ($kpa as $sek){
                 //dd($sek->pangkat->pangkat);
@@ -1084,7 +1085,7 @@ class RekapSPTController extends Controller
         $templateProcessor->setValue('perihal', $spt->perihal);
 
 
-        if ($bidang == 'Sekretariat'){
+        if ($bidang == 'Sekretariat' || 'Promosi'){
             $templateProcessor->setValue('nama_kabid', $sek->nama);
             $templateProcessor->setValue('pangkat_kabid', $sek->pangkat->pangkat);
             $templateProcessor->setValue('nip_kabid', $sek->nip);
